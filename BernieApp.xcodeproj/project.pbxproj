@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
+		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
+		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
+		BFAFBEC61ECDCE840083133D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC51ECDCE840083133D /* Assets.xcassets */; };
+		BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC71ECDCE840083133D /* LaunchScreen.storyboard */; };
+		BFAFBED41ECDCE840083133D /* BernieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBED31ECDCE840083133D /* BernieAppTests.swift */; };
+		BFAFBEDF1ECDCE840083133D /* BernieAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEDE1ECDCE840083133D /* BernieAppUITests.swift */; };
+		BFAFBEF51ECDF2DA0083133D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFBEF11ECDF2C90083133D /* Alamofire.framework */; };
+		BFAFBEF61ECDF2DA0083133D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFBEF11ECDF2C90083133D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEF81ECEFFF10083133D /* MessageManager.swift */; };
+		BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEFA1ECF1EFD0083133D /* Config.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFAFBED01ECDCE840083133D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFAFBEB31ECDCE840083133D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFAFBEBA1ECDCE840083133D;
+			remoteInfo = BernieApp;
+		};
+		BFAFBEDB1ECDCE840083133D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFAFBEB31ECDCE840083133D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFAFBEBA1ECDCE840083133D;
+			remoteInfo = BernieApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BFAFBEF71ECDF2DA0083133D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BFAFBEF61ECDF2DA0083133D /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BFAFBEC31ECDCE840083133D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BFAFBEC51ECDCE840083133D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFAFBEC81ECDCE840083133D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BFAFBECA1ECDCE840083133D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFAFBECF1ECDCE840083133D /* BernieAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BernieAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAFBED31ECDCE840083133D /* BernieAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BernieAppTests.swift; sourceTree = "<group>"; };
+		BFAFBED51ECDCE840083133D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFAFBEDA1ECDCE840083133D /* BernieAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BernieAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAFBEDE1ECDCE840083133D /* BernieAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BernieAppUITests.swift; sourceTree = "<group>"; };
+		BFAFBEE01ECDCE840083133D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFAFBEF11ECDF2C90083133D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		BFAFBEF81ECEFFF10083133D /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		BFAFBEFA1ECF1EFD0083133D /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFAFBEB81ECDCE840083133D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAFBEF51ECDF2DA0083133D /* Alamofire.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBECC1ECDCE840083133D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBED71ECDCE840083133D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFAFBEB21ECDCE840083133D = {
+			isa = PBXGroup;
+			children = (
+				BFAFBEF11ECDF2C90083133D /* Alamofire.framework */,
+				BFAFBEBD1ECDCE840083133D /* BernieApp */,
+				BFAFBED21ECDCE840083133D /* BernieAppTests */,
+				BFAFBEDD1ECDCE840083133D /* BernieAppUITests */,
+				BFAFBEBC1ECDCE840083133D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFAFBEBC1ECDCE840083133D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFAFBEBB1ECDCE840083133D /* BernieApp.app */,
+				BFAFBECF1ECDCE840083133D /* BernieAppTests.xctest */,
+				BFAFBEDA1ECDCE840083133D /* BernieAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFAFBEBD1ECDCE840083133D /* BernieApp */ = {
+			isa = PBXGroup;
+			children = (
+				BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */,
+				BFAFBEF81ECEFFF10083133D /* MessageManager.swift */,
+				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
+				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
+				BFAFBEC21ECDCE840083133D /* Main.storyboard */,
+				BFAFBEC51ECDCE840083133D /* Assets.xcassets */,
+				BFAFBEC71ECDCE840083133D /* LaunchScreen.storyboard */,
+				BFAFBECA1ECDCE840083133D /* Info.plist */,
+			);
+			path = BernieApp;
+			sourceTree = "<group>";
+		};
+		BFAFBED21ECDCE840083133D /* BernieAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFAFBED31ECDCE840083133D /* BernieAppTests.swift */,
+				BFAFBED51ECDCE840083133D /* Info.plist */,
+			);
+			path = BernieAppTests;
+			sourceTree = "<group>";
+		};
+		BFAFBEDD1ECDCE840083133D /* BernieAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BFAFBEDE1ECDCE840083133D /* BernieAppUITests.swift */,
+				BFAFBEE01ECDCE840083133D /* Info.plist */,
+			);
+			path = BernieAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFAFBEBA1ECDCE840083133D /* BernieApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAFBEE31ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieApp" */;
+			buildPhases = (
+				BFAFBEB71ECDCE840083133D /* Sources */,
+				BFAFBEB81ECDCE840083133D /* Frameworks */,
+				BFAFBEB91ECDCE840083133D /* Resources */,
+				BFAFBEF71ECDF2DA0083133D /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BernieApp;
+			productName = BernieApp;
+			productReference = BFAFBEBB1ECDCE840083133D /* BernieApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFAFBECE1ECDCE840083133D /* BernieAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAFBEE61ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieAppTests" */;
+			buildPhases = (
+				BFAFBECB1ECDCE840083133D /* Sources */,
+				BFAFBECC1ECDCE840083133D /* Frameworks */,
+				BFAFBECD1ECDCE840083133D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFAFBED11ECDCE840083133D /* PBXTargetDependency */,
+			);
+			name = BernieAppTests;
+			productName = BernieAppTests;
+			productReference = BFAFBECF1ECDCE840083133D /* BernieAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BFAFBED91ECDCE840083133D /* BernieAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAFBEE91ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieAppUITests" */;
+			buildPhases = (
+				BFAFBED61ECDCE840083133D /* Sources */,
+				BFAFBED71ECDCE840083133D /* Frameworks */,
+				BFAFBED81ECDCE840083133D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFAFBEDC1ECDCE840083133D /* PBXTargetDependency */,
+			);
+			name = BernieAppUITests;
+			productName = BernieAppUITests;
+			productReference = BFAFBEDA1ECDCE840083133D /* BernieAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFAFBEB31ECDCE840083133D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Bernie;
+				TargetAttributes = {
+					BFAFBEBA1ECDCE840083133D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = USV5Z98CAJ;
+						ProvisioningStyle = Automatic;
+					};
+					BFAFBECE1ECDCE840083133D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = USV5Z98CAJ;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BFAFBEBA1ECDCE840083133D;
+					};
+					BFAFBED91ECDCE840083133D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = USV5Z98CAJ;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BFAFBEBA1ECDCE840083133D;
+					};
+				};
+			};
+			buildConfigurationList = BFAFBEB61ECDCE840083133D /* Build configuration list for PBXProject "BernieApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFAFBEB21ECDCE840083133D;
+			productRefGroup = BFAFBEBC1ECDCE840083133D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFAFBEBA1ECDCE840083133D /* BernieApp */,
+				BFAFBECE1ECDCE840083133D /* BernieAppTests */,
+				BFAFBED91ECDCE840083133D /* BernieAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFAFBEB91ECDCE840083133D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */,
+				BFAFBEC61ECDCE840083133D /* Assets.xcassets in Resources */,
+				BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBECD1ECDCE840083133D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBED81ECDCE840083133D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFAFBEB71ECDCE840083133D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
+				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
+				BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */,
+				BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBECB1ECDCE840083133D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAFBED41ECDCE840083133D /* BernieAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAFBED61ECDCE840083133D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFAFBEDF1ECDCE840083133D /* BernieAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFAFBED11ECDCE840083133D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFAFBEBA1ECDCE840083133D /* BernieApp */;
+			targetProxy = BFAFBED01ECDCE840083133D /* PBXContainerItemProxy */;
+		};
+		BFAFBEDC1ECDCE840083133D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFAFBEBA1ECDCE840083133D /* BernieApp */;
+			targetProxy = BFAFBEDB1ECDCE840083133D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BFAFBEC21ECDCE840083133D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFAFBEC31ECDCE840083133D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BFAFBEC71ECDCE840083133D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFAFBEC81ECDCE840083133D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BFAFBEE11ECDCE840083133D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFAFBEE21ECDCE840083133D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFAFBEE41ECDCE840083133D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = BernieApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BFAFBEE51ECDCE840083133D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = BernieApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		BFAFBEE71ECDCE840083133D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				INFOPLIST_FILE = BernieAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BernieApp.app/BernieApp";
+			};
+			name = Debug;
+		};
+		BFAFBEE81ECDCE840083133D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				INFOPLIST_FILE = BernieAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BernieApp.app/BernieApp";
+			};
+			name = Release;
+		};
+		BFAFBEEA1ECDCE840083133D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				INFOPLIST_FILE = BernieAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BernieApp;
+			};
+			name = Debug;
+		};
+		BFAFBEEB1ECDCE840083133D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				INFOPLIST_FILE = BernieAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BernieApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFAFBEB61ECDCE840083133D /* Build configuration list for PBXProject "BernieApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAFBEE11ECDCE840083133D /* Debug */,
+				BFAFBEE21ECDCE840083133D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFAFBEE31ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAFBEE41ECDCE840083133D /* Debug */,
+				BFAFBEE51ECDCE840083133D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BFAFBEE61ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAFBEE71ECDCE840083133D /* Debug */,
+				BFAFBEE81ECDCE840083133D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BFAFBEE91ECDCE840083133D /* Build configuration list for PBXNativeTarget "BernieAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAFBEEA1ECDCE840083133D /* Debug */,
+				BFAFBEEB1ECDCE840083133D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFAFBEB31ECDCE840083133D /* Project object */;
+}
