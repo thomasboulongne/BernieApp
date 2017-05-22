@@ -18,6 +18,8 @@
 		BFAFBEF61ECDF2DA0083133D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFAFBEF11ECDF2C90083133D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEF81ECEFFF10083133D /* MessageManager.swift */; };
 		BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEFA1ECF1EFD0083133D /* Config.swift */; };
+		BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEFE1ECF2D300083133D /* Helpers.swift */; };
+		BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		BFAFBEF11ECDF2C90083133D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BFAFBEF81ECEFFF10083133D /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		BFAFBEFA1ECF1EFD0083133D /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		BFAFBEFE1ECF2D300083133D /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		BFAFBF011ECF487C0083133D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +124,9 @@
 		BFAFBEBD1ECDCE840083133D /* BernieApp */ = {
 			isa = PBXGroup;
 			children = (
+				BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */,
 				BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */,
+				BFAFBEFE1ECF2D300083133D /* Helpers.swift */,
 				BFAFBEF81ECEFFF10083133D /* MessageManager.swift */,
 				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
@@ -289,7 +295,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
+				BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */,
 				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
+				BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */,
 				BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */,
 				BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */,
 			);
@@ -570,6 +578,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFAFBF011ECF487C0083133D /* Model.xcdatamodel */,
+			);
+			currentVersion = BFAFBF011ECF487C0083133D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFAFBEB31ECDCE840083133D /* Project object */;
 }
