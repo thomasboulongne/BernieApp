@@ -31,7 +31,12 @@ final class MessageManager {
             "lang": APIAI_Lang,
             "sessionId": "somerandomthing"
         ]
-            
+        
+        var requestMessage = Dictionary<String, Any>()
+        requestMessage["speech"] = query
+        requestMessage["received"] = false
+        self.processNewMessage(message: requestMessage)
+        
         Alamofire.request("https://api.api.ai/v1/query?v=20150910", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let value = response.value {
@@ -44,20 +49,30 @@ final class MessageManager {
                 
                 for message in messages {
                     Delay(delay: delay) {
-                        self.processNewMessages(message: message)
+                        self.processNewMessage(message: message)
                     }
-                    let speech = message["speech"] as! String
+                    var speech = ""
+                    if message["speech"] is String {
+                        speech = message["speech"] as! String
+                    }
                     delay = (Double(speech.characters.count)) / 20
                 }
             }
         }
     }
     
-    func processNewMessages(message: Dictionary<String, Any>) {
+    func processNewMessage(message: Dictionary<String, Any>) {
         
         let savedMessage = Message(context: self.persistentContainer.viewContext)
         savedMessage.body = message["speech"] as? String;
+        if let received = message["received"] {
+            savedMessage.received = received as! Bool
+        }
+        else {
+            savedMessage.received = true
+        }
         savedMessage.date = NSDate()
+        print(savedMessage.body ?? "----")
         self.saveContext()
         
     }
