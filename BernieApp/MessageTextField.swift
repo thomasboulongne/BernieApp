@@ -35,7 +35,9 @@ class MessageTextField: UITextField, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         MessageManager.shared.request(query: self.text!)
-        
+        let CameraController = CustomCameraController()
+        self.superview?.addSubview(CameraController.view)
+        CameraController.showCamera()
         return true
     }
 }

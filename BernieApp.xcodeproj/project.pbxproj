@@ -21,6 +21,7 @@
 		BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEFE1ECF2D300083133D /* Helpers.swift */; };
 		BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */; };
 		BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF421ED345FF0083133D /* MessageTextField.swift */; };
+		BFDE13711ED4685D006B5AA6 /* CustomCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE13701ED4685D006B5AA6 /* CustomCamera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		BFAFBEFE1ECF2D300083133D /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BFAFBF011ECF487C0083133D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFAFBF421ED345FF0083133D /* MessageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextField.swift; sourceTree = "<group>"; };
+		BFDE13701ED4685D006B5AA6 /* CustomCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCamera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				BFAFBEFE1ECF2D300083133D /* Helpers.swift */,
 				BFAFBEF81ECEFFF10083133D /* MessageManager.swift */,
 				BFAFBF421ED345FF0083133D /* MessageTextField.swift */,
+				BFDE13701ED4685D006B5AA6 /* CustomCamera.swift */,
 				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
 				BFAFBEC21ECDCE840083133D /* Main.storyboard */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
+				BFDE13711ED4685D006B5AA6 /* CustomCamera.swift in Sources */,
 				BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */,
 				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
 				BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */,

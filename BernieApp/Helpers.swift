@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String
 {
@@ -20,6 +21,19 @@ extension String
         }
         print("Invalid arguments ! Returning Current Date . ")
         return Date()
+    }
+}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
     }
 }
 
