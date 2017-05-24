@@ -10,3 +10,5 @@ import Foundation
 
 let APIAI_Token = "a881a3adcd5642e3b9ce925de1479dae"
 let APIAI_Lang  = "fr"
+
+let TextFieldHeight = 40.0

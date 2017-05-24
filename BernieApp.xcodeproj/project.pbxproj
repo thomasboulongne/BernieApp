@@ -21,6 +21,7 @@
 		BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEFE1ECF2D300083133D /* Helpers.swift */; };
 		BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */; };
 		BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF421ED345FF0083133D /* MessageTextField.swift */; };
+		BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		BFAFBEFE1ECF2D300083133D /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BFAFBF011ECF487C0083133D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFAFBF421ED345FF0083133D /* MessageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextField.swift; sourceTree = "<group>"; };
+		BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSubscriber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */,
 				BFAFBEFE1ECF2D300083133D /* Helpers.swift */,
 				BFAFBEF81ECEFFF10083133D /* MessageManager.swift */,
+				BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */,
 				BFAFBF421ED345FF0083133D /* MessageTextField.swift */,
 				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
@@ -302,6 +305,7 @@
 				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
 				BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */,
 				BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */,
+				BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */,
 				BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */,
 				BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */,
 			);

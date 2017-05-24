@@ -16,7 +16,7 @@ class MessageTextField: UITextField, UITextFieldDelegate {
     }
     
     init() {
-        super.init(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 40))
+        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - CGFloat(TextFieldHeight), width: UIScreen.main.bounds.width, height: CGFloat(TextFieldHeight)))
         self.propertiesInit()
     }
     

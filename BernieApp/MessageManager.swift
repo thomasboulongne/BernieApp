@@ -14,6 +14,8 @@ import CoreData
 
 final class MessageManager {
     
+    var subscribers: [MessageManagerSubscriber] = []
+    
     // Can't init is singleton
     private init() {
         
@@ -74,7 +76,13 @@ final class MessageManager {
         savedMessage.date = NSDate()
         print(savedMessage.body ?? "----")
         self.saveContext()
-        
+        self.broadcast()
+    }
+    
+    func broadcast() {
+        for subscriber in self.subscribers {
+            subscriber.onMessagesUpdate()
+        }
     }
     
     func getMessages() -> Array<Any> {
@@ -90,6 +98,19 @@ final class MessageManager {
         
         return history
     }
+    
+    func subscribe(obj: MessageManagerSubscriber) -> () -> () {
+        let index = self.subscribers.count
+        self.subscribers.append(obj)
+        
+        return { () -> () in
+            self.subscribers.remove(at: index)
+        }
+    }
+    
+    /*func unsubscribe(obj: MessageManagerSubscriber) {
+        self.subscribers.remove(at: self.subscribers.index(of: obj))
+    }*/
     
     // MARK: Shared Instance
     
