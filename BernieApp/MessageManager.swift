@@ -43,21 +43,23 @@ final class MessageManager {
             
             if let value = response.value {
                 let JSON = value as! Dictionary<String, Any>
-                let result = JSON["result"] as! Dictionary<String, Any>
-                let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
-                let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
+                if(JSON["result"] != nil) {
+                    let result = JSON["result"] as! Dictionary<String, Any>
+                    let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
+                    let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                 
-                var delay: Double = 0.0
+                    var delay: Double = 0.0
                 
-                for message in messages {
-                    Delay(delay: delay) {
-                        self.processNewMessage(message: message)
+                    for message in messages {
+                        Delay(delay: delay) {
+                            self.processNewMessage(message: message)
+                        }
+                        var speech = ""
+                        if message["speech"] is String {
+                            speech = message["speech"] as! String
+                        }
+                        delay = (Double(speech.characters.count)) / 20
                     }
-                    var speech = ""
-                    if message["speech"] is String {
-                        speech = message["speech"] as! String
-                    }
-                    delay = (Double(speech.characters.count)) / 20
                 }
             }
         }
@@ -75,8 +77,11 @@ final class MessageManager {
         }
         savedMessage.date = NSDate()
         print(savedMessage.body ?? "----")
-        self.saveContext()
-        self.broadcast()
+        
+        if(savedMessage.body != "") {
+            self.saveContext()
+            self.broadcast()
+        }
     }
     
     func broadcast() {

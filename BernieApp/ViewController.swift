@@ -24,15 +24,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        self.tableView.separatorStyle = .none
+        
         self.view.addSubview(self.tableView)
         
         self.onMessagesUpdate()
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(MessageCell.self, forCellReuseIdentifier: "Cell")
         
         // Do any additional setup after loading the view, typically from a nib.
         let textField = MessageTextField()
         self.view.addSubview(textField)
+        
+        self.tableView.estimatedRowHeight = 50
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
     }
@@ -47,14 +51,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
-                                                 for: indexPath)
+        let cell: MessageCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MessageCell
+                
+        let message = self.messages[indexPath.row]
+        
+        cell.setupWithMessage(message: message as! Message)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let message = self.messages[indexPath.row]
         
-        cell.textLabel?.text = (message as AnyObject).value(forKeyPath: "body") as? String
+        let cell = MessageCell()
         
-        return cell
+        let height = cell.setupWithMessage(message: message as! Message).height
+        
+        return height
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
