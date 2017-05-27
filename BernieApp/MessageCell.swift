@@ -42,13 +42,12 @@ class MessageCell: UITableViewCell {
             }
             returnValue = imageView.frame.size
             
-            returnValue.height += vMargin * 2
             
             if message.received {
-                imageView.frame = CGRect(x: hMargin, y: 0, width: returnValue.width, height: returnValue.height)
+                imageView.frame = CGRect(x: hMargin, y: vMargin, width: returnValue.width, height: returnValue.height)
             }
             else {
-                imageView.frame = CGRect(x: UIScreen.main.bounds.width - (returnValue.width + hMargin), y: 0, width: returnValue.width, height: returnValue.height)
+                imageView.frame = CGRect(x: UIScreen.main.bounds.width - (returnValue.width + hMargin), y: vMargin, width: returnValue.width, height: returnValue.height)
             }
             self.addSubview(imageView)
             
@@ -71,19 +70,18 @@ class MessageCell: UITableViewCell {
             
             returnValue = label.sizeThatFits(CGSize(width: maxMessageSize.width, height: maxMessageSize.height))
             
-            returnValue.height += vMargin * 2
-            
             if message.received {
-                label.frame = CGRect(x: hMargin, y: 0, width: returnValue.width, height: returnValue.height)
+                label.frame = CGRect(x: hMargin, y: vMargin, width: returnValue.width, height: returnValue.height)
             }
             else {
-                label.frame = CGRect(x: UIScreen.main.bounds.width - (returnValue.width + hMargin), y: 0, width: returnValue.width, height: returnValue.height)
+                label.frame = CGRect(x: UIScreen.main.bounds.width - (returnValue.width + hMargin), y: vMargin, width: returnValue.width, height: returnValue.height)
             }
             
             self.addSubview(label)
             
         }
-                
+        
+        returnValue.height += vMargin * 2
         return returnValue
     }
     

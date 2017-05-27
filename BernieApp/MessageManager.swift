@@ -79,9 +79,17 @@ final class MessageManager {
         
         savedMessage.date = NSDate()
         
-        let regexp = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
+        let regexp = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg|\\.gif)"
         
-        if let body = message["speech"] as? String {
+        let body: String
+        if message["imageUrl"] != nil {
+            body = (message["imageUrl"] as? String)!
+        }
+        else {
+            body = (message["speech"] as? String)!
+        }
+        
+        if body != "" {
         
             let range = body.range(of: regexp, options: .regularExpression)
             
