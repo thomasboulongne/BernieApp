@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import CoreData
+import UIKit
 
 // MARK: - Singleton
 
@@ -68,19 +69,52 @@ final class MessageManager {
     func processNewMessage(message: Dictionary<String, Any>) {
         
         let savedMessage = Message(context: self.persistentContainer.viewContext)
-        savedMessage.body = message["speech"] as? String;
+        
         if let received = message["received"] {
             savedMessage.received = received as! Bool
         }
         else {
             savedMessage.received = true
         }
-        savedMessage.date = NSDate()
-        print(savedMessage.body ?? "----")
         
-        if(savedMessage.body != "") {
-            self.saveContext()
-            self.broadcast()
+        savedMessage.date = NSDate()
+        
+        let regexp = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
+        
+        if let body = message["speech"] as? String {
+        
+            let range = body.range(of: regexp, options: .regularExpression)
+            
+            if(range != nil) { // Message is an image
+                
+                guard let url = URL(string: body) else { return }
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    guard
+                        let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                        let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                        let data = data, error == nil,
+                        let image = UIImage(data: data)
+                        else { return }
+                    DispatchQueue.main.async() { () -> Void in
+                        let imageData = UIImagePNGRepresentation(image)
+                        savedMessage.image = imageData! as NSData
+                        
+                        print("Image saved")
+                        
+                        self.saveContext()
+                        self.broadcast()
+                    }
+                }.resume()
+            }
+            else {
+                savedMessage.body = body
+                print(savedMessage.body ?? "----")
+                
+                if(savedMessage.body != "") {
+                    self.saveContext()
+                    self.broadcast()
+                }
+            }
         }
     }
     
@@ -100,7 +134,6 @@ final class MessageManager {
         } catch {
             print("Fetching Failed")
         }
-        
         return history
     }
     

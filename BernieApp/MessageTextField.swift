@@ -36,7 +36,7 @@ class MessageTextField: UITextField, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         MessageManager.shared.request(query: self.text!)
-        
+                
         return true
     }
 }
