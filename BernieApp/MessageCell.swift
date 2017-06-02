@@ -21,12 +21,18 @@ class MessageCell: UITableViewCell {
         let imageData = message.image
         
         if imageData != nil {
-
-            let image = UIImage(data: imageData! as Data)
+            let image: UIImage
+            let imageView: UIImageView
+            if message.gif {
+                image = UIImage(gifData: imageData! as Data)
+                imageView = UIImageView(gifImage: image, manager: gifmanager)
+            }
+            else {
+                image = UIImage(data: imageData! as Data)!
+                imageView = UIImageView(image: image)
+            }
             
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: maxMessageSize.width, height: maxMessageSize.height / 2))
-            imageView.image = image
-            let imageSize = image!.size
+            let imageSize = image.size
             
             if imageSize.width > imageSize.height {
                 imageView.frame = CGRect(x: 0, y: 0, width: maxMessageSize.width, height: imageSize.height * maxMessageSize.width / imageSize.width)

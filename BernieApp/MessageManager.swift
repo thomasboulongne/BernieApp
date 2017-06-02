@@ -11,6 +11,8 @@ import Alamofire
 import CoreData
 import UIKit
 
+import SwiftyGif
+
 // MARK: - Singleton
 
 final class MessageManager {
@@ -79,7 +81,8 @@ final class MessageManager {
         
         savedMessage.date = NSDate()
         
-        let regexp = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg|\\.gif)"
+        let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
+        let regexpGif = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.gif)"
         
         let body: String
         if message["imageUrl"] != nil {
@@ -89,11 +92,14 @@ final class MessageManager {
             body = (message["speech"] as? String)!
         }
         
+        savedMessage.gif = false
+        
         if body != "" {
         
-            let range = body.range(of: regexp, options: .regularExpression)
+            let rangeImg = body.range(of: regexpImg, options: .regularExpression)
+            let rangeGif = body.range(of: regexpGif, options: .regularExpression)
             
-            if(range != nil) { // Message is an image
+            if rangeImg != nil { // Message is an image
                 
                 guard let url = URL(string: body) else { return }
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -113,6 +119,31 @@ final class MessageManager {
                         self.broadcast()
                     }
                 }.resume()
+            }
+            else if rangeGif != nil {
+                
+                guard let url = URL(string: body) else { return }
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    guard
+                        let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                        let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                        let data = data, error == nil
+                    else { return }
+                    DispatchQueue.main.async() { () -> Void in
+                        
+                        let image = UIImage(gifData: data)
+                        let imgview = UIImageView(gifImage: image)
+                        
+                        //savedMessage.image = data as NSData
+                        
+                        //savedMessage.gif = true
+                        
+                        print("Gif saved")
+                        
+                        self.saveContext()
+                        self.broadcast()
+                    }
+                    }.resume()
             }
             else {
                 savedMessage.body = body

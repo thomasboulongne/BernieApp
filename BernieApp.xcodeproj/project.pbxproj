@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6904992F1EDB339600A1B59E /* SwiftyGif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6904992D1EDB338400A1B59E /* SwiftyGif.framework */; };
+		690499301EDB339600A1B59E /* SwiftyGif.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6904992D1EDB338400A1B59E /* SwiftyGif.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B01091ED758D900C4ECAE /* Magneta-Bk.otf */; };
 		690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */; };
 		690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */; };
@@ -53,6 +55,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BFAFBEF61ECDF2DA0083133D /* Alamofire.framework in Embed Frameworks */,
+				690499301EDB339600A1B59E /* SwiftyGif.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6904992D1EDB338400A1B59E /* SwiftyGif.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyGif.framework; path = Carthage/Build/iOS/SwiftyGif.framework; sourceTree = "<group>"; };
 		690B01091ED758D900C4ECAE /* Magneta-Bk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Magneta-Bk.otf"; sourceTree = "<group>"; };
 		690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-75Bd.otf"; sourceTree = "<group>"; };
 		690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-65Md.otf"; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAFBEF51ECDF2DA0083133D /* Alamofire.framework in Frameworks */,
+				6904992F1EDB339600A1B59E /* SwiftyGif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 		BFAFBEB21ECDCE840083133D = {
 			isa = PBXGroup;
 			children = (
+				6904992D1EDB338400A1B59E /* SwiftyGif.framework */,
 				BFAFBEF11ECDF2C90083133D /* Alamofire.framework */,
 				BFAFBEBD1ECDCE840083133D /* BernieApp */,
 				BFAFBED21ECDCE840083133D /* BernieAppTests */,
