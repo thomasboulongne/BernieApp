@@ -13,6 +13,8 @@
 		690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */; };
 		690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */; };
 		690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B010F1ED768CF00C4ECAE /* MessageCell.swift */; };
+		69170EC61EE49BBF00811077 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69170EC21EE49B9900811077 /* AlamofireImage.framework */; };
+		69170EC71EE49BBF00811077 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69170EC21EE49B9900811077 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
 		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
 		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
@@ -54,6 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				69170EC71EE49BBF00811077 /* AlamofireImage.framework in Embed Frameworks */,
 				BFAFBEF61ECDF2DA0083133D /* Alamofire.framework in Embed Frameworks */,
 				690499301EDB339600A1B59E /* SwiftyGif.framework in Embed Frameworks */,
 			);
@@ -68,6 +71,7 @@
 		690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-75Bd.otf"; sourceTree = "<group>"; };
 		690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-65Md.otf"; sourceTree = "<group>"; };
 		690B010F1ED768CF00C4ECAE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		69170EC21EE49B9900811077 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
 		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69170EC61EE49BBF00811077 /* AlamofireImage.framework in Frameworks */,
 				BFAFBEF51ECDF2DA0083133D /* Alamofire.framework in Frameworks */,
 				6904992F1EDB339600A1B59E /* SwiftyGif.framework in Frameworks */,
 			);
@@ -130,6 +135,7 @@
 		BFAFBEB21ECDCE840083133D = {
 			isa = PBXGroup;
 			children = (
+				69170EC21EE49B9900811077 /* AlamofireImage.framework */,
 				6904992D1EDB338400A1B59E /* SwiftyGif.framework */,
 				BFAFBEF11ECDF2C90083133D /* Alamofire.framework */,
 				BFAFBEBD1ECDCE840083133D /* BernieApp */,

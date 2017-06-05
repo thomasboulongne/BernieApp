@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 import CoreData
 import UIKit
 
@@ -111,6 +112,8 @@ final class MessageManager {
                         else { return }
                     DispatchQueue.main.async() { () -> Void in
                         let imageData = UIImagePNGRepresentation(image)
+                        
+                        savedMessage.body = body
                         savedMessage.image = imageData! as NSData
                         
                         print("Image saved")
@@ -131,12 +134,11 @@ final class MessageManager {
                     else { return }
                     DispatchQueue.main.async() { () -> Void in
                         
-                        let image = UIImage(gifData: data)
-                        let imgview = UIImageView(gifImage: image)
+                        savedMessage.body = body
                         
-                        //savedMessage.image = data as NSData
+                        savedMessage.image = data as NSData
                         
-                        //savedMessage.gif = true
+                        savedMessage.gif = true
                         
                         print("Gif saved")
                         

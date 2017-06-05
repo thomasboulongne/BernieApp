@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class MessageTextField: UITextField, UITextFieldDelegate {
+
+    let padding = UIEdgeInsets(top: 0, left: hMargin, bottom: 0, right: hMargin);
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.propertiesInit()
@@ -34,9 +37,21 @@ class MessageTextField: UITextField, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         MessageManager.shared.request(query: self.text!)
-                
+        self.text = ""
         return true
     }
 }

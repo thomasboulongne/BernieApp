@@ -1,2 +1,3 @@
 github "Alamofire/Alamofire" ~> 4.4
 github "kirualex/SwiftyGif"
+github "Alamofire/AlamofireImage"

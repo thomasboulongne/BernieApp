@@ -12,11 +12,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var messages: [Any] = []
     private var tableView: UITableView!
+    var scrollView: UIScrollView!
+    var textField: UITextField!
     
     var unsubscribe = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.registerForKeyboardNotifications()
+        
+        self.scrollView = UIScrollView(frame: self.view.frame)
+        self.view.addSubview(self.scrollView)
         
         let height: CGFloat = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - CGFloat(TextFieldHeight)
         let tableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.height, height: height))
@@ -26,15 +33,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.separatorStyle = .none
         
-        self.view.addSubview(self.tableView)
+        self.scrollView.addSubview(self.tableView)
         
         self.onMessagesUpdate()
         
         self.tableView.register(MessageCell.self, forCellReuseIdentifier: "Cell")
         
         // Do any additional setup after loading the view, typically from a nib.
-        let textField = MessageTextField()
-        self.view.addSubview(textField)
+        self.textField = MessageTextField()
+        self.scrollView.addSubview(self.textField)
         
         self.tableView.estimatedRowHeight = 50
         
@@ -87,5 +94,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableViewScrollToBottom(animated: Bool) {
         let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
         self.tableView.setContentOffset(scrollPoint, animated: true)
+    }
+    
+    func registerForKeyboardNotifications(){
+        //Adding notifies on keyboard appearing
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        //Removing notifies on keyboard appearing
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification){
+        
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.scrollView.isScrollEnabled = true
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height, right: 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: contentInsets.bottom), animated: true)
+    }
+    
+    func keyboardWillBeHidden(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
+        self.scrollView.isScrollEnabled = false
     }
 }

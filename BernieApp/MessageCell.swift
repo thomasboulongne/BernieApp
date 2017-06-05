@@ -23,16 +23,18 @@ class MessageCell: UITableViewCell {
         if imageData != nil {
             let image: UIImage
             let imageView: UIImageView
+            
+            var imageSize: CGSize = CGSize(width: 0, height: 0)
             if message.gif {
                 image = UIImage(gifData: imageData! as Data)
                 imageView = UIImageView(gifImage: image, manager: gifmanager)
+                imageSize = imageView.frameAtIndex(index: 0).size
             }
             else {
                 image = UIImage(data: imageData! as Data)!
                 imageView = UIImageView(image: image)
+                imageSize = image.size
             }
-            
-            let imageSize = image.size
             
             if imageSize.width > imageSize.height {
                 imageView.frame = CGRect(x: 0, y: 0, width: maxMessageSize.width, height: imageSize.height * maxMessageSize.width / imageSize.width)
