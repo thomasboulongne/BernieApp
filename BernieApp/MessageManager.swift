@@ -62,6 +62,9 @@ final class MessageManager {
                         if message["speech"] is String {
                             speech = message["speech"] as! String
                         }
+                        else if message["imageUrl"] != nil {
+                            speech = "---------------------"
+                        }
                         delay = (Double(speech.characters.count)) / 20
                     }
                 }

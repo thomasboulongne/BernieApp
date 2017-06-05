@@ -114,6 +114,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func keyboardWasShown(notification: NSNotification){
         
+        self.tableViewScrollToBottom(animated: true)
+        
         //Need to calculate keyboard exact size due to Apple suggestions
         self.scrollView.isScrollEnabled = true
         var info = notification.userInfo!

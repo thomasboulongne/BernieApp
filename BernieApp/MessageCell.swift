@@ -36,6 +36,9 @@ class MessageCell: UITableViewCell {
                 imageSize = image.size
             }
             
+            imageView.layer.cornerRadius = 5
+            imageView.layer.masksToBounds = true
+            
             if imageSize.width > imageSize.height {
                 imageView.frame = CGRect(x: 0, y: 0, width: maxMessageSize.width, height: imageSize.height * maxMessageSize.width / imageSize.width)
             }
