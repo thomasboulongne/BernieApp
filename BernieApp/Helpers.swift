@@ -31,6 +31,12 @@ extension UITableView {
     }
 }
 
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
+
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode

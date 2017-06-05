@@ -35,6 +35,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.scrollView.addSubview(self.tableView)
         
+        
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+
+        
         self.tableView.register(MessageCell.self, forCellReuseIdentifier: "Cell")
         
         // Do any additional setup after loading the view, typically from a nib.
