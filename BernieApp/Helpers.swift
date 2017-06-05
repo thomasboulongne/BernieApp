@@ -24,6 +24,13 @@ extension String
     }
 }
 
+extension UITableView {
+    func reloadData(completion: @escaping ()->()) {
+        UIView.animate(withDuration: 0, animations: { self.reloadData() })
+        { _ in completion() }
+    }
+}
+
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode

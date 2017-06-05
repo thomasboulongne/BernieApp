@@ -35,8 +35,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.scrollView.addSubview(self.tableView)
         
-        self.onMessagesUpdate()
-        
         self.tableView.register(MessageCell.self, forCellReuseIdentifier: "Cell")
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -45,11 +43,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.estimatedRowHeight = 50
         
+        self.tableView.keyboardDismissMode = .onDrag
+        
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
+        
+        self.onMessagesUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.unsubscribe()
+        self.deregisterFromKeyboardNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,9 +89,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.messages = MessageManager.shared.getMessages()
         
-        self.tableView.reloadData()
+        self.tableView.reloadData {
+            self.tableViewScrollToBottom(animated: true)
+        }
         
-        self.tableViewScrollToBottom(animated: true)
     }
     
     func tableViewScrollToBottom(animated: Bool) {
@@ -129,7 +133,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
-        self.view.endEditing(true)
+        self.textField.endEditing(true)
         self.scrollView.isScrollEnabled = false
     }
 }
