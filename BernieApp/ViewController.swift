@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private var tableView: UITableView!
     var scrollView: UIScrollView!
     var textField: UITextField!
+    var header: Header!
     
     var unsubscribe = {}
     
@@ -25,8 +26,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.scrollView = UIScrollView(frame: self.view.frame)
         self.view.addSubview(self.scrollView)
         
-        let height: CGFloat = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - CGFloat(TextFieldHeight)
-        let tableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.height, height: height))
+        let height: CGFloat = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: height))
         self.tableView = tableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -49,6 +50,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.keyboardDismissMode = .onDrag
         
+        self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
+        self.view.addSubview(self.header)
+        
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
         self.onMessagesUpdate()
@@ -62,6 +66,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.header.setupGradient()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

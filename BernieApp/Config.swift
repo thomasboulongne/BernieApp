@@ -18,6 +18,8 @@ let TextFieldHeight = 60.0
 let hMargin: CGFloat = 30.0
 let vMargin: CGFloat = 10.0
 
+let headerHeight: CGFloat = 100.0
+
 let maxMessageSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height/2)
 
 let gifmanager = SwiftyGifManager(memoryLimit:20)

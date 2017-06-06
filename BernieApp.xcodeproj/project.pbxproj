@@ -28,6 +28,7 @@
 		BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */; };
 		BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF421ED345FF0083133D /* MessageTextField.swift */; };
 		BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */; };
+		E98273981EE6D0BC00768D20 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98273971EE6D0BC00768D20 /* Header.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		BFAFBF011ECF487C0083133D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFAFBF421ED345FF0083133D /* MessageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextField.swift; sourceTree = "<group>"; };
 		BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSubscriber.swift; sourceTree = "<group>"; };
+		E98273971EE6D0BC00768D20 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				BFAFBF421ED345FF0083133D /* MessageTextField.swift */,
 				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
+				E98273971EE6D0BC00768D20 /* Header.swift */,
 				690B010F1ED768CF00C4ECAE /* MessageCell.swift */,
 				BFAFBEC21ECDCE840083133D /* Main.storyboard */,
 				BFAFBEC51ECDCE840083133D /* Assets.xcassets */,
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98273981EE6D0BC00768D20 /* Header.swift in Sources */,
 				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
 				690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */,
 				BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */,
