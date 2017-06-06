@@ -50,6 +50,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.keyboardDismissMode = .onDrag
         
+        self.tableView.allowsSelection = false
+        
         self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
         self.view.addSubview(self.header)
         

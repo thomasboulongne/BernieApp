@@ -22,6 +22,8 @@ class Header: UIView {
         
         self.logo.contentMode = .scaleAspectFit
         
+        self.logo.loopAnimation = true
+        
         super.init(frame: frame)
         
         self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize.width / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize.width, height: logoSize.height)
@@ -48,12 +50,7 @@ class Header: UIView {
     }
     
     func play() {
-        self.logo.animationProgress = 0
-        self.logo.play(completion: { finished in
-            print("adele replay dat shit pls")
-            self.play()
-        })
-        
+        self.logo.play()
     }
     
     func setGradientLocations() -> [NSNumber]
