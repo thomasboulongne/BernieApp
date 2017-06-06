@@ -8,22 +8,31 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 class Header: UIView {
     
     let gradient: CAGradientLayer
+    let logo: LOTAnimationView
     
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
+        
+        self.logo = LOTAnimationView(name: "loading_rainbow")
+        
+        self.logo.contentMode = .scaleAspectFit
+        
         super.init(frame: frame)
+        
+        self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize.width / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize.width, height: logoSize.height)
+        
+        self.addSubview(self.logo)
     }
     
     func setupGradient() {
         
         let topColor: UIColor = .white
         let bottomColor: UIColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0)
-        
-        print(self.frame)
         
         self.gradient.frame = self.frame
         
@@ -36,9 +45,14 @@ class Header: UIView {
         
         self.layer.insertSublayer(self.gradient, at: 0)
         
-        print(self.layer.sublayers)
-        
-        
+    }
+    
+    func play() {
+        self.logo.animationProgress = 0
+        self.logo.play(completion: { finished in
+            print("adele replay dat shit pls")
+            self.play()
+        })
         
     }
     
