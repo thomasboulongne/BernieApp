@@ -80,7 +80,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = MessageCell()
         
+        let cellHeight = (message as! Message).cellHeight
+        
+        if cellHeight != 0.0 {
+            return CGFloat((message as! Message).cellHeight)
+        }
+        
         let height = cell.setupWithMessage(message: message as! Message).height
+        
+        (message as! Message).cellHeight = Float(height)
         
         return height
     }
