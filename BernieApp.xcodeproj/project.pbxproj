@@ -33,6 +33,7 @@
 		E982739E1EE6E9CB00768D20 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E982739C1EE6E9C200768D20 /* Lottie.framework */; };
 		E982739F1EE6E9CB00768D20 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E982739C1EE6E9C200768D20 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E98273A31EE6F04A00768D20 /* loading_rainbow.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273A21EE6F04A00768D20 /* loading_rainbow.json */; };
+		E98273A71EE7098300768D20 /* Humeur1-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273A61EE7098300768D20 /* Humeur1-white.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		E98273991EE6E8DD00768D20 /* TwitterHeart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TwitterHeart.json; sourceTree = "<group>"; };
 		E982739C1EE6E9C200768D20 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
 		E98273A21EE6F04A00768D20 /* loading_rainbow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_rainbow.json; sourceTree = "<group>"; };
+		E98273A61EE7098300768D20 /* Humeur1-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur1-white.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				E98273A21EE6F04A00768D20 /* loading_rainbow.json */,
+				E98273A61EE7098300768D20 /* Humeur1-white.json */,
 				E98273991EE6E8DD00768D20 /* TwitterHeart.json */,
 			);
 			name = Resources;
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98273A31EE6F04A00768D20 /* loading_rainbow.json in Resources */,
+				E98273A71EE7098300768D20 /* Humeur1-white.json in Resources */,
 				690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */,
 				BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */,
 				690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */,

@@ -18,7 +18,7 @@ class Header: UIView {
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
         
-        self.logo = LOTAnimationView(name: "loading_rainbow")
+        self.logo = LOTAnimationView(name: "Humeur1-white")
         
         self.logo.contentMode = .scaleAspectFit
         
@@ -27,6 +27,8 @@ class Header: UIView {
         super.init(frame: frame)
         
         self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize.width / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize.width, height: logoSize.height)
+        
+        self.logo.backgroundColor = .green
         
         self.addSubview(self.logo)
     }
