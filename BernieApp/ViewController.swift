@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MessageManagerSubscriber {
     
-    var messages: [Any] = []
+    var messages: [Message] = []
     private var tableView: UITableView!
     var scrollView: UIScrollView!
     var textField: UITextField!
@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
         let message = self.messages[indexPath.row]
         
-        cell.setupWithMessage(message: message as! Message)
+        cell.setupWithMessage(message: message)
         
         return cell
     }
@@ -92,15 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = MessageCell()
         
-        let cellHeight = (message as! Message).cellHeight
-        
-        if cellHeight != 0.0 {
-            return CGFloat((message as! Message).cellHeight)
-        }
-        
-        let height = cell.setupWithMessage(message: message as! Message).height
-        
-        (message as! Message).cellHeight = Float(height)
+        let height = cell.setupWithMessage(message: message).height
         
         return height
     }
@@ -112,6 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func onMessagesUpdate() {
         
         self.messages = MessageManager.shared.getMessages()
+        
         
         self.tableView.reloadData {
             self.tableViewScrollToBottom(animated: true)

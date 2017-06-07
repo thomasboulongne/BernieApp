@@ -18,9 +18,15 @@ class MessageCell: UITableViewCell {
         
         var returnValue = CGSize(width: 0, height: 0)
         
-        let imageData = message.image
-        
-        if imageData != nil {
+        switch message.type {
+        case 1:
+            //print("quick reply display")
+            return returnValue
+        case 2:
+            //print("Rich card display")
+            return returnValue
+        case 3:
+            let imageData = message.image
             let image: UIImage
             let imageView: UIImageView
             
@@ -62,8 +68,9 @@ class MessageCell: UITableViewCell {
             }
             self.addSubview(imageView)
             
-        }
-        else if let body = (message as AnyObject).value(forKeyPath: "body") {
+        default:
+            //print("Default")
+            let body = (message as AnyObject).value(forKeyPath: "body")
             let text = body as! String
             
             let label = UILabel(frame: CGRect())
@@ -89,7 +96,6 @@ class MessageCell: UITableViewCell {
             }
             
             self.addSubview(label)
-            
         }
         
         returnValue.height += vMargin * 2

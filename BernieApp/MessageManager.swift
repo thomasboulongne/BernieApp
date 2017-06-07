@@ -40,6 +40,7 @@ final class MessageManager {
         var requestMessage = Dictionary<String, Any>()
         requestMessage["speech"] = query
         requestMessage["received"] = false
+        requestMessage["type"] = 0
         self.processNewMessage(message: requestMessage)
         
         Alamofire.request("https://api.api.ai/v1/query?v=20150910", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -51,54 +52,57 @@ final class MessageManager {
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                 
-                    var delay: Double = 0.0
+                    var delay: Double = 2.0
                 
                     for message in messages {
+                        delay += 1.0
+                        
                         Delay(delay: delay) {
+                            self.startWriting()
+                        }
+                        
+                        switch message["type"] as! Int {
+                        case 0:
+                            print(message)
+                            let speech = message["speech"] as! String
+                            let count = speech.characters.count
+                            delay += Double(count) / 20.0
+                        default:
+                            delay += 4
+                        }
+                        
+                        
+                        Delay(delay: delay) {
+                            self.endWriting()
                             self.processNewMessage(message: message)
                         }
-                        var speech = ""
-                        if message["speech"] is String {
-                            speech = message["speech"] as! String
-                        }
-                        else if message["imageUrl"] != nil {
-                            speech = "---------------------"
-                        }
-                        delay = (Double(speech.characters.count)) / 20
                     }
                 }
             }
         }
     }
     
+    func startWriting(){
+        print("start Writing")
+    }
+    
+    func endWriting() {
+        print("stop writing")
+    }
+    
     func processNewMessage(message: Dictionary<String, Any>) {
+        let type: Int = message["type"] as! Int
         
-        let savedMessage = Message(context: self.persistentContainer.viewContext)
-        
-        if let received = message["received"] {
-            savedMessage.received = received as! Bool
-        }
-        else {
-            savedMessage.received = true
-        }
-        
-        savedMessage.date = NSDate()
-        
-        let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
-        let regexpGif = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.gif)"
-        
-        let body: String
-        if message["imageUrl"] != nil {
-            body = (message["imageUrl"] as? String)!
-        }
-        else {
-            body = (message["speech"] as? String)!
-        }
-        
-        savedMessage.gif = false
-        
-        if body != "" {
-        
+        switch type {
+        case 1:
+            print("Rich card")
+        case 2:
+            print("Quick replies")
+        case 3:
+            print("Image")
+            let body = message["imageUrl"] as! String
+            let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
+            let regexpGif = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.gif)"
             let rangeImg = body.range(of: regexpImg, options: .regularExpression)
             let rangeGif = body.range(of: regexpGif, options: .regularExpression)
             
@@ -113,9 +117,12 @@ final class MessageManager {
                         let image = UIImage(data: data)
                         else { return }
                     DispatchQueue.main.async() { () -> Void in
+                        
+                        
+                        let savedMessage = self.createMessageToSave(message: message)
+                        
                         let imageData = UIImagePNGRepresentation(image)
                         
-                        savedMessage.body = body
                         savedMessage.image = imageData! as NSData
                         
                         print("Image saved")
@@ -123,7 +130,7 @@ final class MessageManager {
                         self.saveContext()
                         self.broadcast()
                     }
-                }.resume()
+                    }.resume()
             }
             else if rangeGif != nil {
                 
@@ -133,10 +140,11 @@ final class MessageManager {
                         let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                         let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                         let data = data, error == nil
-                    else { return }
+                        else { return }
                     DispatchQueue.main.async() { () -> Void in
                         
-                        savedMessage.body = body
+                        
+                        let savedMessage = self.createMessageToSave(message: message)
                         
                         savedMessage.image = data as NSData
                         
@@ -149,16 +157,39 @@ final class MessageManager {
                     }
                     }.resume()
             }
-            else {
-                savedMessage.body = body
-                print(savedMessage.body ?? "----")
-                
-                if(savedMessage.body != "") {
-                    self.saveContext()
-                    self.broadcast()
-                }
+        case 4:
+            print("Custom payload")
+        default:
+            print("default")
+            
+            let savedMessage = self.createMessageToSave(message: message)
+            
+            let body = (message["speech"] as? String)!
+            savedMessage.body = body
+            
+            if(savedMessage.body != "") {
+                self.saveContext()
+                self.broadcast()
             }
         }
+    }
+    
+    func createMessageToSave(message: Dictionary<String, Any>) -> Message {
+        
+        let savedMessage = Message(context: self.persistentContainer.viewContext)
+        
+        if let received = message["received"] {
+            savedMessage.received = received as! Bool
+        }
+        else {
+            savedMessage.received = true
+        }
+        
+        savedMessage.date = NSDate()
+        
+        savedMessage.type = (Int16(message["type"] as! Int))
+        
+        return savedMessage
     }
     
     func broadcast() {
@@ -167,10 +198,10 @@ final class MessageManager {
         }
     }
     
-    func getMessages() -> Array<Any> {
+    func getMessages() -> Array<Message> {
         
 
-        var history: Array<Any> = []
+        var history: Array<Message> = []
         
         do {
             history = try self.persistentContainer.viewContext.fetch(Message.fetchRequest())

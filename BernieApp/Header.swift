@@ -26,9 +26,7 @@ class Header: UIView {
         
         super.init(frame: frame)
         
-        self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize.width / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize.width, height: logoSize.height)
-        
-        self.logo.backgroundColor = .green
+        self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize, height: logoSize)
         
         self.addSubview(self.logo)
     }
@@ -40,9 +38,7 @@ class Header: UIView {
         
         self.gradient.frame = self.frame
         
-        //self.gradient.locations = self.setGradientLocations()
-        
-        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.7)
+        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.87)
         self.gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         
         self.gradient.colors = [topColor.cgColor, bottomColor.cgColor]
@@ -53,11 +49,6 @@ class Header: UIView {
     
     func play() {
         self.logo.play()
-    }
-    
-    func setGradientLocations() -> [NSNumber]
-    {
-        return [0.70, 1.0]
     }
     
     required init?(coder aDecoder: NSCoder) {
