@@ -73,7 +73,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.header.setupGradient()
-        self.header.play()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,6 +109,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableViewScrollToBottom(animated: true)
         }
         
+    }
+    
+    func onStartTyping() {
+        self.header.play()
+    }
+    
+    func onStopTyping() {
+        self.header.stop()
     }
     
     func tableViewScrollToBottom(animated: Bool) {

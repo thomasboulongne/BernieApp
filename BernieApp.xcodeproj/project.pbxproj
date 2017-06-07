@@ -29,11 +29,13 @@
 		BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF421ED345FF0083133D /* MessageTextField.swift */; };
 		BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */; };
 		E98273981EE6D0BC00768D20 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98273971EE6D0BC00768D20 /* Header.swift */; };
-		E982739A1EE6E8DD00768D20 /* TwitterHeart.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273991EE6E8DD00768D20 /* TwitterHeart.json */; };
 		E982739E1EE6E9CB00768D20 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E982739C1EE6E9C200768D20 /* Lottie.framework */; };
 		E982739F1EE6E9CB00768D20 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E982739C1EE6E9C200768D20 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E98273A31EE6F04A00768D20 /* loading_rainbow.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273A21EE6F04A00768D20 /* loading_rainbow.json */; };
-		E98273A71EE7098300768D20 /* Humeur1-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273A61EE7098300768D20 /* Humeur1-white.json */; };
+		E98273AF1EE8610500768D20 /* 1-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273AA1EE8610500768D20 /* 1-white.json */; };
+		E98273B01EE8610500768D20 /* 2-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273AB1EE8610500768D20 /* 2-white.json */; };
+		E98273B11EE8610500768D20 /* 3-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273AC1EE8610500768D20 /* 3-white.json */; };
+		E98273B21EE8610500768D20 /* 4-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273AD1EE8610500768D20 /* 4-white.json */; };
+		E98273B31EE8610500768D20 /* 5-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E98273AE1EE8610500768D20 /* 5-white.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,10 +98,12 @@
 		BFAFBF421ED345FF0083133D /* MessageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextField.swift; sourceTree = "<group>"; };
 		BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSubscriber.swift; sourceTree = "<group>"; };
 		E98273971EE6D0BC00768D20 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
-		E98273991EE6E8DD00768D20 /* TwitterHeart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TwitterHeart.json; sourceTree = "<group>"; };
 		E982739C1EE6E9C200768D20 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
-		E98273A21EE6F04A00768D20 /* loading_rainbow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_rainbow.json; sourceTree = "<group>"; };
-		E98273A61EE7098300768D20 /* Humeur1-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur1-white.json"; sourceTree = "<group>"; };
+		E98273AA1EE8610500768D20 /* 1-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "1-white.json"; sourceTree = "<group>"; };
+		E98273AB1EE8610500768D20 /* 2-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "2-white.json"; sourceTree = "<group>"; };
+		E98273AC1EE8610500768D20 /* 3-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "3-white.json"; sourceTree = "<group>"; };
+		E98273AD1EE8610500768D20 /* 4-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4-white.json"; sourceTree = "<group>"; };
+		E98273AE1EE8610500768D20 /* 5-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "5-white.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,9 +211,11 @@
 		E982739B1EE6E8E400768D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E98273A21EE6F04A00768D20 /* loading_rainbow.json */,
-				E98273A61EE7098300768D20 /* Humeur1-white.json */,
-				E98273991EE6E8DD00768D20 /* TwitterHeart.json */,
+				E98273AA1EE8610500768D20 /* 1-white.json */,
+				E98273AB1EE8610500768D20 /* 2-white.json */,
+				E98273AC1EE8610500768D20 /* 3-white.json */,
+				E98273AD1EE8610500768D20 /* 4-white.json */,
+				E98273AE1EE8610500768D20 /* 5-white.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -325,15 +331,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98273A31EE6F04A00768D20 /* loading_rainbow.json in Resources */,
-				E98273A71EE7098300768D20 /* Humeur1-white.json in Resources */,
+				E98273B21EE8610500768D20 /* 4-white.json in Resources */,
+				E98273AF1EE8610500768D20 /* 1-white.json in Resources */,
 				690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */,
 				BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */,
 				690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */,
+				E98273B01EE8610500768D20 /* 2-white.json in Resources */,
 				690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */,
+				E98273B31EE8610500768D20 /* 5-white.json in Resources */,
+				E98273B11EE8610500768D20 /* 3-white.json in Resources */,
 				BFAFBEC61ECDCE840083133D /* Assets.xcassets in Resources */,
 				BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */,
-				E982739A1EE6E8DD00768D20 /* TwitterHeart.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

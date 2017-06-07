@@ -86,11 +86,11 @@ final class MessageManager {
     }
     
     func startWriting(){
-        print("start Writing")
+        self.broadcastStartTyping()
     }
     
     func endWriting() {
-        print("stop writing")
+        self.broadcastStopTyping()
         if(self.queueToSave.count > 0) {
             self.saveNextMessage()
         }
@@ -130,7 +130,7 @@ final class MessageManager {
         }
         
         self.saveContext()
-        self.broadcast()
+        self.broadcastNewMessage()
 }
     
     func processNewMessage(message: Dictionary<String, Any>) {
@@ -168,7 +168,7 @@ final class MessageManager {
                         
                         savedMessage["image"] = imageData! as NSData
                         
-                        self.queueToSave.append(savedMessage)
+                        self.save(savedMessage: savedMessage)
                         
                     }
                     }.resume()
@@ -193,7 +193,7 @@ final class MessageManager {
                         
                         print("Gif saved")
                         
-                        self.queueToSave.append(savedMessage)
+                        self.save(savedMessage: savedMessage)
                     }
                     }.resume()
             }
@@ -208,8 +208,16 @@ final class MessageManager {
             savedMessage["body"] = body
             
             if((savedMessage["body"] as! String) != "") {
-                self.queueToSave.append(savedMessage)
+                
+                self.save(savedMessage: savedMessage)
             }
+        }
+    }
+    
+    func save(savedMessage: Dictionary<String, Any>) {
+        self.queueToSave.append(savedMessage)
+        if savedMessage["received"] != nil && savedMessage["received"] as! Bool == false {
+            self.saveNextMessage()
         }
     }
     
@@ -231,9 +239,21 @@ final class MessageManager {
         return savedMessage
     }
     
-    func broadcast() {
+    func broadcastNewMessage() {
         for subscriber in self.subscribers {
             subscriber.onMessagesUpdate()
+        }
+    }
+    
+    func broadcastStartTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStartTyping()
+        }
+    }
+    
+    func broadcastStopTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStopTyping()
         }
     }
     

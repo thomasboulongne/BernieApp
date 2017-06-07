@@ -18,11 +18,9 @@ class Header: UIView {
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
         
-        self.logo = LOTAnimationView(name: "Humeur1-white")
+        self.logo = LOTAnimationView(name: "5-white")
         
         self.logo.contentMode = .scaleAspectFit
-        
-        self.logo.loopAnimation = true
         
         super.init(frame: frame)
         
@@ -48,7 +46,17 @@ class Header: UIView {
     }
     
     func play() {
+        self.logo.loopAnimation = true
         self.logo.play()
+    }
+    
+    func stop() {
+        self.logo.pause()
+        self.logo.play(completion: { (completed) in
+            self.logo.pause()
+            self.logo.loopAnimation = false
+            self.logo.animationProgress = 0
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
