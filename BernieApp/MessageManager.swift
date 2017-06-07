@@ -19,6 +19,8 @@ final class MessageManager {
     
     var subscribers: [MessageManagerSubscriber] = []
     
+    var queueToSave: [Dictionary<String, Any>] = []
+    
     // Can't init is singleton
     private init() {
         
@@ -38,7 +40,7 @@ final class MessageManager {
         ]
         
         var requestMessage = Dictionary<String, Any>()
-        requestMessage["speech"] = query
+        requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
         requestMessage["type"] = 0
         self.processNewMessage(message: requestMessage)
@@ -52,10 +54,10 @@ final class MessageManager {
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                 
-                    var delay: Double = 2.0
+                    var delay: Double = 0.0
                 
                     for message in messages {
-                        delay += 1.0
+                        self.processNewMessage(message: message)
                         
                         Delay(delay: delay) {
                             self.startWriting()
@@ -74,8 +76,9 @@ final class MessageManager {
                         
                         Delay(delay: delay) {
                             self.endWriting()
-                            self.processNewMessage(message: message)
                         }
+                        
+                        delay += 1.0
                     }
                 }
             }
@@ -88,7 +91,47 @@ final class MessageManager {
     
     func endWriting() {
         print("stop writing")
+        if(self.queueToSave.count > 0) {
+            self.saveNextMessage()
+        }
     }
+    
+    func saveNextMessage() {
+        let messageToSave = self.queueToSave.removeFirst()
+    
+        let message = Message(context: self.persistentContainer.viewContext)
+        
+        if messageToSave["body"] != nil {
+            message.body = messageToSave["body"] as? String
+        }
+        
+        if messageToSave["date"] != nil {
+            message.date = messageToSave["date"] as? NSDate
+        }
+        
+        if messageToSave["gif"] != nil {
+            message.gif = messageToSave["gif"] as! Bool
+        }
+        
+        if messageToSave["highlights"] != nil {
+            message.highlights = messageToSave["highlights"] as? NSObject
+        }
+        
+        if messageToSave["image"] != nil {
+            message.image = messageToSave["image"] as? NSData
+        }
+        
+        if messageToSave["received"] != nil {
+            message.received = messageToSave["received"] as! Bool
+        }
+        
+        if messageToSave["type"] != nil {
+            message.type = messageToSave["type"] as! Int16
+        }
+        
+        self.saveContext()
+        self.broadcast()
+}
     
     func processNewMessage(message: Dictionary<String, Any>) {
         let type: Int = message["type"] as! Int
@@ -119,16 +162,14 @@ final class MessageManager {
                     DispatchQueue.main.async() { () -> Void in
                         
                         
-                        let savedMessage = self.createMessageToSave(message: message)
+                        var savedMessage = self.createMessageToSave(message: message)
                         
                         let imageData = UIImagePNGRepresentation(image)
                         
-                        savedMessage.image = imageData! as NSData
+                        savedMessage["image"] = imageData! as NSData
                         
-                        print("Image saved")
+                        self.queueToSave.append(savedMessage)
                         
-                        self.saveContext()
-                        self.broadcast()
                     }
                     }.resume()
             }
@@ -144,16 +185,15 @@ final class MessageManager {
                     DispatchQueue.main.async() { () -> Void in
                         
                         
-                        let savedMessage = self.createMessageToSave(message: message)
+                        var savedMessage = self.createMessageToSave(message: message)
                         
-                        savedMessage.image = data as NSData
+                        savedMessage["image"] = data as NSData
                         
-                        savedMessage.gif = true
+                        savedMessage["gif"] = true
                         
                         print("Gif saved")
                         
-                        self.saveContext()
-                        self.broadcast()
+                        self.queueToSave.append(savedMessage)
                     }
                     }.resume()
             }
@@ -162,32 +202,31 @@ final class MessageManager {
         default:
             print("default")
             
-            let savedMessage = self.createMessageToSave(message: message)
+            var savedMessage = self.createMessageToSave(message: message)
             
             let body = (message["speech"] as? String)!
-            savedMessage.body = body
+            savedMessage["body"] = body
             
-            if(savedMessage.body != "") {
-                self.saveContext()
-                self.broadcast()
+            if((savedMessage["body"] as! String) != "") {
+                self.queueToSave.append(savedMessage)
             }
         }
     }
     
-    func createMessageToSave(message: Dictionary<String, Any>) -> Message {
+    func createMessageToSave(message: Dictionary<String, Any>) -> Dictionary<String, Any> {
         
-        let savedMessage = Message(context: self.persistentContainer.viewContext)
+        var savedMessage = Dictionary<String, Any>()
         
         if let received = message["received"] {
-            savedMessage.received = received as! Bool
+            savedMessage["received"] = received as! Bool
         }
         else {
-            savedMessage.received = true
+            savedMessage["received"] = true
         }
         
-        savedMessage.date = NSDate()
+        savedMessage["date"] = NSDate()
         
-        savedMessage.type = (Int16(message["type"] as! Int))
+        savedMessage["type"] = (Int16(message["type"] as! Int))
         
         return savedMessage
     }
