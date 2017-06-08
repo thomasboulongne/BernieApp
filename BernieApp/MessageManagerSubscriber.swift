@@ -10,4 +10,6 @@ import Foundation
 
 protocol MessageManagerSubscriber {
     func onMessagesUpdate()
+    func onStartTyping()
+    func onStopTyping()
 }
