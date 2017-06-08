@@ -129,6 +129,10 @@ final class MessageManager {
             message.type = messageToSave["type"] as! Int16
         }
         
+        if messageToSave["replies"] != nil {
+            message.replies = messageToSave["replies"] as? NSObject
+        }
+        
         self.saveContext()
         self.broadcastNewMessage()
 }
@@ -140,6 +144,9 @@ final class MessageManager {
         case 1:
             print("Rich card")
         case 2:
+            var savedMessage = self.createMessageToSave(message: message)
+            savedMessage["replies"] = message["replies"]
+            self.save(savedMessage: savedMessage)
             print("Quick replies")
         case 3:
             print("Image")

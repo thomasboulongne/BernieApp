@@ -20,10 +20,15 @@ class MessageCell: UITableViewCell {
         
         switch message.type {
         case 1:
-            //print("quick reply display")
+            //print("Rich card display")
             return returnValue
         case 2:
-            //print("Rich card display")
+            //print("quick reply display")
+            print(message)
+            /*let replies = message.replies as! Array<String>
+            for reply in replies {
+                print(reply)
+            }*/
             return returnValue
         case 3:
             let imageData = message.image
