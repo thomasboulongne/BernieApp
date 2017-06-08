@@ -26,6 +26,8 @@ class Header: UIView {
         
         self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize, height: logoSize)
         
+        self.logo.animationSpeed = -1
+        
         self.addSubview(self.logo)
     }
     

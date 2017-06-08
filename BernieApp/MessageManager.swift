@@ -28,6 +28,8 @@ final class MessageManager {
     
     func request(query: String) {
         
+        print("Request")
+        
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + APIAI_Token,
             "Content-Type": "application/json"
@@ -65,7 +67,6 @@ final class MessageManager {
                         
                         switch message["type"] as! Int {
                         case 0:
-                            print(message)
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
                             delay += Double(count) / 20.0
@@ -91,6 +92,7 @@ final class MessageManager {
     
     func endWriting() {
         self.broadcastStopTyping()
+        print(self.queueToSave.count)
         if(self.queueToSave.count > 0) {
             self.saveNextMessage()
         }
@@ -141,15 +143,23 @@ final class MessageManager {
         let type: Int = message["type"] as! Int
         
         switch type {
-        case 1:
-            print("Rich card")
+        case 0:
+            var savedMessage = self.createMessageToSave(message: message)
+            
+            let body = (message["speech"] as? String)!
+            savedMessage["body"] = body
+            
+            if((savedMessage["body"] as! String) != "") {
+                
+                self.save(savedMessage: savedMessage)
+            }
+        //case 1:
+        //    print("Rich card")
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
             savedMessage["replies"] = message["replies"]
             self.save(savedMessage: savedMessage)
-            print("Quick replies")
         case 3:
-            print("Image")
             let body = message["imageUrl"] as! String
             let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
             let regexpGif = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.gif)"
@@ -198,26 +208,15 @@ final class MessageManager {
                         
                         savedMessage["gif"] = true
                         
-                        print("Gif saved")
-                        
                         self.save(savedMessage: savedMessage)
                     }
                     }.resume()
             }
-        case 4:
-            print("Custom payload")
+        //case 4:
+        //    print("Custom payload")
         default:
-            print("default")
-            
-            var savedMessage = self.createMessageToSave(message: message)
-            
-            let body = (message["speech"] as? String)!
-            savedMessage["body"] = body
-            
-            if((savedMessage["body"] as! String) != "") {
-                
-                self.save(savedMessage: savedMessage)
-            }
+            let savedMessage = self.createMessageToSave(message: message)
+            self.save(savedMessage: savedMessage)
         }
     }
     

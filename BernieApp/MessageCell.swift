@@ -16,6 +16,12 @@ class MessageCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
+        if self.layer.sublayers != nil {
+            for layer in self.layer.sublayers! {
+                layer.removeFromSuperlayer()
+            }
+        }
+        
         var returnValue = CGSize(width: 0, height: 0)
         
         switch message.type {
@@ -24,11 +30,61 @@ class MessageCell: UITableViewCell {
             return returnValue
         case 2:
             //print("quick reply display")
-            print(message)
-            /*let replies = message.replies as! Array<String>
+            let replies = message.replies as! Array<String>
+            //var labels: [QuickReply] = []
+            var offset: CGFloat = hMargin
+            var maxHeight: CGFloat = 0.0
+            
+            let repliesWrapper = UIScrollView()
+            
+            repliesWrapper.showsHorizontalScrollIndicator = false
+            
             for reply in replies {
-                print(reply)
-            }*/
+                let label = QuickReply(frame: CGRect(), text: reply)
+                                
+                label.frame = CGRect(x: offset, y: vMargin/2, width: label.size.width, height: label.size.height)
+                offset += label.size.width + label.padding
+                
+                if label.size.height > maxHeight {
+                    maxHeight = label.size.height
+                }
+                                
+                label.layer.cornerRadius = label.size.height/2
+                label.layer.borderWidth = 1
+                label.layer.borderColor = UIColor.black.cgColor
+                
+                repliesWrapper.addSubview(label)
+            }
+            
+            offset += hMargin / 2
+            
+            returnValue.height = maxHeight + vMargin * 2
+            returnValue.width = UIScreen.main.bounds.width
+            
+            repliesWrapper.contentSize = CGSize(width: offset, height: maxHeight)
+            
+            repliesWrapper.frame = CGRect(x: 0, y: vMargin / 2, width: returnValue.width, height: returnValue.height)
+            self.addSubview(repliesWrapper)
+            
+            let mask = CAGradientLayer();
+            mask.frame = CGRect(x: 0, y: 0, width: returnValue.width, height: returnValue.height)
+            
+            let color1 = UIColor.white.cgColor
+            let color2 = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0).cgColor
+            
+            mask.colors = [color1, color2, color2, color1]
+            
+            let point1: NSNumber = 0.0
+            let point2: CGFloat  = CGFloat(hMargin) / CGFloat(returnValue.width)
+            let point3: CGFloat  = 1 - (CGFloat(hMargin) / CGFloat(returnValue.width))
+            let point4: NSNumber = 1.0
+            
+            mask.locations  = [point1, NSNumber(value: Float(point2)), NSNumber(value: Float(point3)), point4]
+            
+            mask.startPoint = CGPoint(x: 0.0, y: 0.0)
+            mask.endPoint   = CGPoint(x: 1.0, y: 0.0)
+            
+            self.layer.insertSublayer(mask, at: 1)
             return returnValue
         case 3:
             let imageData = message.image
