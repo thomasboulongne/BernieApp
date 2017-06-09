@@ -76,7 +76,7 @@ final class MessageManager {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay += Double(count) / 20.0
+                            delay += Double(count) / 5.0
                         default:
                             delay += 4
                         }
