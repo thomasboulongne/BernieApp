@@ -16,6 +16,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var textField: UITextField!
     var header: Header!
     
+    var heights: [CGFloat] = []
+    
     var unsubscribe = {}
     
     override func viewDidLoad() {
@@ -33,6 +35,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.dataSource = self
         
         self.tableView.separatorStyle = .none
+        
+        self.tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
         
         self.scrollView.addSubview(self.tableView)
         
@@ -87,11 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let message = self.messages[indexPath.row]
-        
-        let cell = MessageCell()
-        
-        let height = cell.setupWithMessage(message: message, index: indexPath.row).height
+        let height = self.heights[indexPath.row]
         
         return height
     }
@@ -104,6 +104,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.messages = MessageManager.shared.getMessages()
         
+        self.heights = []
+        
+        var i = 0
+        for message in self.messages {
+            let cell: MessageCell = MessageCell()
+            heights.append(cell.setupWithMessage(message: message, index: i).height)
+            i += 1
+        }
     
         self.tableView.reloadData {
             self.tableViewScrollToBottom(animated: true)
