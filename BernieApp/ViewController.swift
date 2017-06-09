@@ -157,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
         
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: contentInsets.bottom), animated: true)
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: contentInsets.bottom), animated: false)
     }
     
     func keyboardWillBeHidden(notification: NSNotification){

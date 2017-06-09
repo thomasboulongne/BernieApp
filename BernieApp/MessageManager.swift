@@ -161,8 +161,8 @@ final class MessageManager {
                 
                 self.save(savedMessage: savedMessage)
             }
-        //case 1:
-        //    print("Rich card")
+        case 1:
+            print("Rich card", message)
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
             savedMessage["replies"] = message["replies"]
