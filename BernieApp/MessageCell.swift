@@ -26,12 +26,11 @@ class MessageCell: UITableViewCell {
         
         switch message.type {
         case 1:
-            //print("Rich card display")
             return returnValue
         case 2:
-            //print("quick reply display")
+            
             let replies = message.replies as! Array<String>
-            //var labels: [QuickReply] = []
+            
             var offset: CGFloat = hMargin
             var maxHeight: CGFloat = 0.0
             

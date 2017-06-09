@@ -15,15 +15,15 @@ class CarouselCell: UICollectionViewCell {
     var subTitle: String = ""
     var desc: String = ""
     var subItems: [Dictionary<String, String>] = []
-    var payload: String = ""
+    var postback: String = ""
     
-    func setup(imageUrl: String, title: String, subTitle: String, desc: String, subItems: [Dictionary<String, String>], payload: String) {
-        self.imageUrl = imageUrl
-        self.title    = title
-        self.subTitle = subTitle
-        self.desc     = desc
-        self.subItems = subItems
-        self.payload  = payload
+    func setup(imageUrl: String, title: String, subTitle: String, desc: String, subItems: [Dictionary<String, String>], postback: String) {
+        self.imageUrl  = imageUrl
+        self.title     = title
+        self.subTitle  = subTitle
+        self.desc      = desc
+        self.subItems  = subItems
+        self.postback  = postback
     }
     
     required init?(coder aDecoder: NSCoder) {

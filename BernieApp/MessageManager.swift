@@ -28,8 +28,6 @@ final class MessageManager {
     
     func request(query: String) {
         
-        print("Request")
-        
         var requestMessage = Dictionary<String, Any>()
         requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
@@ -40,9 +38,6 @@ final class MessageManager {
     }
     
     func httpRequest(query: String) {
-        
-        print("Requete :", query)
-        
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + APIAI_Token,
             "Content-Type": "application/json"

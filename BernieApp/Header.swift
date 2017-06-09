@@ -46,14 +46,12 @@ class Header: UIView {
     }
     
     func startTyping() {
-        print("start typing animation")
         self.animationViews[self.currentLogoView]?.removeFromSuperview()
         
         self.currentLogoView = "Typing-TransIn-white"
         self.addSubview(self.animationViews[self.currentLogoView]!)
         self.animationViews[currentLogoView]?.animationSpeed = 3
         
-        print(self.animationViews[self.currentLogoView]!.animationProgress)
         self.animationViews[self.currentLogoView]!.animationProgress = 0
         self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
             
@@ -67,17 +65,14 @@ class Header: UIView {
     }
     
     func stopTyping() {
-        print("stop typing animation")
         
         self.animationViews[self.currentLogoView]!.pause()
         self.animationViews[self.currentLogoView]!.loopAnimation = false
         self.animationViews[self.currentLogoView]!.play(completion: { (completed) in
-            print("end of animation")
             self.animationViews[self.currentLogoView]!.removeFromSuperview()
             self.currentLogoView = "Typing-TransIn-white"
             self.addSubview(self.animationViews[self.currentLogoView]!)
             self.animationViews[self.currentLogoView]!.animationSpeed = -3
-            print(self.animationViews[self.currentLogoView]!.animationProgress)
             self.animationViews[self.currentLogoView]!.animationProgress = 1
             self.animationViews[self.currentLogoView]!.play()
         })
