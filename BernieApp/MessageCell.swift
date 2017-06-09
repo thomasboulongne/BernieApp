@@ -11,7 +11,7 @@ import UIKit
 
 class MessageCell: UITableViewCell {
     
-    func setupWithMessage(message: Message) -> CGSize {
+    func setupWithMessage(message: Message, index: Int) -> CGSize {
         for view in self.subviews {
             view.removeFromSuperview()
         }
@@ -39,8 +39,16 @@ class MessageCell: UITableViewCell {
             
             repliesWrapper.showsHorizontalScrollIndicator = false
             
+            let selectedReply = message.selectedReply
+            
             for reply in replies {
-                let label = QuickReply(frame: CGRect(), text: reply)
+                var selected = false
+                
+                if reply == selectedReply {
+                    selected = true
+                }
+                
+                let label = QuickReply(frame: CGRect(), text: reply, selected: selected, index: index)
                                 
                 label.frame = CGRect(x: offset, y: vMargin/2, width: label.size.width, height: label.size.height)
                 offset += label.size.width + label.padding
@@ -48,10 +56,12 @@ class MessageCell: UITableViewCell {
                 if label.size.height > maxHeight {
                     maxHeight = label.size.height
                 }
-                                
-                label.layer.cornerRadius = label.size.height/2
-                label.layer.borderWidth = 1
-                label.layer.borderColor = UIColor.black.cgColor
+                
+                if selectedReply == nil {
+                    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapQuickReply))
+                    label.addGestureRecognizer(tap)
+                }
+                
                 
                 repliesWrapper.addSubview(label)
             }
@@ -163,6 +173,10 @@ class MessageCell: UITableViewCell {
         return returnValue
     }
     
-    
+    func didTapQuickReply(sender: UITapGestureRecognizer) {
+        let view = sender.view as! QuickReply
+        
+        MessageManager.shared.saveQuickReply(reply: view.text!, index: view.id)
+    }
     
 }

@@ -80,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
         let message = self.messages[indexPath.row]
         
-        cell.setupWithMessage(message: message)
+        cell.setupWithMessage(message: message, index: indexPath.row)
         
         return cell
     }
@@ -91,7 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = MessageCell()
         
-        let height = cell.setupWithMessage(message: message).height
+        let height = cell.setupWithMessage(message: message, index: indexPath.row).height
         
         return height
     }
@@ -104,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.messages = MessageManager.shared.getMessages()
         
-        
+    
         self.tableView.reloadData {
             self.tableViewScrollToBottom(animated: true)
         }

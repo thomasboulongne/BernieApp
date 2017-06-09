@@ -30,6 +30,19 @@ final class MessageManager {
         
         print("Request")
         
+        var requestMessage = Dictionary<String, Any>()
+        requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        requestMessage["received"] = false
+        requestMessage["type"] = 0
+        self.processNewMessage(message: requestMessage)
+        
+        self.httpRequest(query: query)
+    }
+    
+    func httpRequest(query: String) {
+        
+        print("Requete :", query)
+        
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + APIAI_Token,
             "Content-Type": "application/json"
@@ -41,12 +54,6 @@ final class MessageManager {
             "sessionId": "somerandomthing"
         ]
         
-        var requestMessage = Dictionary<String, Any>()
-        requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        requestMessage["received"] = false
-        requestMessage["type"] = 0
-        self.processNewMessage(message: requestMessage)
-        
         Alamofire.request("https://api.api.ai/v1/query?v=20150910", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let value = response.value {
@@ -55,9 +62,9 @@ final class MessageManager {
                     let result = JSON["result"] as! Dictionary<String, Any>
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
-                
+                    
                     var delay: Double = 0.0
-                
+                    
                     for message in messages {
                         self.processNewMessage(message: message)
                         
@@ -85,6 +92,7 @@ final class MessageManager {
             }
         }
     }
+    
     
     func startWriting(){
         self.broadcastStartTyping()
@@ -225,6 +233,14 @@ final class MessageManager {
         if savedMessage["received"] != nil && savedMessage["received"] as! Bool == false {
             self.saveNextMessage()
         }
+    }
+    
+    func saveQuickReply(reply: String, index: Int) {
+        let message = self.getMessages()[index]
+        message.selectedReply = reply
+        self.saveContext()
+        self.broadcastNewMessage()
+        self.httpRequest(query: reply)
     }
     
     func createMessageToSave(message: Dictionary<String, Any>) -> Dictionary<String, Any> {
