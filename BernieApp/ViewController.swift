@@ -112,11 +112,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func onStartTyping() {
-        self.header.play()
+        self.header.startTyping()
     }
     
     func onStopTyping() {
-        self.header.stop()
+        self.header.stopTyping()
     }
     
     func tableViewScrollToBottom(animated: Bool) {

@@ -92,7 +92,7 @@ final class MessageManager {
     
     func endWriting() {
         self.broadcastStopTyping()
-        print(self.queueToSave.count)
+        
         if(self.queueToSave.count > 0) {
             self.saveNextMessage()
         }

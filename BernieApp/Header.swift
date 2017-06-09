@@ -13,22 +13,36 @@ import Lottie
 class Header: UIView {
     
     let gradient: CAGradientLayer
-    let logo: LOTAnimationView
+    var animationViews: Dictionary<String, LOTAnimationView> = [:]
+    
+    var currentLogoView: String = ""
     
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
         
-        self.logo = LOTAnimationView(name: "5-white")
-        
-        self.logo.contentMode = .scaleAspectFit
+        let animationFiles = [
+            "1-white",
+            "2-white",
+            "3-white",
+            "4-white",
+            "5-white",
+            "1-typing",
+            "2-typing",
+            "3-typing"
+        ]
         
         super.init(frame: frame)
         
-        self.logo.frame = CGRect(x: (self.bounds.width / 2) - logoSize / 2, y: UIApplication.shared.statusBarFrame.height + vMargin, width: logoSize, height: logoSize)
+        for file in animationFiles {
+            let anim = LOTAnimationView(name: file)!
+            anim.contentMode = .scaleAspectFit
+            anim.frame = CGRect(x: (self.bounds.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2)
+            self.animationViews[file] = anim
+        }
         
-        self.logo.animationSpeed = -1
-        
-        self.addSubview(self.logo)
+        self.currentLogoView = "4-white"
+        self.addSubview(self.animationViews[self.currentLogoView]!)
+        self.animationViews[self.currentLogoView]?.play()
     }
     
     func setupGradient() {
@@ -38,7 +52,7 @@ class Header: UIView {
         
         self.gradient.frame = self.frame
         
-        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.87)
+        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.75)
         self.gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         
         self.gradient.colors = [topColor.cgColor, bottomColor.cgColor]
@@ -47,18 +61,34 @@ class Header: UIView {
         
     }
     
-    func play() {
-        self.logo.loopAnimation = true
-        self.logo.play()
+    func play(file: String) {
+        self.animationViews[self.currentLogoView]?.removeFromSuperview()
+        self.addSubview(self.animationViews[file]!)
+        self.currentLogoView = file
+        self.animationViews[self.currentLogoView]?.play()
     }
     
     func stop() {
-        self.logo.pause()
-        self.logo.play(completion: { (completed) in
-            self.logo.pause()
-            self.logo.loopAnimation = false
-            self.logo.animationProgress = 0
+        self.animationViews[self.currentLogoView]?.pause()
+        self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
+            self.animationViews[self.currentLogoView]?.pause()
+            self.animationViews[self.currentLogoView]?.loopAnimation = false
+            self.animationViews[self.currentLogoView]?.animationProgress = 0
         })
+    }
+    
+    func startTyping() {
+        print("start typing animation")
+        self.animationViews[self.currentLogoView]?.removeFromSuperview()
+        self.currentLogoView = "4-white"
+        self.addSubview(self.animationViews[self.currentLogoView]!)
+        self.animationViews[self.currentLogoView]?.loopAnimation = true
+        self.animationViews[self.currentLogoView]?.play()
+    }
+    
+    func stopTyping() {
+        print("stop typing animation")
+        self.animationViews[self.currentLogoView]!.loopAnimation = false
     }
     
     required init?(coder aDecoder: NSCoder) {
