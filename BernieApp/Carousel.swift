@@ -31,7 +31,7 @@ class Carousel: UICollectionView, UICollectionViewDataSource {
         let cell: CarouselCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for:indexPath as IndexPath) as! CarouselCell
         
         let item = self.items[indexPath.row]
-        cell.setup(imageUrl: item["imageUrl"] as! String, title: item["title"] as! String, subTitle: item["subTitle"] as! String, desc: item["desc"] as! String, subItems: item["subItems"] as! [Dictionary<String, String>], payload: item["payload"] as! String)
+        cell.setup(imageUrl: item["imageUrl"] as! String, title: item["title"] as! String, subTitle: item["subTitle"] as! String, desc: item["desc"] as! String, subItems: item["subItems"] as! [Dictionary<String, String>], postback: item["postback"] as! String)
         
         return cell
     }

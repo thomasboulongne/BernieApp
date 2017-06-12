@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var scrollView: UIScrollView!
     var textField: UITextField!
     var header: Header!
+    var shortcutButton: ShortcutButton!
     
     var heights: [CGFloat] = []
     
@@ -58,6 +59,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
         self.view.addSubview(self.header)
+        
+        let size: CGFloat = CGFloat(ShortcutButtonHeight)
+        let marginY: CGFloat = ( CGFloat(TextFieldHeight) - size ) / 2
+        print(marginY)
+        self.shortcutButton = ShortcutButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size))
+        self.view.addSubview(self.shortcutButton)
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         

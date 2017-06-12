@@ -57,7 +57,8 @@ final class MessageManager {
                     let result = JSON["result"] as! Dictionary<String, Any>
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
-                    
+                    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    print(messages);
                     var delay: Double = 0.0
                     
                     for message in messages {

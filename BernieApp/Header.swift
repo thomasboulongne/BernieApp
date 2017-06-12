@@ -35,7 +35,7 @@ class Header: UIView {
         super.init(frame: frame)
         
         for file in animationFiles {
-            let anim = LOTAnimationView(name: file)!
+            let anim = LOTAnimationView(name: file)
             anim.contentMode = .scaleAspectFit
             anim.frame = CGRect(x: (self.bounds.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2)
             self.animationViews[file] = anim

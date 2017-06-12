@@ -13,6 +13,7 @@
 		690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */; };
 		690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */; };
 		690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B010F1ED768CF00C4ECAE /* MessageCell.swift */; };
+		BF37D7211EEEFF10000A1535 /* ShortcutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7201EEEFF10000A1535 /* ShortcutButton.swift */; };
 		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
 		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
 		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
@@ -80,6 +81,7 @@
 		690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-75Bd.otf"; sourceTree = "<group>"; };
 		690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-65Md.otf"; sourceTree = "<group>"; };
 		690B010F1ED768CF00C4ECAE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		BF37D7201EEEFF10000A1535 /* ShortcutButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutButton.swift; sourceTree = "<group>"; };
 		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				BFAFBEC51ECDCE840083133D /* Assets.xcassets */,
 				BFAFBEC71ECDCE840083133D /* LaunchScreen.storyboard */,
 				BFAFBECA1ECDCE840083133D /* Info.plist */,
+				BF37D7201EEEFF10000A1535 /* ShortcutButton.swift */,
 			);
 			path = BernieApp;
 			sourceTree = "<group>";
@@ -298,7 +301,7 @@
 				TargetAttributes = {
 					BFAFBEBA1ECDCE840083133D = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = USV5Z98CAJ;
+						DevelopmentTeam = Q9CRH2MVNV;
 						ProvisioningStyle = Automatic;
 					};
 					BFAFBECE1ECDCE840083133D = {
@@ -387,6 +390,7 @@
 				BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */,
 				E9F9AF1E1EEB1CB500984971 /* CarouselCell.swift in Sources */,
 				BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */,
+				BF37D7211EEEFF10000A1535 /* ShortcutButton.swift in Sources */,
 				BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,15 +545,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -558,15 +564,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
