@@ -28,6 +28,7 @@
 		BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF001ECF487C0083133D /* Model.xcdatamodeld */; };
 		BFAFBF431ED345FF0083133D /* MessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBF421ED345FF0083133D /* MessageTextField.swift */; };
 		BFDE13771ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */; };
+		BFF484181EEE94CB0066F2D9 /* Typing-TransOut-white.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF484171EEE94CB0066F2D9 /* Typing-TransOut-white.json */; };
 		E9626C3F1EE94EDA00F5B717 /* QuickReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9626C3E1EE94EDA00F5B717 /* QuickReply.swift */; };
 		E98273981EE6D0BC00768D20 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98273971EE6D0BC00768D20 /* Header.swift */; };
 		E982739E1EE6E9CB00768D20 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E982739C1EE6E9C200768D20 /* Lottie.framework */; };
@@ -100,6 +101,7 @@
 		BFAFBF011ECF487C0083133D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFAFBF421ED345FF0083133D /* MessageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextField.swift; sourceTree = "<group>"; };
 		BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManagerSubscriber.swift; sourceTree = "<group>"; };
+		BFF484171EEE94CB0066F2D9 /* Typing-TransOut-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing-TransOut-white.json"; sourceTree = "<group>"; };
 		E9626C3E1EE94EDA00F5B717 /* QuickReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickReply.swift; sourceTree = "<group>"; };
 		E98273971EE6D0BC00768D20 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		E982739C1EE6E9C200768D20 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		E982739B1EE6E8E400768D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFF484171EEE94CB0066F2D9 /* Typing-TransOut-white.json */,
 				E9F9AF111EEADEF400984971 /* Typing-TransIn-white.json */,
 				E9F9AF121EEADEF400984971 /* Typing-TransIn2-white.json */,
 				E9F9AF131EEADEF400984971 /* Typing1-white.json */,
@@ -342,6 +345,7 @@
 			files = (
 				690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */,
 				E9F9AF181EEADEF400984971 /* Typing2-white.json in Resources */,
+				BFF484181EEE94CB0066F2D9 /* Typing-TransOut-white.json in Resources */,
 				E9F9AF161EEADEF400984971 /* Typing-TransIn2-white.json in Resources */,
 				BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */,
 				690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */,

@@ -21,6 +21,8 @@ final class MessageManager {
     
     var queueToSave: [Dictionary<String, Any>] = []
     
+    var count: Int = 0
+    
     // Can't init is singleton
     private init() {
         
@@ -32,7 +34,8 @@ final class MessageManager {
         requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
         requestMessage["type"] = 0
-        self.processNewMessage(message: requestMessage)
+        self.queueToSave = [requestMessage]
+        self.processNewMessage(message: requestMessage, index: 0)
         
         self.httpRequest(query: query)
     }
@@ -58,10 +61,33 @@ final class MessageManager {
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                     
-                    var delay: Double = 0.0
+                    self.queueToSave = []
+                    var elements: [Dictionary<String, Any>] = []
                     
                     for message in messages {
-                        self.processNewMessage(message: message)
+                        if message["type"] as! Int == 1 {
+                            elements.append(message)
+                        }
+                        else {
+                            self.queueToSave.append(message)
+                        }
+                    }
+                    
+                    var richcards = Dictionary<String,Any>()
+                    richcards["type"] = 1
+                    richcards["elements"] = elements
+                    if richcards.count > 0 {
+                        self.queueToSave.append(richcards)
+                    }
+                    
+                    self.count = self.queueToSave.count
+                    
+                    var delay: Double = 0.0
+                    
+                    var i = 0
+                    
+                    for message in self.queueToSave {
+                        self.processNewMessage(message: message, index: i)
                         
                         Delay(delay: delay) {
                             self.startWriting()
@@ -71,9 +97,9 @@ final class MessageManager {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay += Double(count) / 5.0
+                            delay = delay + Double(count) / 5.0
                         default:
-                            delay += 4
+                            delay = delay + 4
                         }
                         
                         
@@ -81,7 +107,9 @@ final class MessageManager {
                             self.endWriting()
                         }
                         
-                        delay += 1.0
+                        delay = delay + 2.0
+                        
+                        i = i+1
                     }
                 }
             }
@@ -140,9 +168,9 @@ final class MessageManager {
         
         self.saveContext()
         self.broadcastNewMessage()
-}
+    }
     
-    func processNewMessage(message: Dictionary<String, Any>) {
+    func processNewMessage(message: Dictionary<String, Any>, index: Int) {
         let type: Int = message["type"] as! Int
         
         switch type {
@@ -154,14 +182,17 @@ final class MessageManager {
             
             if((savedMessage["body"] as! String) != "") {
                 
-                self.save(savedMessage: savedMessage)
+                self.save(savedMessage: savedMessage, index: index)
             }
         case 1:
-            print("Rich card", message)
+            //            print("Rich card", message)
+            var savedMessage = self.createMessageToSave(message: message)
+            
+            self.save(savedMessage: savedMessage, index: index)
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
             savedMessage["replies"] = message["replies"]
-            self.save(savedMessage: savedMessage)
+            self.save(savedMessage: savedMessage, index: index)
         case 3:
             let body = message["imageUrl"] as! String
             let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
@@ -188,7 +219,7 @@ final class MessageManager {
                         
                         savedMessage["image"] = imageData! as NSData
                         
-                        self.save(savedMessage: savedMessage)
+                        self.save(savedMessage: savedMessage, index: index)
                         
                     }
                     }.resume()
@@ -211,20 +242,20 @@ final class MessageManager {
                         
                         savedMessage["gif"] = true
                         
-                        self.save(savedMessage: savedMessage)
+                        self.save(savedMessage: savedMessage, index: index)
                     }
                     }.resume()
             }
-        //case 4:
+            //case 4:
         //    print("Custom payload")
         default:
             let savedMessage = self.createMessageToSave(message: message)
-            self.save(savedMessage: savedMessage)
+            self.save(savedMessage: savedMessage, index: index)
         }
     }
     
-    func save(savedMessage: Dictionary<String, Any>) {
-        self.queueToSave.append(savedMessage)
+    func save(savedMessage: Dictionary<String, Any>, index: Int) {
+        self.queueToSave[index] = savedMessage
         if savedMessage["received"] != nil && savedMessage["received"] as! Bool == false {
             self.saveNextMessage()
         }

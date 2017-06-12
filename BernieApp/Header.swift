@@ -21,13 +21,8 @@ class Header: UIView {
         self.gradient = CAGradientLayer()
         
         let animationFiles = [
-//            "1-white",
-//            "2-white",
-//            "3-white",
-//            "4-white",
-//            "5-white",
             "Typing-TransIn-white",
-            "Typing-TransIn2-white",
+            "Typing-TransOut-white",
             "Typing1-white",
             "Typing2-white"
         ]
@@ -35,7 +30,7 @@ class Header: UIView {
         super.init(frame: frame)
         
         for file in animationFiles {
-            let anim = LOTAnimationView(name: file)!
+            let anim = LOTAnimationView(name: file)
             anim.contentMode = .scaleAspectFit
             anim.frame = CGRect(x: (self.bounds.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2)
             self.animationViews[file] = anim
@@ -43,6 +38,10 @@ class Header: UIView {
         
         self.currentLogoView = "Typing-TransIn-white"
         self.addSubview(self.animationViews[self.currentLogoView]!)
+        self.animationViews[self.currentLogoView]!.loopAnimation = true
+        
+        self.animationViews[self.currentLogoView]!.animationSpeed = 3
+        self.animationViews[self.currentLogoView]!.play()
     }
     
     func startTyping() {
@@ -55,7 +54,6 @@ class Header: UIView {
         self.animationViews[self.currentLogoView]!.animationProgress = 0
         self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
             
-            print(self.animationViews[self.currentLogoView]!.animationProgress)
             self.animationViews[self.currentLogoView]?.removeFromSuperview()
             self.currentLogoView = "Typing2-white"
             self.addSubview(self.animationViews[self.currentLogoView]!)
@@ -70,10 +68,10 @@ class Header: UIView {
         self.animationViews[self.currentLogoView]!.loopAnimation = false
         self.animationViews[self.currentLogoView]!.play(completion: { (completed) in
             self.animationViews[self.currentLogoView]!.removeFromSuperview()
-            self.currentLogoView = "Typing-TransIn-white"
+            self.currentLogoView = "Typing-TransOut-white"
             self.addSubview(self.animationViews[self.currentLogoView]!)
-            self.animationViews[self.currentLogoView]!.animationSpeed = -3
-            self.animationViews[self.currentLogoView]!.animationProgress = 1
+            self.animationViews[self.currentLogoView]!.animationSpeed = 3
+            self.animationViews[self.currentLogoView]!.animationProgress = 0
             self.animationViews[self.currentLogoView]!.play()
         })
     }
