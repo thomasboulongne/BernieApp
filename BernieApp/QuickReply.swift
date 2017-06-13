@@ -51,8 +51,6 @@ class QuickReply: UILabel {
         super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets(top: self.padding, left: self.padding, bottom: self.padding, right: self.padding)))
     }
     
-    
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

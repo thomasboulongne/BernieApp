@@ -21,6 +21,8 @@ final class MessageManager {
     
     var queueToSave: [Dictionary<String, Any>] = []
     
+    var delays: [Dictionary<String, Double>] = []
+    
     var count: Int = 0
     
     // Can't init is singleton
@@ -34,6 +36,7 @@ final class MessageManager {
         requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
         requestMessage["type"] = 0
+        self.count = 0
         self.queueToSave = [requestMessage]
         self.processNewMessage(message: requestMessage, index: 0)
         
@@ -62,6 +65,7 @@ final class MessageManager {
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                     
                     self.queueToSave = []
+                    self.count = 0
                     var elements: [Dictionary<String, Any>] = []
                     
                     for message in messages {
@@ -75,37 +79,36 @@ final class MessageManager {
                     
                     var richcards = Dictionary<String,Any>()
                     richcards["type"] = 1
-                    richcards["elements"] = elements
+                    richcards["richcards"] = elements
                     if richcards.count > 0 {
                         self.queueToSave.append(richcards)
                     }
-                    
-                    self.count = self.queueToSave.count
                     
                     var delay: Double = 0.0
                     
                     var i = 0
                     
+                    self.delays = []
+                    
                     for message in self.queueToSave {
                         self.processNewMessage(message: message, index: i)
                         
-                        Delay(delay: delay) {
-                            self.startWriting()
-                        }
+                        var delayTimes = Dictionary<String, Double>()
+                        
+                        delayTimes["start"] = delay
                         
                         switch message["type"] as! Int {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay = delay + Double(count) / 5.0
+                            delay = delay + Double(count) / 15.0
                         default:
-                            delay = delay + 4
+                            delay = delay + 2
                         }
                         
+                        delayTimes["duration"] = delay
                         
-                        Delay(delay: delay) {
-                            self.endWriting()
-                        }
+                        self.delays.append(delayTimes)
                         
                         delay = delay + 2.0
                         
@@ -114,60 +117,6 @@ final class MessageManager {
                 }
             }
         }
-    }
-    
-    
-    func startWriting(){
-        self.broadcastStartTyping()
-    }
-    
-    func endWriting() {
-        self.broadcastStopTyping()
-        
-        if(self.queueToSave.count > 0) {
-            self.saveNextMessage()
-        }
-    }
-    
-    func saveNextMessage() {
-        let messageToSave = self.queueToSave.removeFirst()
-    
-        let message = Message(context: self.persistentContainer.viewContext)
-        
-        if messageToSave["body"] != nil {
-            message.body = messageToSave["body"] as? String
-        }
-        
-        if messageToSave["date"] != nil {
-            message.date = messageToSave["date"] as? NSDate
-        }
-        
-        if messageToSave["gif"] != nil {
-            message.gif = messageToSave["gif"] as! Bool
-        }
-        
-        if messageToSave["highlights"] != nil {
-            message.highlights = messageToSave["highlights"] as? NSObject
-        }
-        
-        if messageToSave["image"] != nil {
-            message.image = messageToSave["image"] as? NSData
-        }
-        
-        if messageToSave["received"] != nil {
-            message.received = messageToSave["received"] as! Bool
-        }
-        
-        if messageToSave["type"] != nil {
-            message.type = messageToSave["type"] as! Int16
-        }
-        
-        if messageToSave["replies"] != nil {
-            message.replies = messageToSave["replies"] as? NSObject
-        }
-        
-        self.saveContext()
-        self.broadcastNewMessage()
     }
     
     func processNewMessage(message: Dictionary<String, Any>, index: Int) {
@@ -181,12 +130,28 @@ final class MessageManager {
             savedMessage["body"] = body
             
             if((savedMessage["body"] as! String) != "") {
-                
+                print(savedMessage)
                 self.save(savedMessage: savedMessage, index: index)
             }
         case 1:
-            //            print("Rich card", message)
             var savedMessage = self.createMessageToSave(message: message)
+            var richcards = Array<Dictionary<String, Any>>()
+            
+            for rc in message["richcards"] as! Array<Dictionary<String, Any>> {
+                var richcard = Dictionary<String, Any>()
+                
+                richcard["title"] = rc["title"] as! String
+                richcard["subTitle"] = rc["subtitle"] as! String
+                richcard["imageUrl"] = rc["imageUrl"] as! String
+                let button = rc["buttons"] as! Array<Dictionary<String, String>>
+                richcard["postback"] = button[0]["postback"]!
+                
+                richcard["desc"] = "Most famous Adele look-alike in the LoL game"
+                
+                richcards.append(richcard)
+            }
+            
+            savedMessage["richcards"] = richcards
             
             self.save(savedMessage: savedMessage, index: index)
         case 2:
@@ -256,9 +221,169 @@ final class MessageManager {
     
     func save(savedMessage: Dictionary<String, Any>, index: Int) {
         self.queueToSave[index] = savedMessage
-        if savedMessage["received"] != nil && savedMessage["received"] as! Bool == false {
-            self.saveNextMessage()
+        
+        print("save()", self.count, self.queueToSave.count)
+        
+        self.count += 1
+        if self.count == self.queueToSave.count {
+            print("CONSUME")
+            self.consumeMessagesQueue()
         }
+    }
+    
+    
+    func startWriting(){
+        self.broadcastStartTyping()
+    }
+    
+    func endWriting() {
+        self.broadcastStopTyping()
+    }
+    
+    func consumeMessagesQueue() {
+        
+        var i = 0
+        for messageToSave in queueToSave {
+            if (messageToSave["received"] != nil) && (messageToSave["received"] as? Bool == true) {
+                Delay(delay: self.delays[i]["start"]!) {
+                    self.startWriting()
+                    
+                    let message = Message(context: self.persistentContainer.viewContext)
+                    
+                    if messageToSave["body"] != nil {
+                        message.body = messageToSave["body"] as? String
+                    }
+                    
+                    if messageToSave["date"] != nil {
+                        message.date = messageToSave["date"] as? NSDate
+                    }
+                    
+                    if messageToSave["gif"] != nil {
+                        message.gif = messageToSave["gif"] as! Bool
+                    }
+                    
+                    if messageToSave["highlights"] != nil {
+                        message.highlights = messageToSave["highlights"] as? NSObject
+                    }
+                    
+                    if messageToSave["image"] != nil {
+                        message.image = messageToSave["image"] as? NSData
+                    }
+                    
+                    if messageToSave["received"] != nil {
+                        message.received = messageToSave["received"] as! Bool
+                    }
+                    
+                    if messageToSave["type"] != nil {
+                        message.type = messageToSave["type"] as! Int16
+                    }
+                    
+                    if messageToSave["replies"] != nil {
+                        message.replies = messageToSave["replies"] as? NSObject
+                    }
+                    
+                    if messageToSave["richcards"] != nil {
+                        
+                        for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
+                            let rc = Richcard(context: self.persistentContainer.viewContext)
+                            rc.title = richcard["title"] as? String
+                            rc.subTitle = richcard["subTitle"] as? String
+                            rc.imageUrl = richcard["imageUrl"] as? String
+                            rc.postback = richcard["postback"] as? String
+                            rc.desc = richcard["desc"] as? String
+                            
+                            if richcard["subitems"] != nil {
+                                for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
+                                    let si = Subitem(context: self.persistentContainer.viewContext)
+                                    si.imageUrl = subitem["imageUrl"] as? String
+                                    si.title = subitem["title"] as? String
+                                    si.postback = subitem["postback"] as? String
+                                    si.richcard = rc
+                                }
+                            }
+                            else {
+                                rc.subitem = []
+                            }
+                            rc.message = message
+                        }
+                    }
+                }
+                
+                Delay(delay: self.delays[i]["duration"]!) {
+                    self.endWriting()
+                    self.saveContext()
+                    self.broadcastNewMessage()
+                }
+            }
+            else {
+                
+                let message = Message(context: self.persistentContainer.viewContext)
+                
+                if messageToSave["body"] != nil {
+                    message.body = messageToSave["body"] as? String
+                }
+                
+                if messageToSave["date"] != nil {
+                    message.date = messageToSave["date"] as? NSDate
+                }
+                
+                if messageToSave["gif"] != nil {
+                    message.gif = messageToSave["gif"] as! Bool
+                }
+                
+                if messageToSave["highlights"] != nil {
+                    message.highlights = messageToSave["highlights"] as? NSObject
+                }
+                
+                if messageToSave["image"] != nil {
+                    message.image = messageToSave["image"] as? NSData
+                }
+                
+                if messageToSave["received"] != nil {
+                    message.received = messageToSave["received"] as! Bool
+                }
+                
+                if messageToSave["type"] != nil {
+                    message.type = messageToSave["type"] as! Int16
+                }
+                
+                if messageToSave["replies"] != nil {
+                    message.replies = messageToSave["replies"] as? NSObject
+                }
+                
+                if messageToSave["richcards"] != nil {
+                    
+                    for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
+                        let rc = Richcard(context: self.persistentContainer.viewContext)
+                        rc.title = richcard["title"] as? String
+                        rc.subTitle = richcard["subTitle"] as? String
+                        rc.imageUrl = richcard["imageUrl"] as? String
+                        rc.postback = richcard["postback"] as? String
+                        rc.desc = richcard["desc"] as? String
+                        
+                        if richcard["subitems"] != nil {
+                            for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
+                                let si = Subitem(context: self.persistentContainer.viewContext)
+                                si.imageUrl = subitem["imageUrl"] as? String
+                                si.title = subitem["title"] as? String
+                                si.postback = subitem["postback"] as? String
+                                si.richcard = rc
+                            }
+                        }
+                        else {
+                            rc.subitem = []
+                        }
+                        rc.message = message
+                    }
+                }
+                self.saveContext()
+                self.broadcastNewMessage()
+            }
+            i += 1
+        }
+        
+        self.queueToSave = []
+        
     }
     
     func saveQuickReply(reply: String, index: Int) {
@@ -272,6 +397,12 @@ final class MessageManager {
     func createMessageToSave(message: Dictionary<String, Any>) -> Dictionary<String, Any> {
         
         var savedMessage = Dictionary<String, Any>()
+        
+        let tempMessage = Message(entity: NSEntityDescription.entity(forEntityName: "Message", in: self.persistentContainer.viewContext)!, insertInto: nil)
+        tempMessage.received = false
+        tempMessage.type = 0
+        tempMessage.body = "in yo ass adele"
+        
         
         if let received = message["received"] {
             savedMessage["received"] = received as! Bool

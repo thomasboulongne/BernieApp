@@ -38,10 +38,6 @@ class Header: UIView {
         
         self.currentLogoView = "Typing-TransIn-white"
         self.addSubview(self.animationViews[self.currentLogoView]!)
-        self.animationViews[self.currentLogoView]!.loopAnimation = true
-        
-        self.animationViews[self.currentLogoView]!.animationSpeed = 3
-        self.animationViews[self.currentLogoView]!.play()
     }
     
     func startTyping() {

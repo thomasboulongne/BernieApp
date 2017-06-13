@@ -38,7 +38,6 @@
 		E9F9AF171EEADEF400984971 /* Typing1-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F9AF131EEADEF400984971 /* Typing1-white.json */; };
 		E9F9AF181EEADEF400984971 /* Typing2-white.json in Resources */ = {isa = PBXBuildFile; fileRef = E9F9AF141EEADEF400984971 /* Typing2-white.json */; };
 		E9F9AF1A1EEB13E700984971 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AF191EEB13E700984971 /* Carousel.swift */; };
-		E9F9AF1C1EEB174500984971 /* CarouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AF1B1EEB174500984971 /* CarouselLayout.swift */; };
 		E9F9AF1E1EEB1CB500984971 /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AF1D1EEB1CB500984971 /* CarouselCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +109,6 @@
 		E9F9AF131EEADEF400984971 /* Typing1-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing1-white.json"; sourceTree = "<group>"; };
 		E9F9AF141EEADEF400984971 /* Typing2-white.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing2-white.json"; sourceTree = "<group>"; };
 		E9F9AF191EEB13E700984971 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
-		E9F9AF1B1EEB174500984971 /* CarouselLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselLayout.swift; sourceTree = "<group>"; };
 		E9F9AF1D1EEB1CB500984971 /* CarouselCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,7 +188,6 @@
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
 				E9F9AF191EEB13E700984971 /* Carousel.swift */,
 				E9F9AF1D1EEB1CB500984971 /* CarouselCell.swift */,
-				E9F9AF1B1EEB174500984971 /* CarouselLayout.swift */,
 				E98273971EE6D0BC00768D20 /* Header.swift */,
 				690B010F1ED768CF00C4ECAE /* MessageCell.swift */,
 				E9626C3E1EE94EDA00F5B717 /* QuickReply.swift */,
@@ -382,7 +379,6 @@
 				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
 				E9626C3F1EE94EDA00F5B717 /* QuickReply.swift in Sources */,
 				E9F9AF1A1EEB13E700984971 /* Carousel.swift in Sources */,
-				E9F9AF1C1EEB174500984971 /* CarouselLayout.swift in Sources */,
 				690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */,
 				BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */,
 				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
