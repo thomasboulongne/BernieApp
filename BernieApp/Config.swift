@@ -15,6 +15,10 @@ let APIAI_Lang  = "fr"
 
 let TextFieldHeight = 74.0
 let ShortcutButtonHeight = 40.0
+let takePhotoButtonHeight = 50.0
+let optionalButtonHeight = 25.0
+let closeButtonHeight = 30.0
+
 
 let hMargin: CGFloat = 30.0
 let vMargin: CGFloat = 10.0

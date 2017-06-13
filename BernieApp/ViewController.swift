@@ -15,7 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var scrollView: UIScrollView!
     var textField: UITextField!
     var header: Header!
-    var shortcutButton: ShortcutButton!
+    var photoButton: IconRoundButton!
+    var photoViewController: PhotoViewController!
     
     var heights: [CGFloat] = []
     
@@ -27,6 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.registerForKeyboardNotifications()
         
         self.scrollView = UIScrollView(frame: self.view.frame)
+        
         self.view.addSubview(self.scrollView)
         
         let height: CGFloat = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
@@ -62,9 +64,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let size: CGFloat = CGFloat(ShortcutButtonHeight)
         let marginY: CGFloat = ( CGFloat(TextFieldHeight) - size ) / 2
-        print(marginY)
-        self.shortcutButton = ShortcutButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size))
-        self.view.addSubview(self.shortcutButton)
+        self.photoButton = IconRoundButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size), iconName: "photo")
+        self.photoButton.addTarget(self, action:#selector(self.openCamera), for: .touchUpInside)
+        self.photoButton.layer.borderWidth = 1
+        self.photoButton.layer.borderColor = UIColor.white.cgColor
+        self.view.addSubview(self.photoButton)
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
@@ -84,6 +88,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.header.setupGradient()
+    }
+    
+    func openCamera() {
+        print("button clicked")
+        self.photoViewController = PhotoViewController()
+        self.present( self.photoViewController, animated: false, completion: nil)
+        self.photoViewController.view.alpha = 0
+        
+        UIView.animate(withDuration: 1.5,
+                       animations: {
+                        self.photoViewController.view.alpha = 1.0
+        },
+                       completion: { _ in }
+        )
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
