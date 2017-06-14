@@ -26,18 +26,25 @@ final class MessageManager {
         
     }
     
-    func request(query: String) {
+    func request(query: Dictionary<String, Any>) {
+        var requestMessage = query
+        if query["speech"] != nil {
+            requestMessage["speech"] = (query["speech"] as? String)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
         
-        var requestMessage = Dictionary<String, Any>()
-        requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
-        requestMessage["type"] = 0
         let queue = MessageQueue()
         self.queues.append(queue)
         queue.addElement(elt: requestMessage, startDelay: 0, endDelay: 0)
         self.processNewMessage(message: requestMessage, index: 0, queueIndex: self.queues.count - 1)
         
-        self.httpRequest(query: query)
+        if requestMessage["imageUrl"] != nil {
+            self.httpRequest(query: requestMessage["imageUrl"] as! String)
+        }
+        else {
+            self.httpRequest(query: requestMessage["speech"] as! String)
+        }
+        
     }
     
     func httpRequest(query: String) {
