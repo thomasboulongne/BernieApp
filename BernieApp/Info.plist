@@ -36,6 +36,8 @@
 	<string>photo photo photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>photo photo photo </string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

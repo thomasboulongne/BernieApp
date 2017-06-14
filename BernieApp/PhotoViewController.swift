@@ -8,8 +8,9 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
-class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
 //    var takenPhoto: UIImage?
 //    var imageView:UIImageView!
@@ -28,6 +29,7 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
 
     var viewController: ViewController!
 
+    var tempImgPath: URL!
     
     var takingPhoto = false
     
@@ -37,7 +39,7 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        print("photoviewcontroller loaded")
         //store previous status bar color in order to reset it after
         
         self.previousStatusBarColor = UIApplication.shared.statusBarView?.backgroundColor
@@ -78,18 +80,20 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
 //        if let availableImage = takenPhoto {
 //            imageView.image = availableImage
 //        }
-        prepareCamera()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        prepareCamera()
         UIApplication.shared.statusBarView?.backgroundColor = .clear
-
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarView?.backgroundColor = self.previousStatusBarColor
+        UIApplication.shared.statusBarStyle = .default
+
     }
     
     func prepareCamera() {
@@ -180,6 +184,7 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
                     print(image)
                     self.takenPhotoView = TakenPhotoView(frame: self.view.bounds )
                     self.takenPhotoView.addImage(image: image)
+                    self.storeTempImage(image: image)
                     self.view.addSubview(self.takenPhotoView)
                     //self.view.bringSubview(toFront: self.takenPhotoView)
                     self.view.bringSubview(toFront: self.closeButton)
@@ -222,16 +227,10 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     
     func close()   {
         print("close")
-        self.viewController = ViewController()
-        self.present( self.viewController, animated: false, completion: nil)
-        self.viewController.view.alpha = 0
         
-        UIView.animate(withDuration: 1.5,
-                       animations: {
-                        self.viewController.view.alpha = 1.0
-        },
-                       completion: { _ in }
-        )
+        self.dismiss( animated: true, completion: {
+            self.stopCaptureSession()
+        })
     }
     
     
@@ -265,6 +264,64 @@ class PhotoViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
             //DISABEL FLASH BUTTON HERE IF ERROR
             print("Device tourch Flash Error ");
         }
+    }
+    
+    
+    //SEND TO SERVER
+    
+    func storeTempImage(image: UIImage) {
+        let filename = self.getDocumentsDirectory().appendingPathComponent("copy.jpg")
+        if let data = UIImageJPEGRepresentation(image, 0.8) {
+            // Save cloned image into document directory
+            try? data.write(to: filename)
+            self.tempImgPath = filename
+            print(self.tempImgPath)
+            self.takenPhotoView.sendButton.addTarget(self, action: #selector(self.sendPhotoToServer), for: .touchUpInside)
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func sendPhotoToServer() {
+        let image:UIImage! = self.takenPhotoView.takenImage.image
+        print(image)
+        let username:String = "TEST"
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
+        let base64Image = imageData?.base64EncodedString(options: .lineLength64Characters)
+        
+        let url = "https://api.imgur.com/3/upload"
+        
+        let parameters = [
+            "image": base64Image
+        ]
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            if let imageData = UIImageJPEGRepresentation(image, 0.8) {
+                multipartFormData.append(imageData, withName: username, fileName: "\(username).png", mimeType: "image/png")
+            }
+            
+            for (key, value) in parameters {
+                multipartFormData.append((value?.data(using: .utf8))!, withName: key)
+            }}, to: url, method: .post, headers: ["Authorization": "Client-ID " + IMGUR_CLIENT_ID],
+                encodingCompletion: { encodingResult in
+                    switch encodingResult {
+                    case .success(let upload, _, _):
+                        upload.response { response in
+                            //This is what you have been missing
+                            let json = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
+                            print(json)
+                            let imageDic = json?["data"] as? [String:Any]
+                            print(imageDic?["link"])
+                        }
+                    case .failure(let encodingError):
+                        print("error:\(encodingError)")
+                    }
+        })
+        
     }
 
 }

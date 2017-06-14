@@ -16,7 +16,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var textField: UITextField!
     var header: Header!
     var photoButton: IconRoundButton!
-    var photoViewController: PhotoViewController!
+    
+    var cameraViewController: CameraViewController!
+    var toCamera: Bool!
     
     var heights: [CGFloat] = []
     
@@ -24,11 +26,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.toCamera = false
         self.registerForKeyboardNotifications()
-        
+
         self.scrollView = UIScrollView(frame: self.view.frame)
-        
+        self.cameraViewController = CameraViewController()
         self.view.addSubview(self.scrollView)
         
         let height: CGFloat = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
@@ -76,8 +78,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.unsubscribe()
-        self.deregisterFromKeyboardNotifications()
+        if(!self.toCamera) {
+            self.unsubscribe()
+            self.deregisterFromKeyboardNotifications()
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,16 +97,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func openCamera() {
         print("button clicked")
-        self.photoViewController = PhotoViewController()
-        self.present( self.photoViewController, animated: false, completion: nil)
-        self.photoViewController.view.alpha = 0
+        self.toCamera = true
         
-        UIView.animate(withDuration: 1.5,
-                       animations: {
-                        self.photoViewController.view.alpha = 1.0
-        },
-                       completion: { _ in }
-        )
+        self.present( self.cameraViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

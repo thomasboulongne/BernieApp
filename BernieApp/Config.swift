@@ -13,6 +13,10 @@ import SwiftyGif
 let APIAI_Token = "c0e6a20179364246b80d32aa489324e0"
 let APIAI_Lang  = "fr"
 
+let IMGUR_CLIENT_ID = "46ce83c835caa77"
+let IMGUR_CLIENT_SECRET = "6c287269f702b1579ab3faf0fe3875e71d28ddf0"
+
+
 let TextFieldHeight = 74.0
 let ShortcutButtonHeight = 40.0
 let takePhotoButtonHeight = 50.0

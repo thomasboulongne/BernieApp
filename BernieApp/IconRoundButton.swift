@@ -17,7 +17,7 @@ class IconRoundButton: UIButton {
     init(frame: CGRect, iconName: String) {
         self.padding = 10
         super.init(frame: frame)
-        
+        self.contentMode = .center
         let image = UIImage(named: iconName) as UIImage?
         self.setImage(image, for: .normal)
         self.imageView?.contentMode = .scaleAspectFit
