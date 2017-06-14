@@ -83,6 +83,14 @@ class CarouselCell: UIView {
         
         self.wrapper.addSubview(self.titleLabel)
         self.addSubview(self.wrapper)
+        
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        self.addGestureRecognizer(tap)
+    }
+    
+    func didTap(sender: UITapGestureRecognizer) {
+        let topLeftPosition = self.wrapper.convert(self.wrapper.bounds, to: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
