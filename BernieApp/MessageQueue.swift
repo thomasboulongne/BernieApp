@@ -15,7 +15,10 @@ class MessageQueue {
     
     var delays: [Dictionary<String, Double>] = []
     
+    let id: Int
+    
     init() {
+        self.id = Date().hashValue
     }
     
     func addElement(elt: Dictionary<String, Any>, startDelay: Double, endDelay: Double) {
@@ -72,6 +75,7 @@ class MessageQueue {
     }
     
     func convertMessage(dict: Dictionary<String, Any>, message: Message) -> Message {
+        
         for key in message.entity.attributesByName.keys {
             message.setValue(dict[key], forKey: key)
         }

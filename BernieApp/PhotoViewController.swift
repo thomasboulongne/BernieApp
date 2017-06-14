@@ -39,7 +39,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("photoviewcontroller loaded")
         //store previous status bar color in order to reset it after
         
         self.previousStatusBarColor = UIApplication.shared.statusBarView?.backgroundColor
@@ -170,7 +169,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func takePhotoAction() {
-        print("LOL")
         takingPhoto = true
     }
     
@@ -181,7 +179,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             if let image = self.getImageFromSampleBuffer(buffer: sampleBuffer) {
                 DispatchQueue.main.async {
                     // let photoVC
-                    print(image)
                     self.takenPhotoView = TakenPhotoView(frame: self.view.bounds )
                     self.takenPhotoView.addImage(image: image)
                     self.storeTempImage(image: image)
@@ -200,8 +197,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             let context = CIContext()
             
             let imageRect = CGRect(x:0, y:0, width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
-            print(imageRect)
-            print(UIScreen.main.scale)
             if let image = context.createCGImage(ciImage, from: imageRect) {
                 return UIImage(cgImage: image, scale: UIScreen.main.scale, orientation: .right)
             }
@@ -226,7 +221,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func close()   {
-        print("close")
         
         self.dismiss( animated: true, completion: {
             self.stopCaptureSession()
@@ -275,7 +269,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             // Save cloned image into document directory
             try? data.write(to: filename)
             self.tempImgPath = filename
-            print(self.tempImgPath)
             self.takenPhotoView.sendButton.addTarget(self, action: #selector(self.sendPhotoToServer), for: .touchUpInside)
         }
     }
@@ -288,7 +281,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     func sendPhotoToServer() {
         let image:UIImage! = self.takenPhotoView.takenImage.image
-        print(image)
         let username:String = "TEST"
         let imageData = UIImageJPEGRepresentation(image, 0.8)
         let base64Image = imageData?.base64EncodedString(options: .lineLength64Characters)
@@ -316,7 +308,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                             let imageDict = json?["data"] as? [String:Any]
                             var query = Dictionary<String, Any>()
                             query["type"] = 3
-                            query["imageUrl"] = imageDict?["link"]
+                            query["imageUrl"] = (imageDict?["link"] as! String).replacingOccurrences(of: "http:", with: "https:")
                             MessageManager.shared.request(query: query)
                             self.close()
                         }

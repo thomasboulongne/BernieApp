@@ -34,9 +34,8 @@ final class MessageManager {
         
         requestMessage["received"] = false
         let queue = MessageQueue()
-        self.queues.append(queue)
         queue.addElement(elt: requestMessage, startDelay: 0, endDelay: 0)
-        self.processNewMessage(message: requestMessage, index: 0, queueIndex: self.queues.count - 1)
+        self.processNewMessage(message: requestMessage, index: 0, queue: queue)
         
         if requestMessage["imageUrl"] != nil {
             self.httpRequest(query: requestMessage["imageUrl"] as! String)
@@ -44,7 +43,6 @@ final class MessageManager {
         else {
             self.httpRequest(query: requestMessage["speech"] as! String)
         }
-        
     }
     
     func httpRequest(query: String) {
@@ -70,10 +68,7 @@ final class MessageManager {
       
                     var treatedMessages: Array<Dictionary<String, Any>> = []
                     
-                    
                     var richcards: [Dictionary<String, Any>] = []
-                    
-                    print(messages)
                     for message in messages {
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
@@ -100,7 +95,6 @@ final class MessageManager {
                     var delay: Double = 0.0
                     
                     let queue = MessageQueue()
-                    self.queues.append(queue)
                     
                     var i = 0
                     
@@ -122,9 +116,14 @@ final class MessageManager {
                         
                         queue.addElement(elt: message, startDelay: delayTimes["start"]!, endDelay: delayTimes["end"]!)
                         
-                        self.processNewMessage(message: message, index: i, queueIndex: self.queues.count - 1)
-                        
                         delay = delay + 2.0
+                        
+                        i = i+1
+                    }
+                    
+                    i = 0
+                    for message in messages {
+                        self.processNewMessage(message: message, index: i, queue: queue)
                         
                         i = i+1
                     }
@@ -133,7 +132,7 @@ final class MessageManager {
         }
     }
     
-    func processNewMessage(message: Dictionary<String, Any>, index: Int, queueIndex: Int) {
+    func processNewMessage(message: Dictionary<String, Any>, index: Int, queue: MessageQueue) {
         let type: Int = message["type"] as! Int
         
         switch type {
@@ -144,7 +143,7 @@ final class MessageManager {
             savedMessage["body"] = body
             
             if (savedMessage["body"] as! String) != "" {
-                self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+                self.save(savedMessage: savedMessage, index: index, queue: queue)
             }
         case 1:
             var savedMessage = self.createMessageToSave(message: message)
@@ -166,11 +165,11 @@ final class MessageManager {
             
             savedMessage["richcards"] = richcards
             
-            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+            self.save(savedMessage: savedMessage, index: index, queue: queue)
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
-            savedMessage["replies"] = message["replies"]
-            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+            savedMessage["replies"] = message["quick_replies"]
+            self.save(savedMessage: savedMessage, index: index, queue: queue)
         case 3:
             let body = message["imageUrl"] as! String
             let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
@@ -197,7 +196,7 @@ final class MessageManager {
                         
                         savedMessage["image"] = imageData! as NSData
                         
-                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+                        self.save(savedMessage: savedMessage, index: index, queue: queue)
                         
                     }
                     }.resume()
@@ -220,7 +219,7 @@ final class MessageManager {
                         
                         savedMessage["gif"] = true
                         
-                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+                        self.save(savedMessage: savedMessage, index: index, queue: queue)
                     }
                     }.resume()
             }
@@ -228,12 +227,12 @@ final class MessageManager {
         //    print("Custom payload")
         default:
             let savedMessage = self.createMessageToSave(message: message)
-            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
+            self.save(savedMessage: savedMessage, index: index, queue: queue)
         }
     }
     
-    func save(savedMessage: Dictionary<String, Any>, index: Int, queueIndex: Int) {
-        self.queues[queueIndex].updateMessage(index: index, message: savedMessage)
+    func save(savedMessage: Dictionary<String, Any>, index: Int, queue: MessageQueue) {
+        queue.updateMessage(index: index, message: savedMessage)
     }
     
     func saveQuickReply(reply: String, index: Int) {

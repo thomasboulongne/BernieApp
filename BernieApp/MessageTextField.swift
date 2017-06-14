@@ -50,7 +50,10 @@ class MessageTextField: UITextField, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        MessageManager.shared.request(query: self.text!)
+        var query = Dictionary<String, Any>()
+        query["speech"] = self.text!
+        query["type"] = 0
+        MessageManager.shared.request(query: query)
         self.text = ""
         return true
     }

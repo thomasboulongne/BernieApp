@@ -14,14 +14,17 @@ class QuickReply: UILabel {
     let padding: CGFloat
     var size: CGSize = CGSize()
     let id: Int
+    let payload: String
     
-    init(frame: CGRect, text: String, selected: Bool, index: Int) {
+    init(frame: CGRect, text: String, selected: Bool, index: Int, payload: String) {
         self.id = index
         self.padding = 10.0
+        
+        self.payload = payload
+        
         super.init(frame: frame)
         self.text = text
         self.font = UIFont(name: "Magneta-Book", size: 14)
-        
         
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.black.cgColor

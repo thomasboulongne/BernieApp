@@ -36,7 +36,7 @@ class MessageCell: UITableViewCell {
             
         case 2:
             
-            let replies = message.replies as! Array<String>
+            let replies = message.replies as! Array<Dictionary<String, String>>
             
             var offset: CGFloat = hMargin
             var maxHeight: CGFloat = 0.0
@@ -50,11 +50,11 @@ class MessageCell: UITableViewCell {
             for reply in replies {
                 var selected = false
                 
-                if reply == selectedReply {
+                if reply["payload"]! == selectedReply {
                     selected = true
                 }
                 
-                let label = QuickReply(frame: CGRect(), text: reply, selected: selected, index: index)
+                let label = QuickReply(frame: CGRect(), text: reply["title"]!, selected: selected, index: index, payload: reply["payload"]!)
                                 
                 label.frame = CGRect(x: offset, y: vMargin/2, width: label.size.width, height: label.size.height)
                 offset += label.size.width + label.padding
@@ -181,7 +181,7 @@ class MessageCell: UITableViewCell {
     func didTapQuickReply(sender: UITapGestureRecognizer) {
         let view = sender.view as! QuickReply
         
-        MessageManager.shared.saveQuickReply(reply: view.text!, index: view.id)
+        MessageManager.shared.saveQuickReply(reply: view.payload, index: view.id)
     }
     
 }

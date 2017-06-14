@@ -95,7 +95,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func openCamera() {
-        print("button clicked")
         self.toCamera = true
         
         self.present( self.cameraViewController, animated: true, completion: nil)
