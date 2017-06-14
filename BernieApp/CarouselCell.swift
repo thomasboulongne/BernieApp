@@ -19,9 +19,13 @@ class CarouselCell: UIView {
     var postback: String = ""
     var wrapper: UIView = UIView()
     
+    var insetMargin: CGFloat = 15
+    
     var imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: richcardSize.width, height: richcardSize.height))
     
     var titleLabel: UILabel = UILabel()
+    
+    var subtitleLabel: UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,6 +59,18 @@ class CarouselCell: UIView {
             }
         }.resume()
         
+        self.subtitleLabel.text = self.subTitle
+        
+        self.subtitleLabel.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 14)
+        self.subtitleLabel.textColor = .white
+        
+        let subtitleLabelSize = self.subtitleLabel.sizeThatFits(richcardSize)
+        
+        self.subtitleLabel.frame = CGRect(x: self.insetMargin, y: self.wrapper.bounds.height - self.insetMargin - subtitleLabelSize.height, width: subtitleLabelSize.width, height: subtitleLabelSize.height)
+        
+        self.wrapper.addSubview(self.subtitleLabel)
+        
+        
         self.titleLabel.text = self.title
         
         self.titleLabel.backgroundColor = .white
@@ -63,7 +79,7 @@ class CarouselCell: UIView {
         
         let titleLabelSize = self.titleLabel.sizeThatFits(richcardSize)
         
-        self.titleLabel.frame = CGRect(x: 15, y: self.wrapper.bounds.height - 15 - titleLabelSize.height, width: titleLabelSize.width, height: titleLabelSize.height)
+        self.titleLabel.frame = CGRect(x: 15, y: self.wrapper.bounds.height - self.insetMargin - titleLabelSize.height - subtitleLabelSize.height - self.insetMargin/2, width: titleLabelSize.width, height: titleLabelSize.height)
         
         self.wrapper.addSubview(self.titleLabel)
         self.addSubview(self.wrapper)

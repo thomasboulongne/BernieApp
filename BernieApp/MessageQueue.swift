@@ -41,8 +41,7 @@ class MessageQueue {
     
     func consume() {
         var i = 0
-        print(self.queue)
-        print(self.delays)
+        
         for messageToSave in self.queue {
             if (messageToSave["received"] != nil) && (messageToSave["received"] as? Bool == true) {
                 Delay(delay: self.delays[i]["start"]!) {
