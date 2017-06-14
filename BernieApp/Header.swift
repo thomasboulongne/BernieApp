@@ -21,13 +21,8 @@ class Header: UIView {
         self.gradient = CAGradientLayer()
         
         let animationFiles = [
-//            "1-white",
-//            "2-white",
-//            "3-white",
-//            "4-white",
-//            "5-white",
             "Typing-TransIn-white",
-            "Typing-TransIn2-white",
+            "Typing-TransOut-white",
             "Typing1-white",
             "Typing2-white"
         ]
@@ -55,7 +50,6 @@ class Header: UIView {
         self.animationViews[self.currentLogoView]!.animationProgress = 0
         self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
             
-            print(self.animationViews[self.currentLogoView]!.animationProgress)
             self.animationViews[self.currentLogoView]?.removeFromSuperview()
             self.currentLogoView = "Typing2-white"
             self.addSubview(self.animationViews[self.currentLogoView]!)
@@ -70,10 +64,10 @@ class Header: UIView {
         self.animationViews[self.currentLogoView]!.loopAnimation = false
         self.animationViews[self.currentLogoView]!.play(completion: { (completed) in
             self.animationViews[self.currentLogoView]!.removeFromSuperview()
-            self.currentLogoView = "Typing-TransIn-white"
+            self.currentLogoView = "Typing-TransOut-white"
             self.addSubview(self.animationViews[self.currentLogoView]!)
-            self.animationViews[self.currentLogoView]!.animationSpeed = -3
-            self.animationViews[self.currentLogoView]!.animationProgress = 1
+            self.animationViews[self.currentLogoView]!.animationSpeed = 3
+            self.animationViews[self.currentLogoView]!.animationProgress = 0
             self.animationViews[self.currentLogoView]!.play()
         })
     }

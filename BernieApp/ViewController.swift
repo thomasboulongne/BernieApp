@@ -33,15 +33,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.cameraViewController = CameraViewController()
         self.view.addSubview(self.scrollView)
         
-        let height: CGFloat = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: height))
-        self.tableView = tableView
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        let height: CGFloat           = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
+        let tableView                 = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height, height: height))
+        self.tableView                = tableView
+        self.tableView.delegate       = self
+        self.tableView.dataSource     = self
         
         self.tableView.separatorStyle = .none
         
-        self.tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset   = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
         
         self.scrollView.addSubview(self.tableView)
         
@@ -104,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MessageCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MessageCell
-                
+        
         let message = self.messages[indexPath.row]
         
         cell.setupWithMessage(message: message, index: indexPath.row)

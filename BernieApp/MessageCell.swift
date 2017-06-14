@@ -26,7 +26,14 @@ class MessageCell: UITableViewCell {
         
         switch message.type {
         case 1:
+            returnValue.width = UIScreen.main.bounds.width
+            returnValue.height = richcardSize.height + vMargin * 2
+            
+            let carousel = Carousel(frame: CGRect(x: returnValue.width/2 - (richcardSize.width + richcardMargin * 2)/2, y: 0, width: (richcardSize.width + richcardMargin * 2), height: returnValue.height ), items: message.richcard!.allObjects)
+            
+            self.addSubview(carousel)
             return returnValue
+            
         case 2:
             
             let replies = message.replies as! Array<String>
@@ -139,7 +146,6 @@ class MessageCell: UITableViewCell {
             self.addSubview(imageView)
             
         default:
-            //print("Default")
             let body = (message as AnyObject).value(forKeyPath: "body")
             let text = body as! String
             

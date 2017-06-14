@@ -19,7 +19,7 @@ final class MessageManager {
     
     var subscribers: [MessageManagerSubscriber] = []
     
-    var queueToSave: [Dictionary<String, Any>] = []
+    var queues: [MessageQueue] = []
     
     // Can't init is singleton
     private init() {
@@ -32,7 +32,10 @@ final class MessageManager {
         requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
         requestMessage["type"] = 0
-        self.processNewMessage(message: requestMessage)
+        let queue = MessageQueue()
+        self.queues.append(queue)
+        queue.addElement(elt: requestMessage, startDelay: 0, endDelay: 0)
+        self.processNewMessage(message: requestMessage, index: 0, queueIndex: self.queues.count - 1)
         
         self.httpRequest(query: query)
     }
@@ -57,93 +60,64 @@ final class MessageManager {
                     let result = JSON["result"] as! Dictionary<String, Any>
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
-                    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                    print(messages);
-                    var delay: Double = 0.0
+      
+                    var treatedMessages: Array<Dictionary<String, Any>> = []
+                    
+                    var richcards: [Dictionary<String, Any>] = []
                     
                     for message in messages {
-                        self.processNewMessage(message: message)
-                        
-                        Delay(delay: delay) {
-                            self.startWriting()
+                        if message["type"] as! Int == 1 {
+                            richcards.append(message)
                         }
+                        else {
+                            treatedMessages.append(message)
+                        }
+                    }
+                    
+                    var richcardsMessage = Dictionary<String,Any>()
+                    richcardsMessage["type"] = 1
+                    richcardsMessage["richcards"] = richcards
+                    if richcards.count > 0 {
+                        treatedMessages.append(richcardsMessage)
+                    }
+                    
+                    var delay: Double = 0.0
+                    
+                    let queue = MessageQueue()
+                    self.queues.append(queue)
+                    
+                    var i = 0
+                    
+                    for message in treatedMessages {
+                        var delayTimes = Dictionary<String, Double>()
+                        
+                        delayTimes["start"] = delay
                         
                         switch message["type"] as! Int {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay += Double(count) / 5.0
+                            delay = delay + Double(count) / 15.0
                         default:
-                            delay += 4
+                            delay = delay + 2
                         }
                         
+                        delayTimes["end"] = delay
                         
-                        Delay(delay: delay) {
-                            self.endWriting()
-                        }
+                        queue.addElement(elt: message, startDelay: delayTimes["start"]!, endDelay: delayTimes["end"]!)
                         
-                        delay += 1.0
+                        self.processNewMessage(message: message, index: i, queueIndex: self.queues.count - 1)
+                        
+                        delay = delay + 2.0
+                        
+                        i = i+1
                     }
                 }
             }
         }
     }
     
-    
-    func startWriting(){
-        self.broadcastStartTyping()
-    }
-    
-    func endWriting() {
-        self.broadcastStopTyping()
-        
-        if(self.queueToSave.count > 0) {
-            self.saveNextMessage()
-        }
-    }
-    
-    func saveNextMessage() {
-        let messageToSave = self.queueToSave.removeFirst()
-    
-        let message = Message(context: self.persistentContainer.viewContext)
-        
-        if messageToSave["body"] != nil {
-            message.body = messageToSave["body"] as? String
-        }
-        
-        if messageToSave["date"] != nil {
-            message.date = messageToSave["date"] as? NSDate
-        }
-        
-        if messageToSave["gif"] != nil {
-            message.gif = messageToSave["gif"] as! Bool
-        }
-        
-        if messageToSave["highlights"] != nil {
-            message.highlights = messageToSave["highlights"] as? NSObject
-        }
-        
-        if messageToSave["image"] != nil {
-            message.image = messageToSave["image"] as? NSData
-        }
-        
-        if messageToSave["received"] != nil {
-            message.received = messageToSave["received"] as! Bool
-        }
-        
-        if messageToSave["type"] != nil {
-            message.type = messageToSave["type"] as! Int16
-        }
-        
-        if messageToSave["replies"] != nil {
-            message.replies = messageToSave["replies"] as? NSObject
-        }
-        
-        self.saveContext()
-        self.broadcastNewMessage()
-}
-    
-    func processNewMessage(message: Dictionary<String, Any>) {
+    func processNewMessage(message: Dictionary<String, Any>, index: Int, queueIndex: Int) {
         let type: Int = message["type"] as! Int
         
         switch type {
@@ -153,16 +127,34 @@ final class MessageManager {
             let body = (message["speech"] as? String)!
             savedMessage["body"] = body
             
-            if((savedMessage["body"] as! String) != "") {
-                
-                self.save(savedMessage: savedMessage)
+            if (savedMessage["body"] as! String) != "" {
+                self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
             }
         case 1:
-            print("Rich card", message)
+            var savedMessage = self.createMessageToSave(message: message)
+            var richcards = Array<Dictionary<String, Any>>()
+            
+            for rc in message["richcards"] as! Array<Dictionary<String, Any>> {
+                var richcard = Dictionary<String, Any>()
+                
+                richcard["title"] = rc["title"] as! String
+                richcard["subTitle"] = rc["subtitle"] as! String
+                richcard["imageUrl"] = rc["imageUrl"] as! String
+                let button = rc["buttons"] as! Array<Dictionary<String, String>>
+                richcard["postback"] = button[0]["postback"]!
+                
+                richcard["desc"] = "Most famous Adele look-alike in the LoL game"
+                
+                richcards.append(richcard)
+            }
+            
+            savedMessage["richcards"] = richcards
+            
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
             savedMessage["replies"] = message["replies"]
-            self.save(savedMessage: savedMessage)
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         case 3:
             let body = message["imageUrl"] as! String
             let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
@@ -189,7 +181,7 @@ final class MessageManager {
                         
                         savedMessage["image"] = imageData! as NSData
                         
-                        self.save(savedMessage: savedMessage)
+                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
                         
                     }
                     }.resume()
@@ -212,23 +204,20 @@ final class MessageManager {
                         
                         savedMessage["gif"] = true
                         
-                        self.save(savedMessage: savedMessage)
+                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
                     }
                     }.resume()
             }
-        //case 4:
+            //case 4:
         //    print("Custom payload")
         default:
             let savedMessage = self.createMessageToSave(message: message)
-            self.save(savedMessage: savedMessage)
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         }
     }
     
-    func save(savedMessage: Dictionary<String, Any>) {
-        self.queueToSave.append(savedMessage)
-        if savedMessage["received"] != nil && savedMessage["received"] as! Bool == false {
-            self.saveNextMessage()
-        }
+    func save(savedMessage: Dictionary<String, Any>, index: Int, queueIndex: Int) {
+        self.queues[queueIndex].updateMessage(index: index, message: savedMessage)
     }
     
     func saveQuickReply(reply: String, index: Int) {
@@ -257,24 +246,6 @@ final class MessageManager {
         return savedMessage
     }
     
-    func broadcastNewMessage() {
-        for subscriber in self.subscribers {
-            subscriber.onMessagesUpdate()
-        }
-    }
-    
-    func broadcastStartTyping() {
-        for subscriber in self.subscribers {
-            subscriber.onStartTyping()
-        }
-    }
-    
-    func broadcastStopTyping() {
-        for subscriber in self.subscribers {
-            subscriber.onStopTyping()
-        }
-    }
-    
     func getMessages() -> Array<Message> {
         
 
@@ -294,6 +265,24 @@ final class MessageManager {
         
         return { () -> () in
             self.subscribers.remove(at: index)
+        }
+    }
+    
+    func broadcastNewMessage() {
+        for subscriber in self.subscribers {
+            subscriber.onMessagesUpdate()
+        }
+    }
+    
+    func broadcastStartTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStartTyping()
+        }
+    }
+    
+    func broadcastStopTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStopTyping()
         }
     }
     
