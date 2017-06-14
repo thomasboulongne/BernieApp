@@ -13,6 +13,7 @@
 		690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */; };
 		690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */; };
 		690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B010F1ED768CF00C4ECAE /* MessageCell.swift */; };
+		BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6961EF1375900220B1F /* MessageQueue.swift */; };
 		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
 		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
 		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
@@ -80,6 +81,7 @@
 		690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-75Bd.otf"; sourceTree = "<group>"; };
 		690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-65Md.otf"; sourceTree = "<group>"; };
 		690B010F1ED768CF00C4ECAE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		BF06C6961EF1375900220B1F /* MessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				E982739B1EE6E8E400768D20 /* Resources */,
 				BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */,
 				BFAFBEFE1ECF2D300083133D /* Helpers.swift */,
+				BF06C6961EF1375900220B1F /* MessageQueue.swift */,
 				BFAFBEF81ECEFFF10083133D /* MessageManager.swift */,
 				BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */,
 				BFAFBF421ED345FF0083133D /* MessageTextField.swift */,
@@ -380,6 +383,7 @@
 				E9626C3F1EE94EDA00F5B717 /* QuickReply.swift in Sources */,
 				E9F9AF1A1EEB13E700984971 /* Carousel.swift in Sources */,
 				690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */,
+				BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */,
 				BFAFBEFF1ECF2D300083133D /* Helpers.swift in Sources */,
 				BFAFBEFB1ECF1EFD0083133D /* Config.swift in Sources */,
 				BFAFBF021ECF487C0083133D /* Model.xcdatamodeld in Sources */,

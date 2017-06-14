@@ -19,11 +19,7 @@ final class MessageManager {
     
     var subscribers: [MessageManagerSubscriber] = []
     
-    var queueToSave: [Dictionary<String, Any>] = []
-    
-    var delays: [Dictionary<String, Double>] = []
-    
-    var count: Int = 0
+    var queues: [MessageQueue] = []
     
     // Can't init is singleton
     private init() {
@@ -36,9 +32,10 @@ final class MessageManager {
         requestMessage["speech"] = query.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         requestMessage["received"] = false
         requestMessage["type"] = 0
-        self.count = 0
-        self.queueToSave = [requestMessage]
-        self.processNewMessage(message: requestMessage, index: 0)
+        let queue = MessageQueue()
+        self.queues.append(queue)
+        queue.addElement(elt: requestMessage, startDelay: 0, endDelay: 0)
+        self.processNewMessage(message: requestMessage, index: 0, queueIndex: self.queues.count - 1)
         
         self.httpRequest(query: query)
     }
@@ -64,35 +61,35 @@ final class MessageManager {
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
                     
-                    self.queueToSave = []
-                    self.count = 0
-                    var elements: [Dictionary<String, Any>] = []
+                    
+                    var treatedMessages: Array<Dictionary<String, Any>> = []
+                    
+                    var richcards: [Dictionary<String, Any>] = []
                     
                     for message in messages {
                         if message["type"] as! Int == 1 {
-                            elements.append(message)
+                            richcards.append(message)
                         }
                         else {
-                            self.queueToSave.append(message)
+                            treatedMessages.append(message)
                         }
                     }
                     
-                    var richcards = Dictionary<String,Any>()
-                    richcards["type"] = 1
-                    richcards["richcards"] = elements
+                    var richcardsMessage = Dictionary<String,Any>()
+                    richcardsMessage["type"] = 1
+                    richcardsMessage["richcards"] = richcards
                     if richcards.count > 0 {
-                        self.queueToSave.append(richcards)
+                        treatedMessages.append(richcardsMessage)
                     }
                     
                     var delay: Double = 0.0
                     
+                    let queue = MessageQueue()
+                    self.queues.append(queue)
+                    
                     var i = 0
                     
-                    self.delays = []
-                    
-                    for message in self.queueToSave {
-                        self.processNewMessage(message: message, index: i)
-                        
+                    for message in treatedMessages {
                         var delayTimes = Dictionary<String, Double>()
                         
                         delayTimes["start"] = delay
@@ -106,9 +103,11 @@ final class MessageManager {
                             delay = delay + 2
                         }
                         
-                        delayTimes["duration"] = delay
+                        delayTimes["end"] = delay
                         
-                        self.delays.append(delayTimes)
+                        queue.addElement(elt: message, startDelay: delayTimes["start"]!, endDelay: delayTimes["end"]!)
+                        
+                        self.processNewMessage(message: message, index: i, queueIndex: self.queues.count - 1)
                         
                         delay = delay + 2.0
                         
@@ -119,7 +118,7 @@ final class MessageManager {
         }
     }
     
-    func processNewMessage(message: Dictionary<String, Any>, index: Int) {
+    func processNewMessage(message: Dictionary<String, Any>, index: Int, queueIndex: Int) {
         let type: Int = message["type"] as! Int
         
         switch type {
@@ -129,8 +128,8 @@ final class MessageManager {
             let body = (message["speech"] as? String)!
             savedMessage["body"] = body
             
-            if((savedMessage["body"] as! String) != "") {
-                self.save(savedMessage: savedMessage, index: index)
+            if (savedMessage["body"] as! String) != "" {
+                self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
             }
         case 1:
             var savedMessage = self.createMessageToSave(message: message)
@@ -152,11 +151,11 @@ final class MessageManager {
             
             savedMessage["richcards"] = richcards
             
-            self.save(savedMessage: savedMessage, index: index)
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         case 2:
             var savedMessage = self.createMessageToSave(message: message)
             savedMessage["replies"] = message["replies"]
-            self.save(savedMessage: savedMessage, index: index)
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         case 3:
             let body = message["imageUrl"] as! String
             let regexpImg = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)(?:\\.png|\\.jpg|\\.jpeg)"
@@ -183,7 +182,7 @@ final class MessageManager {
                         
                         savedMessage["image"] = imageData! as NSData
                         
-                        self.save(savedMessage: savedMessage, index: index)
+                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
                         
                     }
                     }.resume()
@@ -206,7 +205,7 @@ final class MessageManager {
                         
                         savedMessage["gif"] = true
                         
-                        self.save(savedMessage: savedMessage, index: index)
+                        self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
                     }
                     }.resume()
             }
@@ -214,122 +213,12 @@ final class MessageManager {
         //    print("Custom payload")
         default:
             let savedMessage = self.createMessageToSave(message: message)
-            self.save(savedMessage: savedMessage, index: index)
+            self.save(savedMessage: savedMessage, index: index, queueIndex: queueIndex)
         }
     }
     
-    func save(savedMessage: Dictionary<String, Any>, index: Int) {
-        self.queueToSave[index] = savedMessage
-        
-        self.count += 1
-        if self.count == self.queueToSave.count {
-            self.consumeMessagesQueue()
-        }
-    }
-    
-    
-    func startWriting(){
-        self.broadcastStartTyping()
-    }
-    
-    func endWriting() {
-        self.broadcastStopTyping()
-    }
-    
-    func consumeMessagesQueue() {
-        
-        var i = 0
-        for messageToSave in queueToSave {
-            if (messageToSave["received"] != nil) && (messageToSave["received"] as? Bool == true) {
-                Delay(delay: self.delays[i]["start"]!) {
-                    self.startWriting()
-                    
-                    let message = Message(context: self.persistentContainer.viewContext)
-                    
-                    for key in message.entity.attributesByName.keys {
-                        message.setValue(messageToSave[key], forKey: key)
-                    }
-                    
-                    if messageToSave["richcards"] != nil {
-                        
-                        for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
-                            let rc = Richcard(context: self.persistentContainer.viewContext)
-                           
-                            for key in rc.entity.attributesByName.keys {
-                                rc.setValue(richcard[key], forKey: key)
-                            }
-                            
-                            if richcard["subitems"] != nil {
-                                for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
-                                    let si = Subitem(context: self.persistentContainer.viewContext)
-                                    for key in si.entity.attributesByName.keys {
-                                        si.setValue(subitem[key], forKey: key)
-                                    }
-                                    
-                                    rc.subitem?.adding(si)
-                                }
-                            }
-                            else {
-                                rc.subitem = []
-                            }
-                            
-                            rc.message = message
-                            
-                            message.richcard?.adding(rc)
-                        }
-                    }
-                }
-                
-                Delay(delay: self.delays[i]["duration"]!) {
-                    self.endWriting()
-                    self.saveContext()
-                    self.broadcastNewMessage()
-                }
-            }
-            else {
-                
-                let message = Message(context: self.persistentContainer.viewContext)
-                
-                for key in message.entity.attributesByName.keys {
-                    message.setValue(messageToSave[key], forKey: key)
-                }
-                
-                if messageToSave["richcards"] != nil {
-                    
-                    for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
-                        let rc = Richcard(context: self.persistentContainer.viewContext)
-                        
-                        for key in rc.entity.attributesByName.keys {
-                            rc.setValue(richcard[key], forKey: key)
-                        }
-                        
-                        if richcard["subitems"] != nil {
-                            for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
-                                let si = Subitem(context: self.persistentContainer.viewContext)
-                                for key in si.entity.attributesByName.keys {
-                                    si.setValue(subitem[key], forKey: key)
-                                }
-                                
-                                rc.subitem?.adding(si)
-                            }
-                        }
-                        else {
-                            rc.subitem = []
-                        }
-                        
-                        rc.message = message
-                        
-                        message.richcard?.adding(rc)
-                    }
-                }
-                self.saveContext()
-                self.broadcastNewMessage()
-            }
-            i += 1
-        }
-        
-        self.queueToSave = []
-        
+    func save(savedMessage: Dictionary<String, Any>, index: Int, queueIndex: Int) {
+        self.queues[queueIndex].updateMessage(index: index, message: savedMessage)
     }
     
     func saveQuickReply(reply: String, index: Int) {
@@ -344,12 +233,6 @@ final class MessageManager {
         
         var savedMessage = Dictionary<String, Any>()
         
-        let tempMessage = Message(entity: NSEntityDescription.entity(forEntityName: "Message", in: self.persistentContainer.viewContext)!, insertInto: nil)
-        tempMessage.received = false
-        tempMessage.type = 0
-        tempMessage.body = "in yo ass adele"
-        
-        
         if let received = message["received"] {
             savedMessage["received"] = received as! Bool
         }
@@ -362,24 +245,6 @@ final class MessageManager {
         savedMessage["type"] = (Int16(message["type"] as! Int))
         
         return savedMessage
-    }
-    
-    func broadcastNewMessage() {
-        for subscriber in self.subscribers {
-            subscriber.onMessagesUpdate()
-        }
-    }
-    
-    func broadcastStartTyping() {
-        for subscriber in self.subscribers {
-            subscriber.onStartTyping()
-        }
-    }
-    
-    func broadcastStopTyping() {
-        for subscriber in self.subscribers {
-            subscriber.onStopTyping()
-        }
     }
     
     func getMessages() -> Array<Message> {
@@ -401,6 +266,24 @@ final class MessageManager {
         
         return { () -> () in
             self.subscribers.remove(at: index)
+        }
+    }
+    
+    func broadcastNewMessage() {
+        for subscriber in self.subscribers {
+            subscriber.onMessagesUpdate()
+        }
+    }
+    
+    func broadcastStartTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStartTyping()
+        }
+    }
+    
+    func broadcastStopTyping() {
+        for subscriber in self.subscribers {
+            subscriber.onStopTyping()
         }
     }
     
