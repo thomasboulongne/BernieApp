@@ -13,11 +13,11 @@
 		690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */; };
 		690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = 690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */; };
 		690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B010F1ED768CF00C4ECAE /* MessageCell.swift */; };
+		BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6961EF1375900220B1F /* MessageQueue.swift */; };
 		BF37D7211EEEFF10000A1535 /* IconRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7201EEEFF10000A1535 /* IconRoundButton.swift */; };
 		BF37D7251EEFE95B000A1535 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7241EEFE95B000A1535 /* PhotoViewController.swift */; };
 		BF37D7271EF01473000A1535 /* TakePhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7261EF01473000A1535 /* TakePhotoButton.swift */; };
 		BF37D7291EF03D80000A1535 /* TakenPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */; };
-		BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6961EF1375900220B1F /* MessageQueue.swift */; };
 		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
 		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
 		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
@@ -85,11 +85,11 @@
 		690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-75Bd.otf"; sourceTree = "<group>"; };
 		690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-65Md.otf"; sourceTree = "<group>"; };
 		690B010F1ED768CF00C4ECAE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		BF06C6961EF1375900220B1F /* MessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		BF37D7201EEEFF10000A1535 /* IconRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconRoundButton.swift; sourceTree = "<group>"; };
 		BF37D7241EEFE95B000A1535 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		BF37D7261EF01473000A1535 /* TakePhotoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakePhotoButton.swift; sourceTree = "<group>"; };
 		BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakenPhotoView.swift; sourceTree = "<group>"; };
-		BF06C6961EF1375900220B1F /* MessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 				TargetAttributes = {
 					BFAFBEBA1ECDCE840083133D = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = Q9CRH2MVNV;
+						DevelopmentTeam = USV5Z98CAJ;
 						ProvisioningStyle = Automatic;
 					};
 					BFAFBECE1ECDCE840083133D = {
@@ -562,14 +562,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q9CRH2MVNV;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -581,14 +581,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q9CRH2MVNV;
+				DEVELOPMENT_TEAM = USV5Z98CAJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

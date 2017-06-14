@@ -63,14 +63,23 @@ final class MessageManager {
       
                     var treatedMessages: Array<Dictionary<String, Any>> = []
                     
+                    
                     var richcards: [Dictionary<String, Any>] = []
                     
+                    print(messages)
                     for message in messages {
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
                         }
                         else {
-                            treatedMessages.append(message)
+                            if message["type"] as! Int == 0 {
+                                if message["speech"] as! String != "" {
+                                    treatedMessages.append(message)
+                                }
+                            }
+                            else {
+                                treatedMessages.append(message)
+                            }
                         }
                     }
                     

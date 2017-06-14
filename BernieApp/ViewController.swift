@@ -70,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.photoButton.addTarget(self, action:#selector(self.openCamera), for: .touchUpInside)
         self.photoButton.layer.borderWidth = 1
         self.photoButton.layer.borderColor = UIColor.white.cgColor
-        self.view.addSubview(self.photoButton)
+        self.scrollView.addSubview(self.photoButton)
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
@@ -82,7 +82,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.unsubscribe()
             self.deregisterFromKeyboardNotifications()
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
