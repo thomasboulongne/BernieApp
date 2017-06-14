@@ -130,7 +130,6 @@ final class MessageManager {
             savedMessage["body"] = body
             
             if((savedMessage["body"] as! String) != "") {
-                print(savedMessage)
                 self.save(savedMessage: savedMessage, index: index)
             }
         case 1:
@@ -222,11 +221,8 @@ final class MessageManager {
     func save(savedMessage: Dictionary<String, Any>, index: Int) {
         self.queueToSave[index] = savedMessage
         
-        print("save()", self.count, self.queueToSave.count)
-        
         self.count += 1
         if self.count == self.queueToSave.count {
-            print("CONSUME")
             self.consumeMessagesQueue()
         }
     }
@@ -250,61 +246,36 @@ final class MessageManager {
                     
                     let message = Message(context: self.persistentContainer.viewContext)
                     
-                    if messageToSave["body"] != nil {
-                        message.body = messageToSave["body"] as? String
-                    }
-                    
-                    if messageToSave["date"] != nil {
-                        message.date = messageToSave["date"] as? NSDate
-                    }
-                    
-                    if messageToSave["gif"] != nil {
-                        message.gif = messageToSave["gif"] as! Bool
-                    }
-                    
-                    if messageToSave["highlights"] != nil {
-                        message.highlights = messageToSave["highlights"] as? NSObject
-                    }
-                    
-                    if messageToSave["image"] != nil {
-                        message.image = messageToSave["image"] as? NSData
-                    }
-                    
-                    if messageToSave["received"] != nil {
-                        message.received = messageToSave["received"] as! Bool
-                    }
-                    
-                    if messageToSave["type"] != nil {
-                        message.type = messageToSave["type"] as! Int16
-                    }
-                    
-                    if messageToSave["replies"] != nil {
-                        message.replies = messageToSave["replies"] as? NSObject
+                    for key in message.entity.attributesByName.keys {
+                        message.setValue(messageToSave[key], forKey: key)
                     }
                     
                     if messageToSave["richcards"] != nil {
                         
                         for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
                             let rc = Richcard(context: self.persistentContainer.viewContext)
-                            rc.title = richcard["title"] as? String
-                            rc.subTitle = richcard["subTitle"] as? String
-                            rc.imageUrl = richcard["imageUrl"] as? String
-                            rc.postback = richcard["postback"] as? String
-                            rc.desc = richcard["desc"] as? String
+                           
+                            for key in rc.entity.attributesByName.keys {
+                                rc.setValue(richcard[key], forKey: key)
+                            }
                             
                             if richcard["subitems"] != nil {
                                 for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
                                     let si = Subitem(context: self.persistentContainer.viewContext)
-                                    si.imageUrl = subitem["imageUrl"] as? String
-                                    si.title = subitem["title"] as? String
-                                    si.postback = subitem["postback"] as? String
-                                    si.richcard = rc
+                                    for key in si.entity.attributesByName.keys {
+                                        si.setValue(subitem[key], forKey: key)
+                                    }
+                                    
+                                    rc.subitem?.adding(si)
                                 }
                             }
                             else {
                                 rc.subitem = []
                             }
+                            
                             rc.message = message
+                            
+                            message.richcard?.adding(rc)
                         }
                     }
                 }
@@ -319,61 +290,36 @@ final class MessageManager {
                 
                 let message = Message(context: self.persistentContainer.viewContext)
                 
-                if messageToSave["body"] != nil {
-                    message.body = messageToSave["body"] as? String
-                }
-                
-                if messageToSave["date"] != nil {
-                    message.date = messageToSave["date"] as? NSDate
-                }
-                
-                if messageToSave["gif"] != nil {
-                    message.gif = messageToSave["gif"] as! Bool
-                }
-                
-                if messageToSave["highlights"] != nil {
-                    message.highlights = messageToSave["highlights"] as? NSObject
-                }
-                
-                if messageToSave["image"] != nil {
-                    message.image = messageToSave["image"] as? NSData
-                }
-                
-                if messageToSave["received"] != nil {
-                    message.received = messageToSave["received"] as! Bool
-                }
-                
-                if messageToSave["type"] != nil {
-                    message.type = messageToSave["type"] as! Int16
-                }
-                
-                if messageToSave["replies"] != nil {
-                    message.replies = messageToSave["replies"] as? NSObject
+                for key in message.entity.attributesByName.keys {
+                    message.setValue(messageToSave[key], forKey: key)
                 }
                 
                 if messageToSave["richcards"] != nil {
                     
                     for richcard in messageToSave["richcards"] as! Array<Dictionary<String, Any>> {
                         let rc = Richcard(context: self.persistentContainer.viewContext)
-                        rc.title = richcard["title"] as? String
-                        rc.subTitle = richcard["subTitle"] as? String
-                        rc.imageUrl = richcard["imageUrl"] as? String
-                        rc.postback = richcard["postback"] as? String
-                        rc.desc = richcard["desc"] as? String
+                        
+                        for key in rc.entity.attributesByName.keys {
+                            rc.setValue(richcard[key], forKey: key)
+                        }
                         
                         if richcard["subitems"] != nil {
                             for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
                                 let si = Subitem(context: self.persistentContainer.viewContext)
-                                si.imageUrl = subitem["imageUrl"] as? String
-                                si.title = subitem["title"] as? String
-                                si.postback = subitem["postback"] as? String
-                                si.richcard = rc
+                                for key in si.entity.attributesByName.keys {
+                                    si.setValue(subitem[key], forKey: key)
+                                }
+                                
+                                rc.subitem?.adding(si)
                             }
                         }
                         else {
                             rc.subitem = []
                         }
+                        
                         rc.message = message
+                        
+                        message.richcard?.adding(rc)
                     }
                 }
                 self.saveContext()

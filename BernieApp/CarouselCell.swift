@@ -36,7 +36,7 @@ class CarouselCell: UIView {
         self.postback  = postback
         
         self.wrapper.frame = CGRect(x: richcardMargin, y: 0, width: richcardSize.width, height: richcardSize.height)
-        self.wrapper.backgroundColor = .green
+        self.wrapper.backgroundColor = .black
         
         self.wrapper.layer.cornerRadius = 5
         self.wrapper.layer.masksToBounds = true
