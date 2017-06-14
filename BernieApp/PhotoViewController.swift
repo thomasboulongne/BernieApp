@@ -313,9 +313,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                         upload.response { response in
                             //This is what you have been missing
                             let json = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
-                            print(json)
-                            let imageDic = json?["data"] as? [String:Any]
-                            print(imageDic?["link"])
+                            let imageDict = json?["data"] as? [String:Any]
+                            var query = Dictionary<String, Any>()
+                            query["type"] = 3
+                            query["imageUrl"] = imageDict?["link"]
+                            MessageManager.shared.request(query: query)
+                            self.close()
                         }
                     case .failure(let encodingError):
                         print("error:\(encodingError)")
