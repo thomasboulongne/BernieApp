@@ -60,8 +60,7 @@ final class MessageManager {
                     let result = JSON["result"] as! Dictionary<String, Any>
                     let fulfillment = result["fulfillment"] as! Dictionary<String, Any>
                     let messages = fulfillment["messages"] as! Array<Dictionary<String, Any>>
-                    
-                    
+      
                     var treatedMessages: Array<Dictionary<String, Any>> = []
                     
                     var richcards: [Dictionary<String, Any>] = []

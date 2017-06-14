@@ -15,6 +15,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var scrollView: UIScrollView!
     var textField: UITextField!
     var header: Header!
+    var photoButton: IconRoundButton!
+    
+    var cameraViewController: CameraViewController!
+    var toCamera: Bool!
     
     var heights: [CGFloat] = []
     
@@ -22,10 +26,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.toCamera = false
         self.registerForKeyboardNotifications()
-        
+
         self.scrollView = UIScrollView(frame: self.view.frame)
+        self.cameraViewController = CameraViewController()
         self.view.addSubview(self.scrollView)
         
         let height: CGFloat           = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
@@ -59,14 +64,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
         self.view.addSubview(self.header)
         
+        let size: CGFloat = CGFloat(ShortcutButtonHeight)
+        let marginY: CGFloat = ( CGFloat(TextFieldHeight) - size ) / 2
+        self.photoButton = IconRoundButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size), iconName: "photo")
+        self.photoButton.addTarget(self, action:#selector(self.openCamera), for: .touchUpInside)
+        self.photoButton.layer.borderWidth = 1
+        self.photoButton.layer.borderColor = UIColor.white.cgColor
+        self.view.addSubview(self.photoButton)
+        
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
         self.onMessagesUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.unsubscribe()
-        self.deregisterFromKeyboardNotifications()
+        if(!self.toCamera) {
+            self.unsubscribe()
+            self.deregisterFromKeyboardNotifications()
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +93,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.header.setupGradient()
+    }
+    
+    func openCamera() {
+        print("button clicked")
+        self.toCamera = true
+        
+        self.present( self.cameraViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

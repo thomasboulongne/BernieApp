@@ -51,6 +51,7 @@ class Carousel : UIScrollView, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+
         let offset = self.contentOffset.x / self.frame.size.width
         
         if offset >= 0 {

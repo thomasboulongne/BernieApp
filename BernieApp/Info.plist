@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Bernie</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,16 +22,22 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Magneta-Bk.otf</string>
 		<string>NHaasGroteskDSPro-65Md.otf</string>
 		<string>NHaasGroteskDSPro-75Bd.otf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+	<string>photo photo photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photo photo photo </string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
