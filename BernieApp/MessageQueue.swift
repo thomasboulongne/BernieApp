@@ -30,6 +30,10 @@ class MessageQueue {
     }
     
     func updateMessage(index: Int, message: Dictionary<String, Any>) {
+        
+        print("update: ", message)
+        print("index: ", index)
+        
         self.queue[index] = message
         self.queue[index]["__readyToSave__"] = true
         

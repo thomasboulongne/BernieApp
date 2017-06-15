@@ -48,7 +48,7 @@ final class MessageManager {
     func httpRequest(query: String) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + APIAI_Token,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json ; charset=UTF-8"
         ]
         
         let parameters: Parameters = [
@@ -70,6 +70,7 @@ final class MessageManager {
                     
                     var richcards: [Dictionary<String, Any>] = []
                     for message in messages {
+                        print("Message", message)
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
                         }
@@ -88,6 +89,8 @@ final class MessageManager {
                     var richcardsMessage = Dictionary<String,Any>()
                     richcardsMessage["type"] = 1
                     richcardsMessage["richcards"] = richcards
+                    
+                    
                     if richcards.count > 0 {
                         treatedMessages.append(richcardsMessage)
                     }
@@ -122,7 +125,7 @@ final class MessageManager {
                     }
                     
                     i = 0
-                    for message in messages {
+                    for message in treatedMessages {
                         self.processNewMessage(message: message, index: i, queue: queue)
                         
                         i = i+1
@@ -138,6 +141,7 @@ final class MessageManager {
         switch type {
         case 0:
             var savedMessage = self.createMessageToSave(message: message)
+            
             
             let body = (message["speech"] as? String)!
             savedMessage["body"] = body
@@ -155,8 +159,8 @@ final class MessageManager {
                 richcard["title"] = rc["title"] as! String
                 richcard["subTitle"] = rc["subtitle"] as! String
                 richcard["imageUrl"] = rc["imageUrl"] as! String
-                let button = rc["buttons"] as! Array<Dictionary<String, String>>
-                richcard["postback"] = button[0]["postback"]!
+                let buttons = rc["buttons"] as! Array<Dictionary<String, String>>
+                richcard["postback"] = buttons[0]["payload"]!
                 
                 richcard["desc"] = "Most famous Adele look-alike in the LoL game"
                 

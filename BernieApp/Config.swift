@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyGif
 
-let APIAI_Token = "c0e6a20179364246b80d32aa489324e0"
+let APIAI_Token = "a881a3adcd5642e3b9ce925de1479dae"
 let APIAI_Lang  = "fr"
 
 let IMGUR_CLIENT_ID = "46ce83c835caa77"
@@ -31,7 +31,7 @@ let headerHeight: CGFloat = 100.0
 
 let richcardSize: CGSize = CGSize(width: 220, height: 220)
 
-let richcardMargin: CGFloat = 8.0
+let richcardMargin: CGFloat = 6.0
 
 let richcardScaleDown: CGFloat = 0.8
 

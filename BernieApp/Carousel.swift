@@ -35,7 +35,7 @@ class Carousel : UIScrollView, UIScrollViewDelegate {
         for item in self.items {
             let rc = item as! Richcard
             let cell = CarouselCell(frame: CGRect(x: i * cellWitdth, y: vMargin, width: cellWitdth, height: richcardSize.height))
-            cell.setup(imageUrl: rc.imageUrl!, title: rc.title!, subTitle: rc.subTitle!, desc: rc.desc!, subItems: rc.subitem?.allObjects as! [Dictionary<String, String>], postback: rc.postback!)
+            cell.setup(richcard: rc)
             self.addSubview(cell)
             i += 1
         }
@@ -75,12 +75,15 @@ class Carousel : UIScrollView, UIScrollViewDelegate {
                             self.subviews[Int(nextPage)].transform = CGAffineTransform(scaleX: 1 - percentage, y: 1 - percentage)
             }
             )
-            UIView.animate(withDuration: 0.1,
-                           animations: {
-                            self.subviews[Int(self.page)].transform = CGAffineTransform(scaleX: richcardScaleDown + percentage, y: richcardScaleDown + percentage)
-            }
-            )
             
+            if richcardScaleDown + percentage <= 1{
+                UIView.animate(withDuration: 0.1,
+                               animations: {
+                                self.subviews[Int(self.page)].transform = CGAffineTransform(scaleX: richcardScaleDown + percentage, y: richcardScaleDown + percentage)
+                }
+                )
+            }
+                
             if(offset == offset.rounded(.toNearestOrAwayFromZero)){
                 
                 self.page = offset.rounded()

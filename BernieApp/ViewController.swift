@@ -20,6 +20,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var cameraViewController: CameraViewController!
     var toCamera: Bool!
     
+    var richcardViewController: RichcardViewController!
+    let richcardTransition = RichcardAnimator()
+    
+    var selectedRichcard: UIView?
+    
     var heights: [CGFloat] = []
     
     var unsubscribe = {}
@@ -31,6 +36,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         self.scrollView = UIScrollView(frame: self.view.frame)
         self.cameraViewController = CameraViewController()
+        
+        
         self.view.addSubview(self.scrollView)
         
         let height: CGFloat           = UIScreen.main.bounds.height - CGFloat(TextFieldHeight)
@@ -75,13 +82,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
         self.onMessagesUpdate()
+        
+        self.richcardTransition.dismissCompletion = {
+            self.selectedRichcard!.isHidden = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if(!self.toCamera) {
-            self.unsubscribe()
-            self.deregisterFromKeyboardNotifications()
-        }
+        self.unsubscribe()
+        self.deregisterFromKeyboardNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.unsubscribe = MessageManager.shared.subscribe(obj: self)
+        self.registerForKeyboardNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +112,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.toCamera = true
         
         self.present( self.cameraViewController, animated: true, completion: nil)
+    }
+    
+    func openRichcard(cell: CarouselCell) {
+        let richcardViewController = RichcardViewController(cell: cell)
+        richcardViewController.transitioningDelegate = self
+        
+        self.selectedRichcard = cell
+        
+        self.richcardTransition.originFrame = cell.wrapper.convert(cell.wrapper.frame, to: nil)
+        
+        self.present(richcardViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -190,5 +215,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.scrollView.scrollIndicatorInsets = contentInsets
         self.textField.endEditing(true)
         self.scrollView.isScrollEnabled = false
+    }
+}
+
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        self.richcardTransition.cell = self.selectedRichcard as! CarouselCell
+        
+        self.richcardTransition.presenting = true
+        self.selectedRichcard?.isHidden = true
+        return self.richcardTransition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.richcardTransition.presenting = false
+        return self.richcardTransition
     }
 }

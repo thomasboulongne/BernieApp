@@ -14,35 +14,34 @@ class CarouselCell: UIView {
     var imageUrl: String = ""
     var title: String = ""
     var subTitle: String = ""
-    var desc: String = ""
-    var subItems: [Dictionary<String, String>] = []
-    var postback: String = ""
     var wrapper: UIView = UIView()
+    
+    var richcard: Richcard!
     
     var insetMargin: CGFloat = 15
     
     var imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: richcardSize.width, height: richcardSize.height))
     
-    var titleLabel: UILabel = UILabel()
+    var titleLabel: RichcardTitle = RichcardTitle()
     
-    var subtitleLabel: UILabel = UILabel()
+    var subtitleLabel: RichcardSubtitle = RichcardSubtitle()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    func setup(imageUrl: String, title: String, subTitle: String, desc: String, subItems: [Dictionary<String, String>], postback: String) {
-        self.imageUrl  = imageUrl
-        self.title     = title
-        self.subTitle  = subTitle
-        self.desc      = desc
-        self.subItems  = subItems
-        self.postback  = postback
+    func setup(richcard: Richcard) {
         
-        self.wrapper.frame = CGRect(x: richcardMargin, y: 0, width: richcardSize.width, height: richcardSize.height)
+        self.imageUrl  = richcard.imageUrl!
+        self.title     = richcard.title!
+        self.subTitle  = richcard.subTitle!
+        
+        self.richcard = richcard
+        
+        self.wrapper.frame = CGRect(x: 0, y: 0, width: richcardSize.width, height: richcardSize.height)
         self.wrapper.backgroundColor = .black
         
-        self.wrapper.layer.cornerRadius = 5
+        self.wrapper.layer.cornerRadius = 10
         self.wrapper.layer.masksToBounds = true
         
         guard let url = URL(string: self.imageUrl) else { return }
@@ -55,6 +54,7 @@ class CarouselCell: UIView {
                 else { return }
             DispatchQueue.main.async() { () -> Void in
                 self.imageView.image = image
+                self.imageView.contentMode = .scaleAspectFill
                 self.wrapper.insertSubview(self.imageView, at: 0)
             }
         }.resume()
@@ -90,7 +90,7 @@ class CarouselCell: UIView {
     }
     
     func didTap(sender: UITapGestureRecognizer) {
-        let topLeftPosition = self.wrapper.convert(self.wrapper.bounds, to: nil)
+        (UIApplication.topViewController() as! ViewController).openRichcard(cell: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
