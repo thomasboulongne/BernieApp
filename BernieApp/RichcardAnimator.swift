@@ -24,9 +24,6 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        let viewController = presenting ?
-            transitionContext.viewController(forKey: .from) as! ViewController : transitionContext.viewController(forKey: .to) as! ViewController
-        
         let containerView = transitionContext.containerView
         let toView = transitionContext.view(forKey: .to)!
                         
@@ -35,9 +32,14 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         var detailsFrame: CGRect = details.frame
         
+        var card = CardView()
+        
         for subview in details.subviews {
             if type(of: subview) == BackgroundImageView.self {
                 detailsFrame = subview.frame
+            }
+            if type(of: subview) == CardView.self {
+                card = subview as! CardView
             }
         }
         
@@ -62,30 +64,83 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             details.center = CGPoint(
                 x: initialFrame.midX,
                 y: initialFrame.midY)
+            details.layer.cornerRadius = richcardRadius
+            
+            card.isHidden = true
+            card.transform = CGAffineTransform(translationX: 0, y: card.topHeight)
+            
+            UIView.animate(withDuration: duration, animations: {
+                self.cell.subtitleLabel.transform = CGAffineTransform(translationX: 0, y: 10)
+                self.cell.subtitleLabel.alpha = 0.0
+            })
+            
+            UIView.animate(withDuration: duration, delay: 0.1, animations: {
+                self.cell.titleLabel.transform = CGAffineTransform(translationX: 0, y: 10)
+                self.cell.titleLabel.alpha = 0.0
+            }, completion: {_ in
+                containerView.addSubview(toView)
+                containerView.bringSubview(toFront: details)
+                UIView.animate(withDuration: self.duration, delay:0.0,
+                               animations: {
+                                details.transform = CGAffineTransform.identity
+                                details.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
+                                details.layer.cornerRadius = 0
+                },
+                               completion:{_ in
+                                
+                                card.isHidden = false
+                                UIView.animate(withDuration: self.duration, animations: {
+                                    
+                                    card.transform = CGAffineTransform.identity
+                                    transitionContext.completeTransition(true)
+                                })
+                }
+                )
+            })
         }
+        else {
+            containerView.addSubview(toView)
+            containerView.bringSubview(toFront: details)
+            
+            
+            UIView.animate(withDuration: self.duration, animations: {
+                card.transform = CGAffineTransform(translationX: 0, y: card.topHeight)
+            }, completion: {_ in
                 
-        containerView.addSubview(details)
+                card.isHidden = true
+                UIView.animate(withDuration: self.duration, delay:0.0,
+                               animations: {
+                                details.transform = scaleTransform
+                                details.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
+                                details.layer.cornerRadius = richcardRadius
+                },
+                               completion:{_ in
+                                
+                                containerView.bringSubview(toFront: toView)
+                                UIView.animate(withDuration: self.duration, animations: {
+                                    self.cell.subtitleLabel.transform = CGAffineTransform.identity
+                                    self.cell.subtitleLabel.alpha = 1.0
+                                })
+                                
+                                UIView.animate(withDuration: self.duration, delay: 0.1, animations: {
+                                    self.cell.titleLabel.transform = CGAffineTransform.identity
+                                    self.cell.titleLabel.alpha = 1.0
+                                }, completion: {_ in
+                                    self.dismissCompletion?()
+                                    
+                                    transitionContext.completeTransition(true)
+                                })
+                }
+                )
+
+            })
+            
+         }
         
-//        containerView.bringSubview(toFront: details)
         
-        self.animateImage(containerView: containerView, context: transitionContext, details: details, finalFrame: finalFrame, scaleTransform: scaleTransform)
     }
     
     func animateImage(containerView: UIView, context: UIViewControllerContextTransitioning, details: UIView, finalFrame: CGRect, scaleTransform: CGAffineTransform ) {
-        
-        containerView.bringSubview(toFront: details)
-        UIView.animate(withDuration: duration, delay:0.0,
-                       animations: {
-                        details.transform = self.presenting ?
-                            CGAffineTransform.identity : scaleTransform
-                        details.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
-        },
-                       completion:{_ in
-                        if !self.presenting {
-                            self.dismissCompletion?()
-                        }
-                        context.completeTransition(true)
-        }
-        )
+
     }
 }

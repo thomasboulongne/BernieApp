@@ -41,7 +41,7 @@ class CarouselCell: UIView {
         self.wrapper.frame = CGRect(x: 0, y: 0, width: richcardSize.width, height: richcardSize.height)
         self.wrapper.backgroundColor = .black
         
-        self.wrapper.layer.cornerRadius = 10
+        self.wrapper.layer.cornerRadius = richcardRadius
         self.wrapper.layer.masksToBounds = true
         
         guard let url = URL(string: self.imageUrl) else { return }
@@ -60,6 +60,7 @@ class CarouselCell: UIView {
         }.resume()
         
         self.subtitleLabel.text = self.subTitle
+        self.subtitleLabel.numberOfLines = 0
         
         self.subtitleLabel.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 14)
         self.subtitleLabel.textColor = .white
@@ -72,6 +73,7 @@ class CarouselCell: UIView {
         
         
         self.titleLabel.text = self.title
+        self.titleLabel.numberOfLines = 0
         
         self.titleLabel.backgroundColor = .white
         

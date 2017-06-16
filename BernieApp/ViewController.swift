@@ -224,7 +224,7 @@ extension ViewController: UIViewControllerTransitioningDelegate {
         self.richcardTransition.cell = self.selectedRichcard as! CarouselCell
         
         self.richcardTransition.presenting = true
-        self.selectedRichcard?.isHidden = true
+//        self.selectedRichcard?.isHidden = true
         return self.richcardTransition
     }
     
