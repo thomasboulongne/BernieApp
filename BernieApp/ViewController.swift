@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var messages: [Message] = []
     private var tableView: UITableView!
     var scrollView: UIScrollView!
-    var textField: UITextField!
+    var textField: MessageTextField!
     var header: Header!
     var photoButton: IconRoundButton!
     
@@ -214,7 +214,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
-        self.textField.endEditing(true)
+        self.textField.resignFirstResponder()
         self.scrollView.isScrollEnabled = false
     }
 }

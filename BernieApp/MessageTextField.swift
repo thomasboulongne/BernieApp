@@ -9,51 +9,62 @@
 import Foundation
 import UIKit
 
-class MessageTextField: UITextField, UITextFieldDelegate {
+class MessageTextField: UITextView, UITextViewDelegate {
 
-    let padding = UIEdgeInsets(top: 0, left: hMargin, bottom: 0, right: hMargin);
+    let padding = UIEdgeInsets(top: hMargin, left: hMargin, bottom: hMargin, right: hMargin);
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(frame: CGRect) {
+        let textViewRect = frame
+        
+        super.init(frame: textViewRect, textContainer: nil)
         self.propertiesInit()
     }
     
     init() {
-        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - CGFloat(TextFieldHeight), width: UIScreen.main.bounds.width, height: CGFloat(TextFieldHeight)))
+        let textViewRect = CGRect(x: 0, y: UIScreen.main.bounds.height - CGFloat(TextFieldHeight), width: UIScreen.main.bounds.width - hMargin - takePhotoButtonHeight, height: CGFloat(TextFieldHeight))
+        super.init(frame: textViewRect, textContainer: nil)
         self.propertiesInit()
     }
     
     func propertiesInit() {
         self.delegate = self
-        self.placeholder = "Enter text here"
-        //self.borderStyle = UITextBorderStyle.line
+        self.text = "Aa"
+        self.textColor = UIColor.lightGray
+        
+        self.isEditable = true
+        
         self.addBorder(edges: .top, color: UIColor.brnWhite, thickness: 1)
         self.returnKeyType = UIReturnKeyType.send
-        self.font = UIFont(name: "Magneta-Book", size: 16)
+        self.font = UIFont.brnUserTextSentFont()
+        
+        self.textContainerInset = self.padding
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.text = nil
+        self.textColor = UIColor.brnBlack
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+            var query = Dictionary<String, Any>()
+            query["speech"] = self.text!
+            query["type"] = 0
+            MessageManager.shared.request(query: query)
+            self.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    override func endEditing(_ force: Bool) -> Bool {
+        self.text = "Aa"
+        self.textColor = UIColor.lightGray
+        return true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
-    }
-    
-    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
-    }
-    
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        var query = Dictionary<String, Any>()
-        query["speech"] = self.text!
-        query["type"] = 0
-        MessageManager.shared.request(query: query)
-        self.text = ""
-        return true
     }
 }

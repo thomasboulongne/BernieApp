@@ -79,7 +79,13 @@ class MessageCell: UITableViewCell {
             
             repliesWrapper.contentSize = CGSize(width: offset, height: maxHeight)
             
-            repliesWrapper.frame = CGRect(x: 0, y: vMargin / 2, width: returnValue.width, height: returnValue.height)
+            if offset <= returnValue.width {
+                repliesWrapper.frame = CGRect(x: returnValue.width / 2 - offset / 2, y: vMargin / 2, width: returnValue.width, height: returnValue.height)
+            }
+            else {
+                repliesWrapper.frame = CGRect(x: 0, y: vMargin / 2, width: returnValue.width, height: returnValue.height)
+            }
+        
             self.addSubview(repliesWrapper)
             
             let mask = CAGradientLayer();

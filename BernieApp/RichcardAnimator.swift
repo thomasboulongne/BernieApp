@@ -11,7 +11,7 @@ import UIKit
 
 class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration = 0.3
+    let duration = 0.2
     var presenting = true
     var originFrame = CGRect.zero
     var cell = CarouselCell()
@@ -80,7 +80,8 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }, completion: {_ in
                 containerView.addSubview(toView)
                 containerView.bringSubview(toFront: details)
-                UIView.animate(withDuration: self.duration, delay:0.0,
+                
+                UIView.animate(withDuration: self.duration, delay:0.0, options: .curveEaseInOut,
                                animations: {
                                 details.transform = CGAffineTransform.identity
                                 details.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
@@ -108,7 +109,7 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }, completion: {_ in
                 
                 card.isHidden = true
-                UIView.animate(withDuration: self.duration, delay:0.0,
+                UIView.animate(withDuration: self.duration, delay:0.0, options: .curveEaseInOut,
                                animations: {
                                 details.transform = scaleTransform
                                 details.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
