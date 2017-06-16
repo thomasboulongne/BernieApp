@@ -74,6 +74,15 @@ final class MessageManager {
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
                         }
+                        else if message["type"] as! Int == 2 {
+                            if message["text"] as! String != "" {
+                                var quickReplyText = Dictionary<String, Any>()
+                                quickReplyText["type"] = 0
+                                quickReplyText["speech"] = message["text"]
+                                treatedMessages.append(quickReplyText)
+                            }
+                            treatedMessages.append(message)
+                        }
                         else {
                             if message["type"] as! Int == 0 {
                                 if message["speech"] as! String != "" {
