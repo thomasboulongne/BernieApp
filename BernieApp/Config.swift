@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyGif
 
-let APIAI_Token = "a881a3adcd5642e3b9ce925de1479dae"
+let APIAI_Token = "c0e6a20179364246b80d32aa489324e0"
 let APIAI_Lang  = "fr"
 
 let IMGUR_CLIENT_ID = "46ce83c835caa77"

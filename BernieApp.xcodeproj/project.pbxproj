@@ -24,7 +24,7 @@
 		BF06C6991EF1AED100220B1F /* RichcardAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */; };
 		BF06C69B1EF1B1EA00220B1F /* RichcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */; };
 		BF37D7211EEEFF10000A1535 /* IconRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7201EEEFF10000A1535 /* IconRoundButton.swift */; };
-		BF37D7251EEFE95B000A1535 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7241EEFE95B000A1535 /* PhotoViewController.swift */; };
+		BF37D7251EEFE95B000A1535 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7241EEFE95B000A1535 /* CameraViewController.swift */; };
 		BF37D7271EF01473000A1535 /* TakePhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7261EF01473000A1535 /* TakePhotoButton.swift */; };
 		BF37D7291EF03D80000A1535 /* TakenPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */; };
 		BF5F7ED51EF2B7A10095CB65 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7ED41EF2B7A10095CB65 /* BackgroundImageView.swift */; };
@@ -108,7 +108,7 @@
 		BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardAnimator.swift; sourceTree = "<group>"; };
 		BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardViewController.swift; sourceTree = "<group>"; };
 		BF37D7201EEEFF10000A1535 /* IconRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconRoundButton.swift; sourceTree = "<group>"; };
-		BF37D7241EEFE95B000A1535 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		BF37D7241EEFE95B000A1535 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF37D7261EF01473000A1535 /* TakePhotoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakePhotoButton.swift; sourceTree = "<group>"; };
 		BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakenPhotoView.swift; sourceTree = "<group>"; };
 		BF5F7ED41EF2B7A10095CB65 /* BackgroundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				BFAFBECA1ECDCE840083133D /* Info.plist */,
 				BF37D7201EEEFF10000A1535 /* IconRoundButton.swift */,
 				BF37D7261EF01473000A1535 /* TakePhotoButton.swift */,
-				BF37D7241EEFE95B000A1535 /* PhotoViewController.swift */,
+				BF37D7241EEFE95B000A1535 /* CameraViewController.swift */,
 				BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */,
 			);
 			path = BernieApp;
@@ -349,7 +349,7 @@
 				TargetAttributes = {
 					BFAFBEBA1ECDCE840083133D = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = USV5Z98CAJ;
+						DevelopmentTeam = Q9CRH2MVNV;
 						ProvisioningStyle = Automatic;
 					};
 					BFAFBECE1ECDCE840083133D = {
@@ -451,7 +451,7 @@
 				E9F9AF1E1EEB1CB500984971 /* CarouselCell.swift in Sources */,
 				BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */,
 				BF5F7ED51EF2B7A10095CB65 /* BackgroundImageView.swift in Sources */,
-				BF37D7251EEFE95B000A1535 /* PhotoViewController.swift in Sources */,
+				BF37D7251EEFE95B000A1535 /* CameraViewController.swift in Sources */,
 				BF37D7211EEEFF10000A1535 /* IconRoundButton.swift in Sources */,
 				BF37D7291EF03D80000A1535 /* TakenPhotoView.swift in Sources */,
 				BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */,
@@ -610,14 +610,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -629,14 +629,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

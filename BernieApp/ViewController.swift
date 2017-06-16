@@ -76,7 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.photoButton = IconRoundButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size), iconName: "photo")
         self.photoButton.addTarget(self, action:#selector(self.openCamera), for: .touchUpInside)
         self.photoButton.layer.borderWidth = 1
-        self.photoButton.layer.borderColor = UIColor.white.cgColor
+        self.photoButton.layer.borderColor = greyish.cgColor
+        self.photoButton.tintColor = greyish
         self.scrollView.addSubview(self.photoButton)
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)

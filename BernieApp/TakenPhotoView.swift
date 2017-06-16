@@ -11,7 +11,6 @@ import UIKit
 class TakenPhotoView: UIView {
 
     var takenImage: UIImageView!
-    var chosenImage: UIImage!
     
     var sendButton: IconRoundButton!
     var backButton: IconRoundButton!
@@ -20,13 +19,13 @@ class TakenPhotoView: UIView {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        
+        self.isHidden = true
         let sendButtonSize: CGFloat = CGFloat(50.0)
         self.sendButton = IconRoundButton(frame: CGRect(
             x: self.frame.width - sendButtonSize * 1.5,
             y: self.frame.height - sendButtonSize * 1.5,
             width: sendButtonSize,
-            height: sendButtonSize), iconName: "send")
+            height: sendButtonSize), iconName: "send", notTemplate: true)
         self.addSubview(self.sendButton)
         
         let backButtonSize: CGFloat = CGFloat(closeButtonHeight)
@@ -38,13 +37,15 @@ class TakenPhotoView: UIView {
             height: backButtonSize), iconName: "back")
         self.backButton.addTarget(self, action:#selector(self.back), for: .touchUpInside)
         self.addSubview(self.backButton)
+        
+        self.takenImage =  UIImageView()
+        self.takenImage.frame = self.frame
+        self.addSubview(self.takenImage)
     }
     
     func addImage(image: UIImage) {
         self.isHidden = false
-        self.chosenImage = image
-        self.takenImage =  UIImageView(image: self.chosenImage)
-        self.addSubview(self.takenImage)
+        self.takenImage.image = image
         self.bringSubview(toFront: self.sendButton)
         self.bringSubview(toFront: self.backButton)
     }

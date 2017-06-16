@@ -14,14 +14,20 @@ class IconRoundButton: UIButton {
     let padding: CGFloat
     var size: CGSize = CGSize()
     
-    init(frame: CGRect, iconName: String) {
+    init(frame: CGRect, iconName: String, notTemplate: Bool? = nil) {
         self.padding = 10
         super.init(frame: frame)
         self.contentMode = .center
-        let image = UIImage(named: iconName) as UIImage?
-        self.setImage(image, for: .normal)
-        self.imageView?.contentMode = .scaleAspectFit
+        if( notTemplate == nil ) {
+            let image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate) as UIImage?
+            self.setImage(image, for: .normal)
+        } else {
+            let image = UIImage(named: iconName)?.withRenderingMode(.alwaysOriginal) as UIImage?
+            self.setImage(image, for: .normal)
+        }
         
+        self.imageView?.contentMode = .scaleAspectFit
+        self.tintColor = UIColor.white
         self.clipsToBounds = true
         
         self.isUserInteractionEnabled = true
@@ -34,7 +40,6 @@ class IconRoundButton: UIButton {
 //        self.size.height += self.padding * 2
         
         self.layer.cornerRadius = self.frame.width / 2
-        
     }
     
     
