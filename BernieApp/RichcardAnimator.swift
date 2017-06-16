@@ -139,8 +139,4 @@ class RichcardAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         
     }
-    
-    func animateImage(containerView: UIView, context: UIViewControllerContextTransitioning, details: UIView, finalFrame: CGRect, scaleTransform: CGAffineTransform ) {
-
-    }
 }

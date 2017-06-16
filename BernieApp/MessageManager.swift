@@ -156,21 +156,23 @@ final class MessageManager {
             for rc in message["richcards"] as! Array<Dictionary<String, Any>> {
                 var richcard = Dictionary<String, Any>()
                 
-                richcard["title"] = rc["title"] as! String
+                richcard["title"]    = rc["title"] as! String
                 richcard["subTitle"] = rc["subtitle"] as! String
                 richcard["imageUrl"] = rc["imageUrl"] as! String
-                let buttons = rc["buttons"] as! Array<Dictionary<String, String>>
+                let buttons          = rc["buttons"] as! Array<Dictionary<String, String>>
                 richcard["postback"] = buttons[0]["payload"]!
                 
-                richcard["desc"] = "Most famous Adele look-alike in the LoL game"
+                richcard["desc"]     = "Most famous Adele look-alike in the LoL game"
                 
-                var item1 = Dictionary<String, Any>()
-                item1["title"] = "Triforce"
-                item1["imageUrl"] = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
+                var item1            = Dictionary<String, Any>()
+                item1["title"]       = "Triforce"
+                item1["imageUrl"]    = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
+                item1["postback"]    = "Qui est Ai Weiwei?"
                 
-                var item2 = Dictionary<String, Any>()
-                item2["title"] = "Tabi Ninja"
-                item2["imageUrl"] = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
+                var item2            = Dictionary<String, Any>()
+                item2["title"]       = "Tabi Ninja (make u fast & strong)"
+                item2["imageUrl"]    = "https://1.bp.blogspot.com/-CTwHw1uxHZ0/UqDGpucVYeI/AAAAAAAAAKM/C4f3FaRdX-g/s1600/ninjatabi.jpg"
+                item2["postback"]    = "Qui est Ashley Bickerton?"
                 
                 richcard["subitems"] = [item1, item2, item1, item2, item1, item2, item1, item2]
                 
