@@ -164,6 +164,16 @@ final class MessageManager {
                 
                 richcard["desc"] = "Most famous Adele look-alike in the LoL game"
                 
+                var item1 = Dictionary<String, Any>()
+                item1["title"] = "Triforce"
+                item1["imageUrl"] = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
+                
+                var item2 = Dictionary<String, Any>()
+                item2["title"] = "Tabi Ninja"
+                item2["imageUrl"] = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
+                
+                richcard["subitems"] = [item1, item2, item1, item2, item1, item2, item1, item2]
+                
                 richcards.append(richcard)
             }
             

@@ -15,6 +15,11 @@
 		690B01101ED768CF00C4ECAE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B010F1ED768CF00C4ECAE /* MessageCell.swift */; };
 		69584BE11EF384EC00CF371B /* ctaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69584BE01EF384EC00CF371B /* ctaButton.swift */; };
 		69584BE31EF38D2A00CF371B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69584BE21EF38D2A00CF371B /* CardView.swift */; };
+		69584BE51EF4078E00CF371B /* styleguide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69584BE41EF4078E00CF371B /* styleguide.swift */; };
+		69584BEA1EF4161500CF371B /* NHaasGroteskDSPro-25Th.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69584BE61EF40E7600CF371B /* NHaasGroteskDSPro-25Th.otf */; };
+		69584BEB1EF4161500CF371B /* NHaasGroteskDSPro-35XLt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69584BE71EF40E7600CF371B /* NHaasGroteskDSPro-35XLt.otf */; };
+		69584BEC1EF4161500CF371B /* NHaasGroteskDSPro-45Lt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69584BE81EF40E7600CF371B /* NHaasGroteskDSPro-45Lt.otf */; };
+		69584BED1EF4161500CF371B /* NHaasGroteskDSPro-55Rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69584BE91EF40E7600CF371B /* NHaasGroteskDSPro-55Rg.otf */; };
 		BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6961EF1375900220B1F /* MessageQueue.swift */; };
 		BF06C6991EF1AED100220B1F /* RichcardAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */; };
 		BF06C69B1EF1B1EA00220B1F /* RichcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */; };
@@ -94,6 +99,11 @@
 		690B010F1ED768CF00C4ECAE /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		69584BE01EF384EC00CF371B /* ctaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ctaButton.swift; sourceTree = "<group>"; };
 		69584BE21EF38D2A00CF371B /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		69584BE41EF4078E00CF371B /* styleguide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = styleguide.swift; sourceTree = "<group>"; };
+		69584BE61EF40E7600CF371B /* NHaasGroteskDSPro-25Th.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-25Th.otf"; sourceTree = "<group>"; };
+		69584BE71EF40E7600CF371B /* NHaasGroteskDSPro-35XLt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-35XLt.otf"; sourceTree = "<group>"; };
+		69584BE81EF40E7600CF371B /* NHaasGroteskDSPro-45Lt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-45Lt.otf"; sourceTree = "<group>"; };
+		69584BE91EF40E7600CF371B /* NHaasGroteskDSPro-55Rg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NHaasGroteskDSPro-55Rg.otf"; sourceTree = "<group>"; };
 		BF06C6961EF1375900220B1F /* MessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardAnimator.swift; sourceTree = "<group>"; };
 		BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +177,10 @@
 		690B01081ED7585A00C4ECAE /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				69584BE61EF40E7600CF371B /* NHaasGroteskDSPro-25Th.otf */,
+				69584BE71EF40E7600CF371B /* NHaasGroteskDSPro-35XLt.otf */,
+				69584BE81EF40E7600CF371B /* NHaasGroteskDSPro-45Lt.otf */,
+				69584BE91EF40E7600CF371B /* NHaasGroteskDSPro-55Rg.otf */,
 				690B010B1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf */,
 				690B010D1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf */,
 				690B01091ED758D900C4ECAE /* Magneta-Bk.otf */,
@@ -210,6 +224,7 @@
 				BFDE13761ED5D6F6006B5AA6 /* MessageManagerSubscriber.swift */,
 				BFAFBF421ED345FF0083133D /* MessageTextField.swift */,
 				BFAFBEFA1ECF1EFD0083133D /* Config.swift */,
+				69584BE41EF4078E00CF371B /* styleguide.swift */,
 				BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */,
 				BFAFBEC01ECDCE840083133D /* ViewController.swift */,
 				BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */,
@@ -376,6 +391,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69584BEA1EF4161500CF371B /* NHaasGroteskDSPro-25Th.otf in Resources */,
+				69584BEB1EF4161500CF371B /* NHaasGroteskDSPro-35XLt.otf in Resources */,
+				69584BEC1EF4161500CF371B /* NHaasGroteskDSPro-45Lt.otf in Resources */,
+				69584BED1EF4161500CF371B /* NHaasGroteskDSPro-55Rg.otf in Resources */,
 				690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */,
 				E9F9AF181EEADEF400984971 /* Typing2-white.json in Resources */,
 				BFF484181EEE94CB0066F2D9 /* Typing-TransOut-white.json in Resources */,
@@ -411,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69584BE51EF4078E00CF371B /* styleguide.swift in Sources */,
 				E98273981EE6D0BC00768D20 /* Header.swift in Sources */,
 				BFAFBEF91ECEFFF10083133D /* MessageManager.swift in Sources */,
 				E9626C3F1EE94EDA00F5B717 /* QuickReply.swift in Sources */,

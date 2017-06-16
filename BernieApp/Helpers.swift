@@ -37,6 +37,51 @@ extension UIApplication {
     }
 }
 
+extension UIView {
+    func addBorder(edges: UIRectEdge, color: UIColor = UIColor.white, thickness: CGFloat = 1.0) {
+        
+        var borders = [UIView]()
+        
+        func border() -> UIView {
+            let border = UIView(frame: CGRect.zero)
+            border.backgroundColor = color
+            return border
+        }
+        
+        if edges.contains(.top) || edges.contains(.all) {
+            let top = border()
+            addSubview(top)
+            top.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: thickness)
+            borders.append(top)
+        }
+        
+        if edges.contains(.left) || edges.contains(.all) {
+            let left = border()
+            addSubview(left)
+            left.frame = CGRect(x: 0, y: 0, width: thickness, height: self.bounds.height)
+            borders.append(left)
+        }
+        
+        if edges.contains(.right) || edges.contains(.all) {
+            let right = border()
+            addSubview(right)
+            right.frame = CGRect(x: self.bounds.width - thickness, y: 0, width: self.bounds.width, height: thickness)
+            borders.append(right)
+        }
+        
+        if edges.contains(.bottom) || edges.contains(.all) {
+            let bottom = border()
+            addSubview(bottom)
+            bottom.frame = CGRect(x: 0, y: self.bounds.height - thickness, width: self.bounds.width, height: thickness)
+            borders.append(bottom)
+        }
+        
+        for border in borders {
+            self.addSubview(border)
+        }
+    }
+}
+
 extension UIApplication {
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

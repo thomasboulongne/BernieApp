@@ -39,7 +39,7 @@ let richcardRadius: CGFloat = 10
 
 let detailsPadding: CGFloat = 15
 
-let detailsSubitemHeight: CGFloat = 110
+let detailsSubitemHeight: CGFloat = 123 + 4
 
 let logoSize: CGFloat = (headerHeight - (UIApplication.shared.statusBarFrame.height + vMargin * 2))
 
@@ -48,8 +48,3 @@ let logoPadding: CGFloat = logoSize / 2.4
 let maxMessageSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height/2)
 
 let gifmanager = SwiftyGifManager(memoryLimit:20)
-
-let black: UIColor = UIColor(colorLiteralRed: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
-let brownishgrey: UIColor = UIColor(colorLiteralRed: 94/255, green: 94/255, blue: 94/255, alpha: 1.0)
-let grey: UIColor = UIColor(colorLiteralRed: 125/255, green: 125/255, blue: 125/255, alpha: 1.0)
-let greyish: UIColor = UIColor(colorLiteralRed: 180/255, green: 180/255, blue: 180/255, alpha: 1.0)

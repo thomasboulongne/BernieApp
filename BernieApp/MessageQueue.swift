@@ -94,11 +94,14 @@ class MessageQueue {
                 }
                 
                 if richcard["subitems"] != nil {
+                    
                     for subitem in richcard["subitems"] as! Array<Dictionary<String, Any>> {
                         let si = Subitem(context: MessageManager.shared.persistentContainer.viewContext)
                         for key in si.entity.attributesByName.keys {
                             si.setValue(subitem[key], forKey: key)
                         }
+                        
+                        si.richcard = rc
                         
                         rc.subitem?.adding(si)
                     }

@@ -27,8 +27,7 @@ class MessageTextField: UITextField, UITextFieldDelegate {
         self.delegate = self
         self.placeholder = "Enter text here"
         //self.borderStyle = UITextBorderStyle.line
-        self.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0).cgColor
-        self.layer.borderWidth = 1
+        self.addBorder(edges: .top, color: UIColor.brnWhite, thickness: 1)
         self.returnKeyType = UIReturnKeyType.send
         self.font = UIFont(name: "Magneta-Book", size: 16)
     }

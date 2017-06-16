@@ -32,8 +32,8 @@ class CtaButton: UILabel {
         self.clipsToBounds = true
         
         self.layer.borderWidth = 1
-        self.layer.borderColor = greyish.cgColor
-        self.textColor = black
+        self.layer.borderColor = UIColor.brnGreyish.cgColor
+        self.textColor = UIColor.brnBlack
         
         
         self.layer.cornerRadius = (self.size.height + detailsPadding * 2) / 2

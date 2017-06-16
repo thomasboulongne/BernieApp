@@ -60,34 +60,41 @@ class RichcardViewController: UIViewController {
         
         let title = UILabel()
         title.text = self.richcard.title
-        title.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 26)
+        title.font = UIFont.brnH2Font()
         title.numberOfLines = 0
-        title.textColor = black
+        title.textColor = UIColor.brnBlack
         
         
         let titleSize = title.sizeThatFits(maxSize)
         
         let subtitle = UILabel()
         subtitle.text = self.richcard.subTitle
-        subtitle.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 16)
-        subtitle.textColor = grey
+        subtitle.font = UIFont.brnSubhead1Font()
+        subtitle.textColor = UIColor.brnWarmGrey
         
         let subtitleSize = subtitle.sizeThatFits(maxSize)
         
         let desc = UILabel()
         desc.text = self.richcard.desc
-        desc.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 14)
-        desc.textColor = brownishgrey
+        desc.font = UIFont.brnBodyFont()
+        desc.textColor = UIColor.brnBrownishGrey
         desc.numberOfLines = 0
         
         let descSize = desc.sizeThatFits(maxSize)
         
         let subItemsView = UIScrollView()
         
+        var i: Int = 0
+                
         for item in self.richcard.subitem! {
             let subitem = item as! Subitem
             let itemView = UIView()
             let itemImage = UIImageView()
+            itemImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            itemImage.layer.cornerRadius = 5
+            
+            itemImage.layer.masksToBounds = true
+            
             guard let url = URL(string: subitem.imageUrl!) else { return }
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 guard
@@ -101,11 +108,23 @@ class RichcardViewController: UIViewController {
                 }
                 }.resume()
             let itemTitle = UILabel()
+            
             itemTitle.text = subitem.title
+            
+            itemTitle.numberOfLines = 2
+            
+            itemTitle.font = UIFont.brnSmallFont()
+            
+            itemTitle.frame = CGRect(x: 0, y: itemImage.bounds.height + 3, width: 60, height: 26)
             
             itemView.addSubview(itemImage)
             itemView.addSubview(itemTitle)
             
+            let itemWidth: CGFloat = 60
+            let itemOffsetWidth: CGFloat = richcardMargin * 2 + itemWidth
+            itemView.frame = CGRect(x: richcardMargin + CGFloat(i) * itemOffsetWidth, y: detailsSubitemHeight/2 - itemImage.bounds.height / 2, width: itemWidth, height: itemImage.bounds.height + 3 + itemTitle.frame.height)
+            
+            i += 1
             subItemsView.addSubview(itemView)
         }
         
@@ -125,9 +144,7 @@ class RichcardViewController: UIViewController {
         
         wrapper.backgroundColor = .white
         
-        subItemsView.backgroundColor = .green
-        
-        let wrapperHeight = titleSize.height + detailsPadding + subtitleSize.height + descSize.height + subItemsViewSize.height + detailsPadding + ctaButton.size.height + detailsPadding
+        let wrapperHeight = titleSize.height + detailsPadding + subtitleSize.height + detailsPadding + descSize.height + detailsPadding + subItemsViewSize.height + detailsPadding + ctaButton.size.height + detailsPadding
         
         let cardHeight = arrowWrapperSize.height + wrapperHeight
         
@@ -144,11 +161,11 @@ class RichcardViewController: UIViewController {
         
         subtitle.frame      = CGRect(x: detailsPadding, y: subtitleY, width: subtitleSize.width, height: subtitleSize.height)
         
-        let descY           = subtitleY + subtitleSize.height
+        let descY           = subtitleY + subtitleSize.height + detailsPadding
         
         desc.frame          = CGRect(x: detailsPadding, y: descY, width: descSize.width, height: descSize.height)
         
-        let subitemsY       = descY + descSize.height
+        let subitemsY       = descY + descSize.height + detailsPadding
         
         subItemsView.frame  = CGRect(x: 0, y: subitemsY, width: subItemsViewSize.width, height: subItemsViewSize.height)
         
@@ -163,6 +180,8 @@ class RichcardViewController: UIViewController {
         self.card.bottomHeight = self.translateY
         self.card.topHeight = self.card.bounds.height - self.card.bottomHeight
         
+        subItemsView.addBorder(edges: [.top, .bottom], color: UIColor.brnWhite, thickness: 2)
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(showCard))
         swipeUp.direction = .up
         self.card.addGestureRecognizer(swipeUp)
@@ -175,14 +194,12 @@ class RichcardViewController: UIViewController {
     }
     
     func showCard(gesture: UISwipeGestureRecognizer) {
-        print("swipeUp")
         UIView.animate(withDuration: 0.3, animations: {
             self.card.transform = CGAffineTransform(translationX: 0, y: -self.translateY)
         })
     }
     
     func hideCard(gesture: UISwipeGestureRecognizer) {
-        print("swipeDown")
         UIView.animate(withDuration: 0.3, animations: {
             self.card.transform = CGAffineTransform.identity
         })
