@@ -173,7 +173,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     }, completion: { (finished) -> Void in
                         self.blurEffectView.removeFromSuperview()
                         self.disclaimer.animate(newText: "Pas de chaton mignon, sinon je fond...", characterDelay: 0.03)
-                        self.logo.play(file: "Humeur4-Chill-white")
+                        self.logo.play(file: "Humeur4-Chill")
                     })
                     
                 }
@@ -227,7 +227,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             self.view.bringSubview(toFront: self.closeButton)
             
             self.disclaimer.animate(newText: "Envoie la moi, voir si je trouve !", characterDelay: 0.03)
-            self.logo.play(file: "Humeur2-Search-white")
+            self.logo.play(file: "Humeur2-Search")
 
         } else {
             print("Error, capture photo didn't work")

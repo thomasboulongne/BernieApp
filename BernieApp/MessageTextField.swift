@@ -44,8 +44,14 @@ class MessageTextField: UIView, UITextViewDelegate {
         
         self.TextView.isEditable = true
         
+        if GeneralSettings.shared.theme == "black" {
+            self.TextView.keyboardAppearance = .dark
+        }
+            
+        
         self.addBorder(edges: .top, color: UIColor.brnWhite, thickness: 1)
         self.TextView.returnKeyType = UIReturnKeyType.send
+        
         self.TextView.font = UIFont.brnUserTextSentFont()
         
         self.TextView.backgroundColor = .clear

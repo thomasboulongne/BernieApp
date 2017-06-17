@@ -32,7 +32,7 @@ final class MessageManager {
             requestMessage["speech"] = (query["speech"] as? String)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
         
-        self.broadcastEmotion(file: "Humeur4-Chill-white")
+        self.broadcastEmotion(file: "Humeur4-Chill")
         
         requestMessage["received"] = false
         let queue = MessageQueue()

@@ -44,8 +44,6 @@ class Header: UIView {
         topColor = themes(theme: GeneralSettings.shared.theme)["white"]!
         bottomColor = themes(theme: GeneralSettings.shared.theme)["white"]!.withAlphaComponent(0.0)
         
-        print(topColor, bottomColor)
-        
         self.gradient.frame = self.frame
         
         self.gradient.startPoint = CGPoint(x: 0.0, y: 0.75)

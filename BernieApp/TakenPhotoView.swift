@@ -55,7 +55,7 @@ class TakenPhotoView: UIView {
         
         let controller = self.parentViewController as! CameraViewController
         controller.disclaimer.animate(newText: "Pas de chaton mignon, sinon je fond...", characterDelay: 0.03)
-        controller.logo.play(file: "Humeur4-Chill-white")
+        controller.logo.play(file: "Humeur4-Chill")
     }
     
 
