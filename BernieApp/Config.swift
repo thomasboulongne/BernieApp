@@ -18,6 +18,7 @@ let IMGUR_CLIENT_SECRET = "6c287269f702b1579ab3faf0fe3875e71d28ddf0"
 
 
 let TextFieldHeight = 74.0
+
 let ShortcutButtonHeight = 40.0
 let takePhotoButtonHeight: CGFloat = 50.0
 let optionalButtonHeight = 25.0

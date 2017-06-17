@@ -176,7 +176,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableViewScrollToBottom(animated: Bool) {
         let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
-        self.tableView.setContentOffset(scrollPoint, animated: true)
+        self.tableView.setContentOffset(scrollPoint, animated: false)
     }
     
     func registerForKeyboardNotifications(){
