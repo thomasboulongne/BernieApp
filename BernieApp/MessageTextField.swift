@@ -64,7 +64,7 @@ class MessageTextField: UIView, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.TextView.textColor == UIColor.lightGray {
             self.TextView.text = nil
-            self.TextView.textColor = UIColor.black
+            self.TextView.textColor = themes(theme: GeneralSettings.shared.theme)["black"]
         }
         
         let newPosition = self.TextView.endOfDocument

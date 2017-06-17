@@ -52,10 +52,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.scrollView.addSubview(self.tableView)
         
-        
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-
-        
         self.tableView.register(MessageCell.self, forCellReuseIdentifier: "Cell")
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -71,7 +67,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
         self.view.addSubview(self.header)
         
-        self.header.logo.play(file: "Humeur1-Smile-white")
+        self.header.logo.play(file: "Humeur1-Smile")
+        
+        self.setColors()
         
         let size: CGFloat = CGFloat(ShortcutButtonHeight)
         let marginY: CGFloat = ( CGFloat(TextFieldHeight) - size ) / 2
@@ -109,6 +107,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.header.setupGradient()
+    }
+    
+    func setColors() {
+        UIApplication.shared.statusBarView?.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
+        
+        if GeneralSettings.shared.theme == "black" {
+            UIApplication.shared.statusBarStyle = .lightContent
+        }
+        
+        self.scrollView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
+        self.tableView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
+        
     }
     
     func openCamera() {

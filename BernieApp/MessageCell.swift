@@ -16,6 +16,8 @@ class MessageCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
+        self.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]!
+        
         if self.layer.sublayers != nil {
             for layer in self.layer.sublayers! {
                 layer.removeFromSuperlayer()
@@ -91,10 +93,10 @@ class MessageCell: UITableViewCell {
             let mask = CAGradientLayer();
             mask.frame = CGRect(x: 0, y: 0, width: returnValue.width, height: returnValue.height)
             
-            let color1 = UIColor.white.cgColor
-            let color2 = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0).cgColor
+            let color1 = themes(theme: GeneralSettings.shared.theme)["white"]!.cgColor
+            let color2 = themes(theme: GeneralSettings.shared.theme)["white"]?.withAlphaComponent(0).cgColor
             
-            mask.colors = [color1, color2, color2, color1]
+            mask.colors = [color1, color2!, color2!, color1]
             
             let point1: NSNumber = 0.0
             let point2: CGFloat  = CGFloat(hMargin) / CGFloat(returnValue.width)
@@ -167,6 +169,8 @@ class MessageCell: UITableViewCell {
             else {
                 label.font = UIFont(name: "Magneta-Book", size: 16)
             }
+            
+            label.textColor = themes(theme: GeneralSettings.shared.theme)["black"]!
             
             returnValue = label.sizeThatFits(CGSize(width: maxMessageSize.width, height: maxMessageSize.height))
             

@@ -26,16 +26,18 @@ class QuickReply: UILabel {
         self.text = text
         self.font = UIFont(name: "Magneta-Book", size: 14)
         
+        self.textColor = themes(theme: GeneralSettings.shared.theme)["black"]
+        
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = themes(theme: GeneralSettings.shared.theme)["black"]!.cgColor
         
         self.clipsToBounds = true
         
         self.isUserInteractionEnabled = true
         
         if selected {
-            self.textColor = UIColor.white
-            self.backgroundColor = UIColor.black
+            self.textColor = themes(theme: GeneralSettings.shared.theme)["white"]
+            self.backgroundColor = themes(theme: GeneralSettings.shared.theme)["black"]
         }
         
         let maxSize = CGSize(width: UIScreen.main.bounds.width / 2.5, height: 45)

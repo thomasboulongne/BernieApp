@@ -126,3 +126,19 @@ extension UIFont {
         return UIFont(name: "NHaasGroteskDSPro-55Rg", size: 11.0)
     }
 };
+
+func themes(theme: String) -> Dictionary<String, UIColor> {
+    var themes = Dictionary<String, Dictionary<String,UIColor>>()
+    themes["white"] = Dictionary<String, UIColor>()
+    themes["white"]?["white"] = .white
+    themes["white"]?["whitish"] = .brnWhite
+    themes["white"]?["black"] = .brnBlack
+    
+    themes["black"] = Dictionary<String, UIColor>()
+    themes["black"]?["white"] = .brnBlack
+    themes["black"]?["whitish"] = .brnWhite
+    themes["black"]?["black"] = .brnWhite
+    
+    return themes[theme]!
+    
+}

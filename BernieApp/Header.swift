@@ -24,7 +24,7 @@ class Header: UIView {
         self.logo = Logo(frame: CGRect(x: (frame.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2))
         
         super.init(frame: frame)
-        
+                
         self.addSubview(self.logo)
     }
     
@@ -38,8 +38,13 @@ class Header: UIView {
     
     func setupGradient() {
         
-        let topColor: UIColor = .white
-        let bottomColor: UIColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0)
+        var topColor: UIColor = .white
+        var bottomColor: UIColor = .white
+        
+        topColor = themes(theme: GeneralSettings.shared.theme)["white"]!
+        bottomColor = themes(theme: GeneralSettings.shared.theme)["white"]!.withAlphaComponent(0.0)
+        
+        print(topColor, bottomColor)
         
         self.gradient.frame = self.frame
         

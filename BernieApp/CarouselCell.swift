@@ -39,7 +39,7 @@ class CarouselCell: UIView {
         self.richcard = richcard
         
         self.wrapper.frame = CGRect(x: 0, y: 0, width: richcardSize.width, height: richcardSize.height)
-        self.wrapper.backgroundColor = .black
+        self.wrapper.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
         
         self.wrapper.layer.cornerRadius = richcardRadius
         self.wrapper.layer.masksToBounds = true

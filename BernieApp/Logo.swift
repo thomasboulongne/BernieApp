@@ -20,7 +20,16 @@ class Logo: UIView {
         "Humeur2-Search-white",
         "Humeur3-Dunno-white",
         "Humeur4-Chill-white",
-        "Humeur5-Loading-white"
+        "Humeur5-Loading-white",
+        "Typing-TransIn-black",
+        "Typing-TransOut-black",
+        "Typing1-black",
+        "Typing2-black",
+        "Humeur1-Smile-black",
+        "Humeur2-Search-black",
+        "Humeur3-Dunno-black",
+        "Humeur4-Chill-black",
+        "Humeur5-Loading-black"
     ]
     
     var animationViews: Dictionary<String, LOTAnimationView> = [:]
@@ -31,7 +40,7 @@ class Logo: UIView {
     
     override init(frame: CGRect) {
         
-        self.currentLogoView = "Humeur2-Search-white"
+        self.currentLogoView = "Humeur2-Search-" + GeneralSettings.shared.theme
         
         super.init(frame: frame)
         
@@ -50,7 +59,7 @@ class Logo: UIView {
         self.animationViews[self.currentLogoView]?.isHidden = true
         
         if self.typingTransition {
-            self.currentLogoView = "Typing-TransIn-white"
+            self.currentLogoView = "Typing-TransIn-" + GeneralSettings.shared.theme
             self.animationViews[self.currentLogoView]!.isHidden = false
             self.animationViews[currentLogoView]?.animationSpeed = 1
             
@@ -58,14 +67,14 @@ class Logo: UIView {
             self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
                 
                 self.animationViews[self.currentLogoView]?.isHidden = true
-                self.currentLogoView = "Typing2-white"
+                self.currentLogoView = "Typing2-" + GeneralSettings.shared.theme
                 self.animationViews[self.currentLogoView]!.isHidden = false
                 self.animationViews[self.currentLogoView]!.loopAnimation = true
                 self.animationViews[self.currentLogoView]!.play()
             })
         }
         else {
-            self.currentLogoView = "Typing2-white"
+            self.currentLogoView = "Typing2-" + GeneralSettings.shared.theme
             self.animationViews[self.currentLogoView]!.isHidden = false
             self.animationViews[currentLogoView]?.animationSpeed = 1
             
@@ -82,7 +91,7 @@ class Logo: UIView {
             self.animationViews[self.currentLogoView]!.pause()
             self.animationViews[self.currentLogoView]!.play(completion: { (completed) in
                 self.animationViews[self.currentLogoView]!.isHidden = true
-                self.currentLogoView = "Typing-TransIn-white"
+                self.currentLogoView = "Typing-TransIn-" + GeneralSettings.shared.theme
                 self.animationViews[self.currentLogoView]!.isHidden = false
                 self.animationViews[self.currentLogoView]!.animationSpeed = -1
                 self.animationViews[self.currentLogoView]!.animationProgress = 0
@@ -91,7 +100,7 @@ class Logo: UIView {
         }
         else {
             self.animationViews[self.currentLogoView]!.isHidden = true
-            self.currentLogoView = "Humeur2-Search-white"
+            self.currentLogoView = "Humeur2-Search-" + GeneralSettings.shared.theme
             self.animationViews[self.currentLogoView]!.isHidden = false
             self.animationViews[self.currentLogoView]!.animationProgress = 0
         }
@@ -99,8 +108,8 @@ class Logo: UIView {
     
     func play(file: String) {
         self.animationViews[self.currentLogoView]?.isHidden = true
-        self.animationViews[file]!.isHidden = false
-        self.currentLogoView = file
+        self.currentLogoView = file + "-" + GeneralSettings.shared.theme
+        self.animationViews[self.currentLogoView]!.isHidden = false
         self.animationViews[self.currentLogoView]?.animationProgress = 0
         self.animationViews[self.currentLogoView]?.play()
     }
