@@ -175,8 +175,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableViewScrollToBottom(animated: Bool) {
-        let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
-        self.tableView.setContentOffset(scrollPoint, animated: false)
+        if self.messages.count > 0 {
+            if self.messages[self.messages.count-1].type != 2 {
+                let previousLastCell = MessageCell()
+                let height: CGFloat = previousLastCell.setupWithMessage(message: self.messages[self.messages.count-1], index: 0).height
+                
+                let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height - height)
+                self.tableView.setContentOffset(scrollPoint, animated: false)
+            }
+            
+            let scrollPoint2 = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
+            self.tableView.setContentOffset(scrollPoint2, animated: true)
+        }
     }
     
     func registerForKeyboardNotifications(){
