@@ -32,6 +32,8 @@ final class MessageManager {
             requestMessage["speech"] = (query["speech"] as? String)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
         
+        self.broadcastEmotion(file: "Humeur4-Chill-white")
+        
         requestMessage["received"] = false
         let queue = MessageQueue()
         queue.addElement(elt: requestMessage, startDelay: 0, endDelay: 0)
@@ -119,16 +121,20 @@ final class MessageManager {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay = delay + Double(count) / 15.0
+                            delay = delay + Double(count) / 25.0
+                            
+                        case 2:
+                            delay = delay + 0.3
+                            
                         default:
-                            delay = delay + 2
+                            delay = delay + 1
                         }
                         
                         delayTimes["end"] = delay
                         
                         queue.addElement(elt: message, startDelay: delayTimes["start"]!, endDelay: delayTimes["end"]!)
                         
-                        delay = delay + 2.0
+                        delay = delay + 1.4
                         
                         i = i+1
                     }
@@ -323,6 +329,12 @@ final class MessageManager {
     func broadcastStopTyping() {
         for subscriber in self.subscribers {
             subscriber.onStopTyping()
+        }
+    }
+    
+    func broadcastEmotion(file: String) {
+        for subscriber in self.subscribers {
+            subscriber.playEmotion(file: file)
         }
     }
     

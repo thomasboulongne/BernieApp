@@ -12,8 +12,6 @@ import Alamofire
 
 class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
-//    var takenPhoto: UIImage?
-//    var imageView:UIImageView!
     var captureSession : AVCaptureSession!
     var cameraOutput : AVCapturePhotoOutput!
     var settings : AVCapturePhotoSettings!
@@ -37,12 +35,11 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     var previousStatusBarColor:UIColor!
     
-    var header: Header!
+    var logo: Logo!
     
     var disclaimer: UILabel!
     
     var blurEffectView : UIVisualEffectView!
-
 
 
     override func viewDidLoad() {
@@ -112,23 +109,23 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         self.takenPhotoView = TakenPhotoView(frame: self.cameraView.bounds )
         self.view.addSubview(self.takenPhotoView)
         
-        self.header = Header(frame: CGRect(
-            x: 30.0,
+        self.logo = Logo(frame: CGRect(
+            x: 25.0 - logoPadding,
             y: 60.0,
-            width: 26.0,
-            height: 30.0))
-         self.view.addSubview(self.header)
+            width: logoSize + logoPadding * 2,
+            height: logoSize + logoPadding * 2)
+        )
+         self.view.addSubview(self.logo)
         
         
         self.disclaimer = UILabel(frame: CGRect(
-            x: 30.0,
-            y: 120.0 + 22.0,
-            width: self.view.frame.width - 30 * 2,
+            x: 25.0,
+            y: 60 + self.logo.bounds.height,
+            width: self.view.frame.width - hMargin * 2,
             height: 44.0))
-        self.disclaimer.font = UIFont(name: "NHaasGroteskDSPro-65Md", size: 18)
+        self.disclaimer.font = UIFont.brnH4Font()
+        self.disclaimer.textColor = UIColor.brnWhite
         self.disclaimer.numberOfLines = 0
-        self.disclaimer.textColor = UIColor.white
-        self.disclaimer.animate(newText: "Pas de chaton mignon, sinon je fond...", characterDelay: 0.07)
         view.addSubview(self.disclaimer)
         
         
@@ -175,6 +172,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                                     self.blurEffectView.alpha = 0
                     }, completion: { (finished) -> Void in
                         self.blurEffectView.removeFromSuperview()
+                        self.disclaimer.animate(newText: "Pas de chaton mignon, sinon je fond...", characterDelay: 0.03)
+                        self.logo.play(file: "Humeur4-Chill-white")
                     })
                     
                 }
@@ -226,6 +225,9 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             self.takenPhotoView.addImage(image: image)
             self.storeTempImage(image: image)
             self.view.bringSubview(toFront: self.closeButton)
+            
+            self.disclaimer.animate(newText: "Envoie la moi, voir si je trouve !", characterDelay: 0.03)
+            self.logo.play(file: "Humeur2-Search-white")
 
         } else {
             print("Error, capture photo didn't work")

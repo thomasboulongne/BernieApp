@@ -15,7 +15,6 @@ class TakenPhotoView: UIView {
     var sendButton: IconRoundButton!
     var backButton: IconRoundButton!
     
-    
     override init(frame: CGRect) {
         
         super.init(frame: frame)
@@ -53,6 +52,10 @@ class TakenPhotoView: UIView {
     
     func back() {
         self.isHidden = true
+        
+        let controller = self.parentViewController as! CameraViewController
+        controller.disclaimer.animate(newText: "Pas de chaton mignon, sinon je fond...", characterDelay: 0.03)
+        controller.logo.play(file: "Humeur4-Chill-white")
     }
     
 

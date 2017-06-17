@@ -13,63 +13,27 @@ import Lottie
 class Header: UIView {
     
     let gradient: CAGradientLayer
-    var animationViews: Dictionary<String, LOTAnimationView> = [:]
     
     var currentLogoView: String = ""
+    
+    let logo: Logo
     
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
         
-        let animationFiles = [
-            "Typing-TransIn-white",
-            "Typing-TransOut-white",
-            "Typing1-white",
-            "Typing2-white"
-        ]
+        self.logo = Logo(frame: CGRect(x: (frame.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2))
         
         super.init(frame: frame)
         
-        for file in animationFiles {
-            let anim = LOTAnimationView(name: file)
-            anim.contentMode = .scaleAspectFit
-            anim.frame = CGRect(x: (self.bounds.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2)
-            self.animationViews[file] = anim
-        }
-        
-        self.currentLogoView = "Typing-TransIn-white"
-        self.addSubview(self.animationViews[self.currentLogoView]!)
+        self.addSubview(self.logo)
     }
     
     func startTyping() {
-        self.animationViews[self.currentLogoView]?.removeFromSuperview()
-        
-        self.currentLogoView = "Typing-TransIn-white"
-        self.addSubview(self.animationViews[self.currentLogoView]!)
-        self.animationViews[currentLogoView]?.animationSpeed = 3
-        
-        self.animationViews[self.currentLogoView]!.animationProgress = 0
-        self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
-            
-            self.animationViews[self.currentLogoView]?.removeFromSuperview()
-            self.currentLogoView = "Typing2-white"
-            self.addSubview(self.animationViews[self.currentLogoView]!)
-            self.animationViews[self.currentLogoView]!.loopAnimation = true
-            self.animationViews[self.currentLogoView]!.play()
-        })
+        self.logo.startTyping()
     }
     
     func stopTyping() {
-        
-        self.animationViews[self.currentLogoView]!.pause()
-        self.animationViews[self.currentLogoView]!.loopAnimation = false
-        self.animationViews[self.currentLogoView]!.play(completion: { (completed) in
-            self.animationViews[self.currentLogoView]!.removeFromSuperview()
-            self.currentLogoView = "Typing-TransOut-white"
-            self.addSubview(self.animationViews[self.currentLogoView]!)
-            self.animationViews[self.currentLogoView]!.animationSpeed = 3
-            self.animationViews[self.currentLogoView]!.animationProgress = 0
-            self.animationViews[self.currentLogoView]!.play()
-        })
+        self.logo.stopTyping()
     }
     
     func setupGradient() {
@@ -86,22 +50,6 @@ class Header: UIView {
         
         self.layer.insertSublayer(self.gradient, at: 0)
         
-    }
-    
-    func play(file: String) {
-        self.animationViews[self.currentLogoView]?.removeFromSuperview()
-        self.addSubview(self.animationViews[file]!)
-        self.currentLogoView = file
-        self.animationViews[self.currentLogoView]?.play()
-    }
-    
-    func stop() {
-        self.animationViews[self.currentLogoView]?.pause()
-        self.animationViews[self.currentLogoView]?.play(completion: { (completed) in
-            self.animationViews[self.currentLogoView]?.pause()
-            self.animationViews[self.currentLogoView]?.loopAnimation = false
-            self.animationViews[self.currentLogoView]?.animationProgress = 0
-        })
     }
     
     required init?(coder aDecoder: NSCoder) {

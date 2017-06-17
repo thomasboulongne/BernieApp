@@ -71,6 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.header = Header(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
         self.view.addSubview(self.header)
         
+        self.header.logo.play(file: "Humeur1-Smile-white")
+        
         let size: CGFloat = CGFloat(ShortcutButtonHeight)
         let marginY: CGFloat = ( CGFloat(TextFieldHeight) - size ) / 2
         self.photoButton = IconRoundButton(frame: CGRect(x: UIScreen.main.bounds.width - ( marginY * 2 ) - size, y: UIScreen.main.bounds.height - marginY - size, width: size, height: size), iconName: "photo")
@@ -172,6 +174,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func onStopTyping() {
         self.header.stopTyping()
+    }
+    
+    func playEmotion(file: String) {
+        self.header.logo.play(file: file)
     }
     
     func tableViewScrollToBottom(animated: Bool) {

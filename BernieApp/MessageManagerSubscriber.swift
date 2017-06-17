@@ -12,4 +12,5 @@ protocol MessageManagerSubscriber {
     func onMessagesUpdate()
     func onStartTyping()
     func onStopTyping()
+    func playEmotion(file: String)
 }
