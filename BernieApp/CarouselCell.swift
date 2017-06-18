@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-import Alamofire
+import AlamofireImage
+
 
 class CarouselCell: UIView {
     var imageUrl: String = ""
@@ -44,21 +45,10 @@ class CarouselCell: UIView {
         self.wrapper.layer.cornerRadius = richcardRadius
         self.wrapper.layer.masksToBounds = true
         
-        guard let url = URL(string: self.imageUrl) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { () -> Void in
-                self.imageView.image = image
-                self.imageView.contentMode = .scaleAspectFill
-                self.wrapper.insertSubview(self.imageView, at: 0)
-            }
-        }.resume()
-        
+        let url = URL(string: self.imageUrl)!
+        self.imageView.af_setImage(withURL: url)
+        self.imageView.contentMode = .scaleAspectFill
+        self.wrapper.insertSubview(self.imageView, at: 0)
         self.subtitleLabel.text = self.subTitle
         self.subtitleLabel.numberOfLines = 0
         

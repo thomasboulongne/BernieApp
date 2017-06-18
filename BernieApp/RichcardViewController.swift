@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 
 class RichcardViewController: UIViewController {
     
@@ -189,18 +190,8 @@ class RichcardViewController: UIViewController {
             
             itemImage.layer.masksToBounds = true
             
-            guard let url = URL(string: subitem.imageUrl!) else { return CGSize.zero }
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard
-                    let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                    let data = data, error == nil,
-                    let image = UIImage(data: data)
-                    else { return }
-                DispatchQueue.main.async() { () -> Void in
-                    itemImage.image = image
-                }
-                }.resume()
+            let url = URL(string: subitem.imageUrl!)!
+            itemImage.af_setImage(withURL: url)
             let itemTitle = UILabel()
             
             itemTitle.text = subitem.title
