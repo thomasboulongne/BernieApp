@@ -189,7 +189,7 @@ final class MessageManager {
                 let buttons          = rc["buttons"] as! Array<Dictionary<String, String>>
                 richcard["postback"] = buttons[0]["payload"]!
                 
-                richcard["desc"]     = rc["desc"] as! String
+                richcard["desc"]     = rc["desc"] as? String
                 
                 richcard["subitemtitle"] = (rc["subitems"]! as! Dictionary<String, Any>)["title"] as! String
                 
