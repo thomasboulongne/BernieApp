@@ -45,8 +45,6 @@ class Carousel : UIScrollView, UIScrollViewDelegate {
         }
         
         self.subviews[Int(self.page)].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        
-        //print("Carousel created with ", self.items)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

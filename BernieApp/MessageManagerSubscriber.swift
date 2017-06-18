@@ -9,7 +9,7 @@
 import Foundation
 
 protocol MessageManagerSubscriber {
-    func onMessagesUpdate()
+    func onMessagesUpdate(animated: Bool)
     func onStartTyping()
     func onStopTyping()
     func playEmotion(file: String)

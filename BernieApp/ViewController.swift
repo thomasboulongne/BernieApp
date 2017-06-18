@@ -58,8 +58,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.textField = MessageTextField()
         self.scrollView.addSubview(self.textField)
         
-        self.tableView.estimatedRowHeight = 50
-        
         self.tableView.keyboardDismissMode = .onDrag
         
         self.tableView.allowsSelection = false
@@ -82,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.unsubscribe = MessageManager.shared.subscribe(obj: self)
         
-        self.onMessagesUpdate()
+        self.onMessagesUpdate(animated: false)
         
         self.richcardTransition.dismissCompletion = {
             self.selectedRichcard!.isHidden = false
@@ -160,7 +158,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return self.messages.count
     }
     
-    func onMessagesUpdate() {
+    func onMessagesUpdate(animated: Bool) {
         
         self.messages = MessageManager.shared.getMessages()
         
@@ -172,11 +170,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             heights.append(cell.setupWithMessage(message: message, index: i).height)
             i += 1
         }
-    
-        self.tableView.reloadData {
-            self.tableViewScrollToBottom(animated: true)
-        }
         
+        DispatchQueue.main.async {
+            self.tableView.reloadData {
+                self.tableViewScrollToBottom(animated: animated)
+            }
+        }
     }
     
     func onStartTyping() {
@@ -192,16 +191,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableViewScrollToBottom(animated: Bool) {
+        
         if self.messages.count > 0 {
-            if self.messages[self.messages.count-1].type != 2 {
-                let height = self.heights[self.messages.count-1]
-                
-                let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height - height)
-                self.tableView.setContentOffset(scrollPoint, animated: false)
-            }
-            
-            let scrollPoint2 = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
-            self.tableView.setContentOffset(scrollPoint2, animated: true)
+            let index: IndexPath = IndexPath(row: self.messages.count-1, section: 0)
+            self.tableView.scrollToRow(at: index, at: .bottom, animated: animated)
         }
     }
     

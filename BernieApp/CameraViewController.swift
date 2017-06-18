@@ -161,7 +161,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     captureSession.addOutput(self.cameraOutput)
                     self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                     self.previewLayer.frame = self.cameraView.bounds
-                    print(self.previewLayer.frame)
+                    
                     self.previewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
                     self.cameraView.layer.addSublayer(self.previewLayer)
                     captureSession.startRunning()
@@ -204,13 +204,12 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             self.settings.flashMode = .off
             
         }
-        print("takePhotoAction")
-        print(self.settings.flashMode)
+        
         self.cameraOutput.capturePhoto(with: settings, delegate: self)
     }
     
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
-        print("capturing")
+        
         if let error = error {
             print("error occure : \(error.localizedDescription)")
         }

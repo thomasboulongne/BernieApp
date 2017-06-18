@@ -72,7 +72,7 @@ final class MessageManager {
                     
                     var richcards: [Dictionary<String, Any>] = []
                     for message in messages {
-                        print("Message", message)
+                        
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
                         }
@@ -171,25 +171,39 @@ final class MessageManager {
             for rc in message["richcards"] as! Array<Dictionary<String, Any>> {
                 var richcard = Dictionary<String, Any>()
                 
+                print(rc)
+                
                 richcard["title"]    = rc["title"] as! String
-                richcard["subTitle"] = rc["subtitle"] as! String
+                print(type(of: rc["subtitle"]))
+                
+                richcard["subTitle"] = String(format: "%@", rc["subtitle"] as! CVarArg)
+                
+//                if type(of: rc["subtitle"]) == NSNumber.self {
+//                    richcard["subTitle"] = String(describing: rc["subtitle"])
+//                }
+//                else {
+//                    richcard["subTitle"] = rc["subtitle"] as! String
+//                }
+                
                 richcard["imageUrl"] = rc["imageUrl"] as! String
                 let buttons          = rc["buttons"] as! Array<Dictionary<String, String>>
                 richcard["postback"] = buttons[0]["payload"]!
                 
-                richcard["desc"]     = "Most famous Adele look-alike in the LoL game"
+                richcard["desc"]     = rc["desc"] as! String
                 
-                var item1            = Dictionary<String, Any>()
-                item1["title"]       = "Triforce"
-                item1["imageUrl"]    = "https://i.ytimg.com/vi/zmq6G2AMOeA/hqdefault.jpg"
-                item1["postback"]    = "Qui est Ai Weiwei?"
+                richcard["subitemtitle"] = (rc["subitems"]! as! Dictionary<String, Any>)["title"] as! String
                 
-                var item2            = Dictionary<String, Any>()
-                item2["title"]       = "Tabi Ninja (make u fast & strong)"
-                item2["imageUrl"]    = "https://1.bp.blogspot.com/-CTwHw1uxHZ0/UqDGpucVYeI/AAAAAAAAAKM/C4f3FaRdX-g/s1600/ninjatabi.jpg"
-                item2["postback"]    = "Qui est Ashley Bickerton?"
+                var subitems: [Dictionary<String, Any>] = []
                 
-                richcard["subitems"] = [item1, item2, item1, item2, item1, item2, item1, item2]
+                for subitem in (rc["subitems"]! as! Dictionary<String, Any>)["items"] as! NSArray{
+                    var item = Dictionary<String, Any>()
+                    item["title"]       = (subitem as! Dictionary<String, String>)["title"]
+                    item["imageUrl"]    = (subitem as! Dictionary<String, String>)["imageUrl"]
+                    item["postback"]    = (subitem as! Dictionary<String, String>)["postback"]
+                    subitems.append(item)
+                }
+                
+                richcard["subitems"] = subitems
                 
                 richcards.append(richcard)
             }
@@ -316,7 +330,7 @@ final class MessageManager {
     
     func broadcastNewMessage() {
         for subscriber in self.subscribers {
-            subscriber.onMessagesUpdate()
+            subscriber.onMessagesUpdate(animated: true)
         }
     }
     

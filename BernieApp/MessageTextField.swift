@@ -113,7 +113,7 @@ class MessageTextField: UIView, UITextViewDelegate {
             // the user's entry
         else if self.TextView.textColor == UIColor.lightGray && !text.isEmpty {
             self.TextView.text = nil
-            self.TextView.textColor = UIColor.brnBlack
+            self.TextView.textColor = themes(theme: GeneralSettings.shared.theme)["black"]
         }
         
         if text == "\n" {

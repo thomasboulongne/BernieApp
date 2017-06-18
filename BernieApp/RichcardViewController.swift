@@ -163,6 +163,18 @@ class RichcardViewController: UIViewController {
         self.subItemsView = UIView()
         let subItemsScrollView = UIScrollView()
         
+        let titleLabel = UILabel()
+        
+        titleLabel.text = self.richcard.subitemtitle
+        
+        titleLabel.font = UIFont.brnH7Font()
+        
+        let titleSize = titleLabel.sizeThatFits(CGSize(width: self.cardWidth, height: 20))
+        
+        titleLabel.frame = CGRect(x: detailsPadding, y: detailsPadding, width: titleSize.width, height: titleSize.height)
+        
+        self.subItemsView.addSubview(titleLabel)
+        
         var i: Int = 0
         var offset: CGFloat = detailsPadding - richcardMargin
         
@@ -172,6 +184,8 @@ class RichcardViewController: UIViewController {
             let itemImage = UIImageView()
             itemImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             itemImage.layer.cornerRadius = 5
+            
+            itemImage.contentMode = .scaleAspectFill
             
             itemImage.layer.masksToBounds = true
             
