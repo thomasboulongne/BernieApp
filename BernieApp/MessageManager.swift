@@ -87,7 +87,8 @@ final class MessageManager {
                         }
                         else {
                             if message["type"] as! Int == 0 {
-                                if message["speech"] as! String != "" {
+                                print(message)
+                                if message["speech"] as? String != "" {
                                     treatedMessages.append(message)
                                 }
                             }
@@ -121,7 +122,7 @@ final class MessageManager {
                         case 0:
                             let speech = message["speech"] as! String
                             let count = speech.characters.count
-                            delay = delay + Double(count) / 25.0
+                            delay = delay + Double(count) / 35.0
                             
                         case 2:
                             delay = delay + 0.3

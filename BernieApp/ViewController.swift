@@ -108,6 +108,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.header.setupGradient()
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let tableView = scrollView as! UITableView
+        for cell in tableView.visibleCells {
+            let customCell = cell as! MessageCell
+            
+            if customCell.gif != nil {
+                let cellRect = tableView.rectForRow(at: tableView.indexPath(for: cell)!)
+                if tableView.bounds.contains(cellRect) {
+                    customCell.gif?.startAnimatingGif()
+                }
+                else {
+                    customCell.gif?.stopAnimatingGif()
+                }
+            }
+        }
+    }
+        
     func setColors() {
         UIApplication.shared.statusBarView?.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
         

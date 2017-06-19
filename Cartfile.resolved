@@ -1,3 +1,4 @@
-github "Alamofire/Alamofire" "4.4.0"
+github "Alamofire/Alamofire" "4.5.0"
+github "Alamofire/AlamofireImage" "3.2.0"
 github "airbnb/lottie-ios" "140663c839cd00245316512e26fd51b1bef3edcf"
 github "kirualex/SwiftyGif" "3.0.3"

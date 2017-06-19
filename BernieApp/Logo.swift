@@ -94,7 +94,7 @@ class Logo: UIView {
                 self.currentLogoView = "Typing-TransIn-" + GeneralSettings.shared.theme
                 self.animationViews[self.currentLogoView]!.isHidden = false
                 self.animationViews[self.currentLogoView]!.animationSpeed = -1
-                self.animationViews[self.currentLogoView]!.animationProgress = 0
+                self.animationViews[self.currentLogoView]!.animationProgress = 1
                 self.animationViews[self.currentLogoView]!.play()
             })
         }

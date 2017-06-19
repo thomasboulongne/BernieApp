@@ -11,7 +11,18 @@ import UIKit
 
 class MessageCell: UITableViewCell {
     
+    var gif: UIImageView?
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupWithMessage(message: Message, index: Int) -> CGSize {
+        
         for view in self.subviews {
             view.removeFromSuperview()
         }
@@ -117,9 +128,12 @@ class MessageCell: UITableViewCell {
             
             var imageSize: CGSize = CGSize(width: 0, height: 0)
             if message.gif {
-                image = UIImage(gifData: imageData! as Data)
+                image = UIImage(gifData: imageData! as Data, levelOfIntegrity: 0.5)
                 imageView = UIImageView(gifImage: image, manager: gifmanager)
                 imageSize = imageView.frameAtIndex(index: 0).size
+                
+                self.gif = imageView
+                imageView.stopAnimatingGif()
             }
             else {
                 image = UIImage(data: imageData! as Data)!

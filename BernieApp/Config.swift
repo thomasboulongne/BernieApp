@@ -48,4 +48,4 @@ let logoPadding: CGFloat = logoSize / 2.4
 
 let maxMessageSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height/2)
 
-let gifmanager = SwiftyGifManager(memoryLimit:20)
+let gifmanager = SwiftyGifManager(memoryLimit: 60)
