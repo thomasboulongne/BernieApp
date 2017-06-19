@@ -15,6 +15,7 @@ class MessageCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.isOpaque = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +28,7 @@ class MessageCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
-        self.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]!
+        self.backgroundColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]!
         
         if self.layer.sublayers != nil {
             for layer in self.layer.sublayers! {
@@ -35,9 +36,13 @@ class MessageCell: UITableViewCell {
             }
         }
         
+//        let type = message.type == 3 ? 0 : message.type
+        
+        let type = message.type
+        
         var returnValue = CGSize(width: 0, height: 0)
         
-        switch message.type {
+        switch type {
         case 1:
             returnValue.width = UIScreen.main.bounds.width
             returnValue.height = richcardSize.height + vMargin * 2
@@ -104,8 +109,8 @@ class MessageCell: UITableViewCell {
             let mask = CAGradientLayer();
             mask.frame = CGRect(x: 0, y: 0, width: returnValue.width, height: returnValue.height)
             
-            let color1 = themes(theme: GeneralSettings.shared.theme)["white"]!.cgColor
-            let color2 = themes(theme: GeneralSettings.shared.theme)["white"]?.withAlphaComponent(0).cgColor
+            let color1 = themes(theme: GeneralSettings.shared.theme)["whiteBg"]!.cgColor
+            let color2 = themes(theme: GeneralSettings.shared.theme)["whiteBg"]?.withAlphaComponent(0).cgColor
             
             mask.colors = [color1, color2!, color2!, color1]
             
@@ -128,7 +133,8 @@ class MessageCell: UITableViewCell {
             
             var imageSize: CGSize = CGSize(width: 0, height: 0)
             if message.gif {
-                image = UIImage(gifData: imageData! as Data, levelOfIntegrity: 0.5)
+//            if false {
+                image = UIImage(gifData: imageData! as Data, levelOfIntegrity: 1.0)
                 imageView = UIImageView(gifImage: image, manager: gifmanager)
                 imageSize = imageView.frameAtIndex(index: 0).size
                 
@@ -169,7 +175,7 @@ class MessageCell: UITableViewCell {
             
         default:
             let body = (message as AnyObject).value(forKeyPath: "body")
-            let text = body as! String
+            let text = (body as? String) == nil ? "text not found" : body as! String
             
             let label = UILabel(frame: CGRect())
             

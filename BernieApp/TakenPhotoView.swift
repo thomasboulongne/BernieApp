@@ -49,7 +49,6 @@ class TakenPhotoView: UIView {
         self.bringSubview(toFront: self.backButton)
     }
     
-    
     func back() {
         self.isHidden = true
         

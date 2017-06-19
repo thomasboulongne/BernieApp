@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MessageManagerSubscriber {
     
     var messages: [Message] = []
+    var cells: [MessageCell] = []
+    
     private var tableView: UITableView!
     var scrollView: UIScrollView!
     var textField: MessageTextField!
@@ -126,14 +128,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
         
     func setColors() {
-        UIApplication.shared.statusBarView?.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
+        UIApplication.shared.statusBarView?.backgroundColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]
         
         if GeneralSettings.shared.theme == "black" {
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
-        self.scrollView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
-        self.tableView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["white"]
+        self.scrollView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]
+        self.tableView.backgroundColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]
         
     }
     
@@ -157,11 +159,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MessageCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MessageCell
         
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
         let message = self.messages[indexPath.row]
         
-        cell.setupWithMessage(message: message, index: indexPath.row)
-        
-        return cell
+        (cell as! MessageCell).setupWithMessage(message: message, index: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -188,11 +193,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             i += 1
         }
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData {
-                self.tableViewScrollToBottom(animated: animated)
-            }
+        self.tableView.reloadData {
+            self.tableViewScrollToBottom(animated: animated)
         }
+        
     }
     
     func onStartTyping() {

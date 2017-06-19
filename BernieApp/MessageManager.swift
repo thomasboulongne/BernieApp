@@ -177,8 +177,13 @@ final class MessageManager {
                 richcard["title"]    = rc["title"] as! String
                 print(type(of: rc["subtitle"]))
                 
-                richcard["subTitle"] = String(format: "%@", rc["subtitle"] as! CVarArg)
-                
+                if rc["subtitle"] as? CVarArg != nil {
+                    richcard["subTitle"] = String(format: "%@", rc["subtitle"] as! CVarArg)
+                }
+                else {
+                    richcard["subTitle"] = rc["subtitle"]
+                }
+                    
 //                if type(of: rc["subtitle"]) == NSNumber.self {
 //                    richcard["subTitle"] = String(describing: rc["subtitle"])
 //                }
@@ -192,9 +197,10 @@ final class MessageManager {
                 
                 richcard["desc"]     = rc["desc"] as? String
                 
-                richcard["subitemtitle"] = (rc["subitems"]! as! Dictionary<String, Any>)["title"] as! String
+                richcard["subitemtitle"] = (rc["subitems"] as? Dictionary<String, Any>)?["title"] as? String
                 
                 var subitems: [Dictionary<String, Any>] = []
+                
                 
                 for subitem in (rc["subitems"]! as! Dictionary<String, Any>)["items"] as! NSArray{
                     var item = Dictionary<String, Any>()
@@ -238,7 +244,7 @@ final class MessageManager {
                         
                         var savedMessage = self.createMessageToSave(message: message)
                         
-                        let imageData = UIImagePNGRepresentation(image)
+                        let imageData = UIImageJPEGRepresentation(image, 0.8)
                         
                         savedMessage["image"] = imageData! as NSData
                         

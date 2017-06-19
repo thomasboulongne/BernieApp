@@ -114,6 +114,15 @@ class Logo: UIView {
         self.animationViews[self.currentLogoView]?.play()
     }
     
+    func play(file: String, loop: Bool) {
+        self.animationViews[self.currentLogoView]?.isHidden = true
+        self.currentLogoView = file + "-" + GeneralSettings.shared.theme
+        self.animationViews[self.currentLogoView]!.isHidden = false
+        self.animationViews[self.currentLogoView]!.loopAnimation = loop
+        self.animationViews[self.currentLogoView]?.animationProgress = 0
+        self.animationViews[self.currentLogoView]?.play()
+    }
+    
     func stop() {
         self.animationViews[self.currentLogoView]?.pause()
         self.animationViews[self.currentLogoView]?.play(completion: { (completed) in

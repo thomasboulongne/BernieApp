@@ -28,7 +28,7 @@ let closeButtonHeight = 30.0
 let hMargin: CGFloat = 30.0
 let vMargin: CGFloat = 10.0
 
-let headerHeight: CGFloat = 100.0
+let headerHeight: CGFloat = 120.0
 
 let richcardSize: CGSize = CGSize(width: 220, height: 220)
 
@@ -42,7 +42,7 @@ let detailsPadding: CGFloat = 15
 
 let detailsSubitemHeight: CGFloat = 123 + 4
 
-let logoSize: CGFloat = (headerHeight - (UIApplication.shared.statusBarFrame.height + vMargin * 2))
+let logoSize: CGFloat = (headerHeight - (UIApplication.shared.statusBarFrame.height + vMargin * 4))
 
 let logoPadding: CGFloat = logoSize / 2.4
 

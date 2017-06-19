@@ -293,10 +293,20 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func sendPhotoToServer() {
+        self.logo.play(file: "Humeur5-Loading", loop: true)
+        
+        self.takenPhotoView.sendButton.removeTarget(self, action: #selector(self.sendPhotoToServer), for: .touchUpInside)
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.takenPhotoView.sendButton.tintColor = .brnBlack
+            self.takenPhotoView.sendButton.alpha = 0.10
+        })
+        
         let image:UIImage! = self.takenPhotoView.takenImage.image
         let username:String = "TEST"
         let imageData = UIImageJPEGRepresentation(image, 0.8)
         let base64Image = imageData?.base64EncodedString(options: .lineLength64Characters)
+        
         
         let url = "https://api.imgur.com/3/upload"
         

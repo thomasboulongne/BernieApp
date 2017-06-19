@@ -31,15 +31,6 @@
 		69584BFF1EF5D03900CF371B /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69584BFE1EF5D03900CF371B /* GeneralSettings.swift */; };
 		69584C161EF7174100CF371B /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69584C141EF7171300CF371B /* AlamofireImage.framework */; };
 		69584C171EF7174100CF371B /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69584C141EF7171300CF371B /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		69584C211EF7195F00CF371B /* Humeur1-Smile-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C181EF7195F00CF371B /* Humeur1-Smile-black.json */; };
-		69584C221EF7195F00CF371B /* Humeur2-Search-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C191EF7195F00CF371B /* Humeur2-Search-black.json */; };
-		69584C231EF7195F00CF371B /* Humeur3-Dunno-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1A1EF7195F00CF371B /* Humeur3-Dunno-black.json */; };
-		69584C241EF7195F00CF371B /* Humeur4-Chill-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1B1EF7195F00CF371B /* Humeur4-Chill-black.json */; };
-		69584C251EF7195F00CF371B /* Humeur5-Loading-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1C1EF7195F00CF371B /* Humeur5-Loading-black.json */; };
-		69584C261EF7195F00CF371B /* Typing-TransIn-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1D1EF7195F00CF371B /* Typing-TransIn-black.json */; };
-		69584C271EF7195F00CF371B /* Typing-TransOut-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1E1EF7195F00CF371B /* Typing-TransOut-black.json */; };
-		69584C281EF7195F00CF371B /* Typing1-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C1F1EF7195F00CF371B /* Typing1-black.json */; };
-		69584C291EF7195F00CF371B /* Typing2-black.json in Resources */ = {isa = PBXBuildFile; fileRef = 69584C201EF7195F00CF371B /* Typing2-black.json */; };
 		BF06C6971EF1375900220B1F /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6961EF1375900220B1F /* MessageQueue.swift */; };
 		BF06C6991EF1AED100220B1F /* RichcardAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */; };
 		BF06C69B1EF1B1EA00220B1F /* RichcardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */; };
@@ -47,9 +38,18 @@
 		BF37D7251EEFE95B000A1535 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7241EEFE95B000A1535 /* CameraViewController.swift */; };
 		BF37D7271EF01473000A1535 /* TakePhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7261EF01473000A1535 /* TakePhotoButton.swift */; };
 		BF37D7291EF03D80000A1535 /* TakenPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */; };
+		BF4591261EF847E7005FAB60 /* Humeur1-Smile-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF4591251EF847E7005FAB60 /* Humeur1-Smile-black.json */; };
 		BF5F7ED51EF2B7A10095CB65 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7ED41EF2B7A10095CB65 /* BackgroundImageView.swift */; };
 		BF5F7ED71EF2EE7C0095CB65 /* RichcardTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7ED61EF2EE7C0095CB65 /* RichcardTitle.swift */; };
 		BF5F7ED91EF2EEAC0095CB65 /* RichcardSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7ED81EF2EEAC0095CB65 /* RichcardSubtitle.swift */; };
+		BF6DD3721EF7F4470026D9C4 /* Humeur2-Search-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD3691EF7F4470026D9C4 /* Humeur2-Search-black.json */; };
+		BF6DD3731EF7F4470026D9C4 /* Humeur3-Dunno-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36A1EF7F4470026D9C4 /* Humeur3-Dunno-black.json */; };
+		BF6DD3741EF7F4470026D9C4 /* Humeur4-Chill-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36B1EF7F4470026D9C4 /* Humeur4-Chill-black.json */; };
+		BF6DD3751EF7F4470026D9C4 /* Humeur5-Loading-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36C1EF7F4470026D9C4 /* Humeur5-Loading-black.json */; };
+		BF6DD3761EF7F4470026D9C4 /* Typing-TransIn-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36D1EF7F4470026D9C4 /* Typing-TransIn-black.json */; };
+		BF6DD3771EF7F4470026D9C4 /* Typing-TransOut-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36E1EF7F4470026D9C4 /* Typing-TransOut-black.json */; };
+		BF6DD3781EF7F4470026D9C4 /* Typing1-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD36F1EF7F4470026D9C4 /* Typing1-black.json */; };
+		BF6DD3791EF7F4470026D9C4 /* Typing2-black.json in Resources */ = {isa = PBXBuildFile; fileRef = BF6DD3701EF7F4470026D9C4 /* Typing2-black.json */; };
 		BFAFBEBF1ECDCE840083133D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */; };
 		BFAFBEC11ECDCE840083133D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAFBEC01ECDCE840083133D /* ViewController.swift */; };
 		BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAFBEC21ECDCE840083133D /* Main.storyboard */; };
@@ -133,15 +133,6 @@
 		69584BFC1EF5CFB800CF371B /* ThemeSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeSubscriber.swift; sourceTree = "<group>"; };
 		69584BFE1EF5D03900CF371B /* GeneralSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		69584C141EF7171300CF371B /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
-		69584C181EF7195F00CF371B /* Humeur1-Smile-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur1-Smile-black.json"; sourceTree = "<group>"; };
-		69584C191EF7195F00CF371B /* Humeur2-Search-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur2-Search-black.json"; sourceTree = "<group>"; };
-		69584C1A1EF7195F00CF371B /* Humeur3-Dunno-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur3-Dunno-black.json"; sourceTree = "<group>"; };
-		69584C1B1EF7195F00CF371B /* Humeur4-Chill-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur4-Chill-black.json"; sourceTree = "<group>"; };
-		69584C1C1EF7195F00CF371B /* Humeur5-Loading-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur5-Loading-black.json"; sourceTree = "<group>"; };
-		69584C1D1EF7195F00CF371B /* Typing-TransIn-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing-TransIn-black.json"; sourceTree = "<group>"; };
-		69584C1E1EF7195F00CF371B /* Typing-TransOut-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing-TransOut-black.json"; sourceTree = "<group>"; };
-		69584C1F1EF7195F00CF371B /* Typing1-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing1-black.json"; sourceTree = "<group>"; };
-		69584C201EF7195F00CF371B /* Typing2-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing2-black.json"; sourceTree = "<group>"; };
 		BF06C6961EF1375900220B1F /* MessageQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		BF06C6981EF1AED100220B1F /* RichcardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardAnimator.swift; sourceTree = "<group>"; };
 		BF06C69A1EF1B1EA00220B1F /* RichcardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardViewController.swift; sourceTree = "<group>"; };
@@ -149,9 +140,18 @@
 		BF37D7241EEFE95B000A1535 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF37D7261EF01473000A1535 /* TakePhotoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakePhotoButton.swift; sourceTree = "<group>"; };
 		BF37D7281EF03D80000A1535 /* TakenPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakenPhotoView.swift; sourceTree = "<group>"; };
+		BF4591251EF847E7005FAB60 /* Humeur1-Smile-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur1-Smile-black.json"; sourceTree = "<group>"; };
 		BF5F7ED41EF2B7A10095CB65 /* BackgroundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		BF5F7ED61EF2EE7C0095CB65 /* RichcardTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardTitle.swift; sourceTree = "<group>"; };
 		BF5F7ED81EF2EEAC0095CB65 /* RichcardSubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichcardSubtitle.swift; sourceTree = "<group>"; };
+		BF6DD3691EF7F4470026D9C4 /* Humeur2-Search-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur2-Search-black.json"; sourceTree = "<group>"; };
+		BF6DD36A1EF7F4470026D9C4 /* Humeur3-Dunno-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur3-Dunno-black.json"; sourceTree = "<group>"; };
+		BF6DD36B1EF7F4470026D9C4 /* Humeur4-Chill-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur4-Chill-black.json"; sourceTree = "<group>"; };
+		BF6DD36C1EF7F4470026D9C4 /* Humeur5-Loading-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Humeur5-Loading-black.json"; sourceTree = "<group>"; };
+		BF6DD36D1EF7F4470026D9C4 /* Typing-TransIn-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing-TransIn-black.json"; sourceTree = "<group>"; };
+		BF6DD36E1EF7F4470026D9C4 /* Typing-TransOut-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing-TransOut-black.json"; sourceTree = "<group>"; };
+		BF6DD36F1EF7F4470026D9C4 /* Typing1-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing1-black.json"; sourceTree = "<group>"; };
+		BF6DD3701EF7F4470026D9C4 /* Typing2-black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Typing2-black.json"; sourceTree = "<group>"; };
 		BFAFBEBB1ECDCE840083133D /* BernieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BernieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAFBEBE1ECDCE840083133D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAFBEC01ECDCE840083133D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -317,19 +317,19 @@
 				69584BF41EF5C14900CF371B /* Humeur3-Dunno-white.json */,
 				69584BF51EF5C14900CF371B /* Humeur4-Chill-white.json */,
 				69584BF61EF5C14900CF371B /* Humeur5-Loading-white.json */,
-				69584C181EF7195F00CF371B /* Humeur1-Smile-black.json */,
-				69584C191EF7195F00CF371B /* Humeur2-Search-black.json */,
-				69584C1A1EF7195F00CF371B /* Humeur3-Dunno-black.json */,
-				69584C1B1EF7195F00CF371B /* Humeur4-Chill-black.json */,
-				69584C1C1EF7195F00CF371B /* Humeur5-Loading-black.json */,
-				69584C1D1EF7195F00CF371B /* Typing-TransIn-black.json */,
-				69584C1E1EF7195F00CF371B /* Typing-TransOut-black.json */,
-				69584C1F1EF7195F00CF371B /* Typing1-black.json */,
-				69584C201EF7195F00CF371B /* Typing2-black.json */,
 				E9F9AF111EEADEF400984971 /* Typing-TransIn-white.json */,
 				69584BF01EF5AB3A00CF371B /* Typing-TransOut-white.json */,
 				E9F9AF131EEADEF400984971 /* Typing1-white.json */,
 				E9F9AF141EEADEF400984971 /* Typing2-white.json */,
+				BF4591251EF847E7005FAB60 /* Humeur1-Smile-black.json */,
+				BF6DD3691EF7F4470026D9C4 /* Humeur2-Search-black.json */,
+				BF6DD36A1EF7F4470026D9C4 /* Humeur3-Dunno-black.json */,
+				BF6DD36B1EF7F4470026D9C4 /* Humeur4-Chill-black.json */,
+				BF6DD36C1EF7F4470026D9C4 /* Humeur5-Loading-black.json */,
+				BF6DD36D1EF7F4470026D9C4 /* Typing-TransIn-black.json */,
+				BF6DD36E1EF7F4470026D9C4 /* Typing-TransOut-black.json */,
+				BF6DD36F1EF7F4470026D9C4 /* Typing1-black.json */,
+				BF6DD3701EF7F4470026D9C4 /* Typing2-black.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -445,32 +445,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69584C231EF7195F00CF371B /* Humeur3-Dunno-black.json in Resources */,
-				69584C211EF7195F00CF371B /* Humeur1-Smile-black.json in Resources */,
-				69584C241EF7195F00CF371B /* Humeur4-Chill-black.json in Resources */,
+				BF6DD3731EF7F4470026D9C4 /* Humeur3-Dunno-black.json in Resources */,
 				69584BEA1EF4161500CF371B /* NHaasGroteskDSPro-25Th.otf in Resources */,
 				69584BEB1EF4161500CF371B /* NHaasGroteskDSPro-35XLt.otf in Resources */,
 				69584BEC1EF4161500CF371B /* NHaasGroteskDSPro-45Lt.otf in Resources */,
 				69584BED1EF4161500CF371B /* NHaasGroteskDSPro-55Rg.otf in Resources */,
 				690B010A1ED758D900C4ECAE /* Magneta-Bk.otf in Resources */,
-				69584C281EF7195F00CF371B /* Typing1-black.json in Resources */,
 				E9F9AF181EEADEF400984971 /* Typing2-white.json in Resources */,
 				BFAFBEC91ECDCE840083133D /* LaunchScreen.storyboard in Resources */,
 				690B010E1ED7592100C4ECAE /* NHaasGroteskDSPro-65Md.otf in Resources */,
 				69584BF71EF5C14900CF371B /* Humeur1-Smile-white.json in Resources */,
-				69584C291EF7195F00CF371B /* Typing2-black.json in Resources */,
 				E9F9AF171EEADEF400984971 /* Typing1-white.json in Resources */,
 				69584BF81EF5C14900CF371B /* Humeur2-Search-white.json in Resources */,
+				BF4591261EF847E7005FAB60 /* Humeur1-Smile-black.json in Resources */,
+				BF6DD3791EF7F4470026D9C4 /* Typing2-black.json in Resources */,
 				690B010C1ED7591A00C4ECAE /* NHaasGroteskDSPro-75Bd.otf in Resources */,
-				69584C221EF7195F00CF371B /* Humeur2-Search-black.json in Resources */,
+				BF6DD3721EF7F4470026D9C4 /* Humeur2-Search-black.json in Resources */,
 				69584BFB1EF5C14900CF371B /* Humeur5-Loading-white.json in Resources */,
 				BFAFBEC61ECDCE840083133D /* Assets.xcassets in Resources */,
-				69584C261EF7195F00CF371B /* Typing-TransIn-black.json in Resources */,
-				69584C251EF7195F00CF371B /* Humeur5-Loading-black.json in Resources */,
 				69584BFA1EF5C14900CF371B /* Humeur4-Chill-white.json in Resources */,
+				BF6DD3761EF7F4470026D9C4 /* Typing-TransIn-black.json in Resources */,
+				BF6DD3751EF7F4470026D9C4 /* Humeur5-Loading-black.json in Resources */,
 				BFAFBEC41ECDCE840083133D /* Main.storyboard in Resources */,
-				69584C271EF7195F00CF371B /* Typing-TransOut-black.json in Resources */,
 				69584BF91EF5C14900CF371B /* Humeur3-Dunno-white.json in Resources */,
+				BF6DD3781EF7F4470026D9C4 /* Typing1-black.json in Resources */,
+				BF6DD3771EF7F4470026D9C4 /* Typing-TransOut-black.json in Resources */,
+				BF6DD3741EF7F4470026D9C4 /* Humeur4-Chill-black.json in Resources */,
 				69584BF11EF5AB3A00CF371B /* Typing-TransOut-white.json in Resources */,
 				E9F9AF151EEADEF400984971 /* Typing-TransIn-white.json in Resources */,
 			);

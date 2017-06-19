@@ -21,7 +21,7 @@ class Header: UIView {
     override init(frame: CGRect) {
         self.gradient = CAGradientLayer()
         
-        self.logo = Logo(frame: CGRect(x: (frame.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2))
+        self.logo = Logo(frame: CGRect(x: (frame.width / 2) - (logoSize + logoPadding * 2) / 2, y: UIApplication.shared.statusBarFrame.height + vMargin * 1.5 - logoPadding, width: logoSize + logoPadding * 2, height: logoSize + logoPadding * 2))
         
         super.init(frame: frame)
                 
@@ -41,12 +41,12 @@ class Header: UIView {
         var topColor: UIColor = .white
         var bottomColor: UIColor = .white
         
-        topColor = themes(theme: GeneralSettings.shared.theme)["white"]!
-        bottomColor = themes(theme: GeneralSettings.shared.theme)["white"]!.withAlphaComponent(0.0)
+        topColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]!
+        bottomColor = themes(theme: GeneralSettings.shared.theme)["whiteBg"]!.withAlphaComponent(0.0)
         
         self.gradient.frame = self.frame
         
-        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.75)
+        self.gradient.startPoint = CGPoint(x: 0.0, y: 0.65)
         self.gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         
         self.gradient.colors = [topColor.cgColor, bottomColor.cgColor]
