@@ -18,6 +18,8 @@ class RichcardViewController: UIViewController {
     
     var card: CardView!
     
+    var arrow: UIButton!
+    
     var cardWidth: CGFloat = 0
     
     var subItemsView = UIView()
@@ -53,11 +55,21 @@ class RichcardViewController: UIViewController {
         self.card = CardView()
         
         let arrowWrapper = UIView()
-        let arrow = UIButton()
+        self.arrow = UIButton()
         
-        let arrowSize = CGSize(width: 36, height: vMargin)
+        let arrowImage = UIImage(named: "swipeuparrow")?.withRenderingMode(.alwaysOriginal) as UIImage?
+        self.arrow.setImage(arrowImage, for: .normal)
         
-        arrowWrapper.addSubview(arrow)
+        self.arrow.alpha = 0.7
+        
+        self.arrow.imageView?.contentMode = .scaleAspectFit
+        self.arrow.contentMode = .center
+        
+        let arrowSize = CGSize(width: 45, height: 25)
+        
+        self.arrow.frame = CGRect(x: cardWidth / 2 - arrowSize.width/2, y: 0, width: arrowSize.width, height: arrowSize.height)
+        
+        arrowWrapper.addSubview(self.arrow)
         
         let arrowWrapperSize = CGSize(width: maxSize.width, height: vMargin + arrowSize.height)
         
@@ -259,12 +271,14 @@ class RichcardViewController: UIViewController {
     func showCard(gesture: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: 0.3, animations: {
             self.card.transform = CGAffineTransform(translationX: 0, y: -self.translateY)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         })
     }
     
     func hideCard(gesture: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: 0.3, animations: {
             self.card.transform = CGAffineTransform.identity
+            self.arrow.transform = CGAffineTransform.identity
         })
     }
     

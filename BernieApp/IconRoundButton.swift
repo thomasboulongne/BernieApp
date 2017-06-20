@@ -17,16 +17,17 @@ class IconRoundButton: UIButton {
     init(frame: CGRect, iconName: String, notTemplate: Bool? = nil) {
         self.padding = 10
         super.init(frame: frame)
-        self.contentMode = .center
+        
+        let image: UIImage
         if( notTemplate == nil ) {
-            let image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate) as UIImage?
-            self.setImage(image, for: .normal)
+            image = (UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate) as UIImage?)!
         } else {
-            let image = UIImage(named: iconName)?.withRenderingMode(.alwaysOriginal) as UIImage?
-            self.setImage(image, for: .normal)
+            image = (UIImage(named: iconName)?.withRenderingMode(.alwaysOriginal) as UIImage?)!
         }
         
+        self.setImage(image, for: .normal)
         self.imageView?.contentMode = .scaleAspectFit
+        self.contentMode = .center
         self.tintColor = UIColor.white
         self.clipsToBounds = true
         

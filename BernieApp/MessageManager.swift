@@ -73,6 +73,8 @@ final class MessageManager {
                     var richcards: [Dictionary<String, Any>] = []
                     for message in messages {
                         
+                        print(message)
+                        
                         if message["type"] as! Int == 1 {
                             richcards.append(message)
                         }
@@ -128,7 +130,7 @@ final class MessageManager {
                             delay = delay + 0.3
                             
                         default:
-                            delay = delay + 1
+                            delay = delay + 2
                         }
                         
                         delayTimes["end"] = delay
