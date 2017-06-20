@@ -1,1 +1,4 @@
 github "Alamofire/Alamofire" ~> 4.4
+github "kirualex/SwiftyGif"
+github "airbnb/lottie-ios" "master"
+github "Alamofire/AlamofireImage" ~> 3.1
