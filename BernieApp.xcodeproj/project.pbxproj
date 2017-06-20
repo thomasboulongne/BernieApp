@@ -403,7 +403,7 @@
 				TargetAttributes = {
 					BFAFBEBA1ECDCE840083133D = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = USV5Z98CAJ;
+						DevelopmentTeam = Q9CRH2MVNV;
 						ProvisioningStyle = Automatic;
 					};
 					BFAFBECE1ECDCE840083133D = {
@@ -681,14 +681,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -701,14 +701,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = USV5Z98CAJ;
+				DEVELOPMENT_TEAM = Q9CRH2MVNV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = BernieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bernie.BernieApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
