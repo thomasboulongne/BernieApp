@@ -139,7 +139,6 @@ class MessageCell: UITableViewCell {
                 imageSize = imageView.frameAtIndex(index: 0).size
                 
                 self.gif = imageView
-                imageView.stopAnimatingGif()
             }
             else {
                 image = UIImage(data: imageData! as Data)!

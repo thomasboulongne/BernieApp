@@ -326,6 +326,21 @@ final class MessageManager {
         return history
     }
     
+    func getMessages(number: Int) -> Array<Message> {
+        
+        var history: Array<Message> = []
+        
+        do {
+            let request: NSFetchRequest<Message> = Message.fetchRequest()
+            let count = try self.persistentContainer.viewContext.count(for: request)
+            request.fetchOffset = count - number
+            history = try self.persistentContainer.viewContext.fetch(request)
+        } catch {
+            print("Fetching Failed")
+        }
+        return history
+    }
+    
     func subscribe(obj: MessageManagerSubscriber) -> () -> () {
         let index = self.subscribers.count
         self.subscribers.append(obj)
